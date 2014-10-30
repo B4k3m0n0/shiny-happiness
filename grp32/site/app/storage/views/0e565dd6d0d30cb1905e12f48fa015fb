@@ -1,0 +1,58 @@
+
+
+
+
+
+
+<?php $__env->startSection('mainbody'); ?>
+
+<div class="circle">
+
+</div>
+
+<div class="contentor">
+	<div class="players">
+		<table>
+			<tr>
+				<td>
+					<div></div>
+				</td>
+				<td>
+					<div></div>
+				</td>
+				<td>
+					<div></div>
+				</td>
+				<td>
+					<div></div>
+				</td>
+				<td>
+					<div></div>
+				</td>
+				<td>
+					<div></div>
+				</td>
+				<td>
+					<div></div>
+				</td>
+				<td>
+					<div></div>
+				</td>
+				<td>
+					<div></div>
+				</td>
+				<td>
+					<div></div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="grandient"></div>
+</div>
+
+<div></div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.score-card', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.navbar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

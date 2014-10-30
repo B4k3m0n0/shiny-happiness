@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--CSS LINKS-->
+    <link href="./css/styles.css" rel="stylesheet">
+    <style type="text/css">
+      table, tr, td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <table>
+        <?php for($i = 0; $i < 13; $i++): ?>
+          <tr>
+            <td>
+              <?php echo array_keys($jogoPontos)[$i]; ?>
+
+            </td>
+            <td>
+              <?php echo array_values($jogoPontos)[$i]; ?>
+
+            </td>
+          </tr>
+        <?php endfor; ?>
+      </table>
+    </div>
+  </body>
+</html>            

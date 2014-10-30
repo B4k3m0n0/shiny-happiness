@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <!--CSS LINKS-->
+        <link href="./css/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div>
+            <?php echo Form::open(); ?>
+
+            <?php for($i = 0; $i < 5; $i++): ?>
+                <?php echo Form::text('dado'.($i+1) , Input::old('dado')); ?>
+
+            </br>
+            <?php endfor; ?>
+            <?php echo Form::submit('Submit'); ?>
+
+            <?php echo Form::close(); ?>
+
+        </div>
+    </body>
+</html>

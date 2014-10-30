@@ -1,0 +1,36 @@
+<?php echo $__env->yieldContent('layouts.master'); ?>
+
+<?php $__env->startSection('leftbar'); ?>
+<a class="score-card-button open glyphicon glyphicon-minus"></a>
+  <div class="score-card">
+    <table>
+      <thead>
+        <tr>
+          <th class="score-card-table score-card-column-top">COMBOS</th>
+          <th class="score-card-table">Player1</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php for($i = 0; $i < 13; $i++): ?>
+          <tr>
+            <?php if($i != 12): ?>
+              <td class="score-card-table score-card-column-mid" data-toggle="tooltip" data-container="body" data-placement="left" title="<?php echo $jogos[2][$i]; ?>">
+                <?php echo $jogos[0][$i]; ?>
+
+              </td>
+            <?php else: ?>
+              <td class="score-card-table score-card-column-bot" data-toggle="tooltip" data-container="body" data-placement="left" title="<?php echo $jogos[2][$i]; ?>">
+                <?php echo $jogos[0][$i]; ?>
+
+              </td>
+            <?php endif; ?>
+            <td class="score-card-table">
+              <?php echo $jogos[1][$i]; ?>
+
+            </td>
+          </tr>
+        <?php endfor; ?>
+      </tbody>
+    </table>
+  </div>
+<?php $__env->stopSection(); ?>
