@@ -1,0 +1,45 @@
+.signup-obligatory {
+	background-color: rgba(92,184,92,0.5) !important;
+	border: 1px solid #5cb85c !important;
+}
+
+.signup-obligatory label {
+	color: rgba(255,255,255,1) !important;
+}
+
+.input-group-addon:first-child {
+	border-right: 1px solid #ccc;
+	width: 45px;
+}
+
+.form-control {
+	border-left: 0px !important;
+}
+
+label {
+	margin-bottom: 0;
+}
+
+.margin-center {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.box-obligatory {
+	float: left;
+	height: 20px;
+	width: 20px;
+	background-color: rgba(92,184,92,0.5) !important;
+	border: 1px solid #5cb85c !important;
+}
+
+.text-obligatory {
+	margin-left: 10px;
+	color: #5cb85c;
+}
+
+.div-obligatory {
+	margin-left: 10px;
+	height: 20px;
+	width: 100%;
+}

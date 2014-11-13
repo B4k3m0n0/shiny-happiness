@@ -1,0 +1,70 @@
+.score-card.open{
+	background-color: white;
+	width: 210px;
+	padding: 15px 15px;
+	border-right: 1px solid #ccc;
+	position: fixed;
+	left: 0;
+	top: 50px;
+	bottom: 0;
+}
+
+.score-card.closed {
+	display: none;
+}
+
+.score-card-button.open {
+	position: fixed;
+	margin-left: 10px;
+	left: 215px;
+	top: 60px;
+	float: left;
+}
+
+.score-card-button.closed {
+	position: fixed;
+	margin-left: 10px;
+	left: 0;
+	top: 60px;
+	float: left;
+}
+
+.score-card-table
+{
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #dadada;
+	padding: 10px;
+	font-size: 13px;
+	font-weight: 200;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.score-card table thead tr /*td or th*/:first-child
+{
+	border-top: 2px solid #428bca !important;
+}
+
+
+.score-card table /*tbody of thead*/ tr /*td or th*/:first-child
+{
+	border-top: 1px solid #428bca !important;
+	border-left: 2px solid #428bca !important;
+	border-right: 2px solid #428bca !important;
+	border-bottom: 1px solid #428bca !important;
+}
+
+.score-card table tbody tr:last-child /*td or th*/:first-child
+{
+	border-bottom: 2px solid #428bca !important;
+}
+
+
+.tooltip .tooltip-inner {
+	background-color: #428bca;
+	width: 150px;
+}
+
+.tooltip .tooltip-arrow {
+	border-right-color: #428bca !important;
+}

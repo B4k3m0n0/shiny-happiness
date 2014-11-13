@@ -117,7 +117,7 @@ class ProjetoController extends BaseController {
 	public function update($id)
 	{
 		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, projeto::$rules);
+		$validation = Validator::make($input, Projeto::$rules);
 
 		if ($validation->passes())
 		{

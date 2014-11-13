@@ -17,6 +17,9 @@ class JogoController extends BaseController {
 	public function getJogo()
 	{
 		$dices = Input::all();
+
+		array_shift($dices);
+
 		$jogos = $this->jogoCall($dices);
 
 		return View::make('projeto/game')->with('jogos', $jogos);

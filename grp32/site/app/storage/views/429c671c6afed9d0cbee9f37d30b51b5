@@ -1,0 +1,7 @@
+<?php echo HTML::style('css/bootstrap.min.css'); ?>
+
+
+<?php echo HTML::style('css/styles.css'); ?>
+
+
+<?php echo $__env->yieldContent('styles'); ?>

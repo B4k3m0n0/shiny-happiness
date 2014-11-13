@@ -47,6 +47,13 @@ class LaravelDebugbar extends DebugBar
      * @var \Illuminate\Foundation\Application
      */
     protected $app;
+    
+    /**
+     * Normalized Laravel Version
+     *
+     * @var string
+     */
+    protected $version;
 
     /**
      * True when booted.
@@ -64,6 +71,11 @@ class LaravelDebugbar extends DebugBar
             $app = app();   //Fallback when $app is not given
         }
         $this->app = $app;
+        
+        //Normalize Laravel version
+        $version = $app::VERSION;
+        list($version) = explode('-', $version);
+        $this->version = $version;
     }
 
     /**
@@ -118,18 +130,18 @@ class LaravelDebugbar extends DebugBar
                 }
             );
 
-            //Check if App::before is already called..
-            if (version_compare($app::VERSION, '4.1', '>=') && $this->app->isBooted()) {
+            //Check if App::before is already called.. 
+            if ($this->checkVersion('4.1') && $this->app->isBooted()) {
                 $debugbar->startMeasure('application', 'Application');
             } else {
-                $this->app->before(
+                $this->app['router']->before(
                     function () use ($debugbar) {
                         $debugbar->startMeasure('application', 'Application');
                     }
                 );
             }
 
-            $this->app->after(
+            $this->app['router']->before(
                 function () use ($debugbar) {
                     $debugbar->stopMeasure('application');
                     $debugbar->startMeasure('after', 'After application');
@@ -142,17 +154,17 @@ class LaravelDebugbar extends DebugBar
         if ($this->shouldCollect('exceptions', true)) {
             try {
                 $exceptionCollector = new ExceptionsCollector();
-                if (method_exists($exceptionCollector, 'setChainExceptions')) {
-                    $exceptionCollector->setChainExceptions(
-                        $this->app['config']->get('laravel-debugbar::config.options.exceptions.chain', true)
-                    );
-                }
-                $this->addCollector($exceptionCollector);
-                $this->app->error(
-                    function (Exception $exception) use ($exceptionCollector) {
-                        $exceptionCollector->addException($exception);
-                    }
+                $exceptionCollector->setChainExceptions(
+                    $this->app['config']->get('laravel-debugbar::config.options.exceptions.chain', true)
                 );
+                $this->addCollector($exceptionCollector);
+                if ($this->checkVersion('5.0', '<')) {
+	                $this->app->error(
+	                    function (Exception $exception) use ($exceptionCollector) {
+	                        $exceptionCollector->addException($exception);
+	                    }
+	                );
+                }
             } catch (\Exception $e) {
             }
         }
@@ -211,7 +223,7 @@ class LaravelDebugbar extends DebugBar
 
         if ($this->shouldCollect('route')) {
             try {
-                if (version_compare($app::VERSION, '4.1', '>=')) {
+                if ($this->checkVersion('4.1')) {
                     $this->addCollector($this->app->make('Barryvdh\Debugbar\DataCollector\IlluminateRouteCollector'));
                 } else {
                     $this->addCollector($this->app->make('Barryvdh\Debugbar\DataCollector\SymfonyRouteCollector'));
@@ -283,6 +295,15 @@ class LaravelDebugbar extends DebugBar
             if ($this->app['config']->get('laravel-debugbar::config.options.db.backtrace')) {
                 $queryCollector->setFindSource(true);
             }
+            
+            if ($this->app['config']->get('laravel-debugbar::config.options.db.explain.enabled')) {
+                $types = $this->app['config']->get('laravel-debugbar::config.options.db.explain.types');
+                $queryCollector->setExplainSource(true, $types);
+            }
+
+            if ($this->app['config']->get('laravel-debugbar::config.options.db.hints', true)) {
+                $queryCollector->setShowHints(true);
+            }
 
             $this->addCollector($queryCollector);
 
@@ -290,9 +311,7 @@ class LaravelDebugbar extends DebugBar
                 $db->listen(
                     function ($query, $bindings, $time, $connectionName) use ($db, $queryCollector) {
                         $connection = $db->connection($connectionName);
-                        if (!method_exists($connection, 'logging') || $connection->logging()) {
-                            $queryCollector->addQuery((string) $query, $bindings, $time, $connection);
-                        }
+                        $queryCollector->addQuery((string) $query, $bindings, $time, $connection);
                     }
                 );
             } catch (\Exception $e) {
@@ -740,5 +759,17 @@ class LaravelDebugbar extends DebugBar
             $collector = $this->getCollector('messages');
             $collector->addMessage($message, $label);
         }
+    }
+    
+    /**
+     * Check the version of Laravel
+     *
+     * @param string $version
+     * @param string $operator (default: '>=')
+     * @return boolean
+     */
+    protected function checkVersion($version, $operator = ">=")
+    {
+    	return version_compare($this->version, $version, $operator);
     }
 }

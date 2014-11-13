@@ -4,9 +4,15 @@
 
 <?php $__env->startSection('mainbody'); ?>
 
+<?php $__env->startSection('styles'); ?>
+  @parent
+  <?php echo HTML::style('css/signup.css'); ?>
+
+<?php $__env->stopSection(); ?>
+
 <div class="col-md-4 col-md-offset-4">
 
-  <?php echo Form::open(array('class' => 'border-login')); ?>
+  <?php echo Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'signup')); ?>
 
     <h3 class="center">Create your account</h3>
     <hr>

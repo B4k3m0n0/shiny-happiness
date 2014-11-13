@@ -1,5 +1,10 @@
 @yield('layouts.master')
 
+@section('styles')
+  @parent
+  {{ HTML::style('css/navbar.css') }}
+@stop
+
 @section('navbar')
   <div class="container">
     <div class="navbar-header">
@@ -10,10 +15,10 @@
       	<a class="navbar-link">Algodão</a>
       </li>
       <li>
-        <a href="" class="navbar-link">Púcaro</a>
+        <a class="navbar-link">Púcaro</a>
       </li>
       <li>
-      	<a href="" class="navbar-link">Cadeirão</a>
+      	<a class="navbar-link">Cadeirão</a>
       </li>
     </ul>
   </div>

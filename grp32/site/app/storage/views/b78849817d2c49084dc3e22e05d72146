@@ -1,29 +1,28 @@
 <?php echo $__env->yieldContent('layouts.master'); ?>
 
+<?php $__env->startSection('styles'); ?>
+  @parent
+  <?php echo HTML::style('css/score-card.css'); ?>
+
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('leftbar'); ?>
-<a class="score-card-button open glyphicon glyphicon-minus"></a>
-  <div class="score-card">
+<a class="score-card-button open fa fa-minus"></a>
+  <div class="score-card open">
     <table>
       <thead>
         <tr>
-          <th class="score-card-table score-card-column-top">COMBOS</th>
+          <th class="score-card-table">COMBOS</th>
           <th class="score-card-table">Player1</th>
         </tr>
       </thead>
       <tbody>
         <?php for($i = 0; $i < 13; $i++): ?>
           <tr>
-            <?php if($i != 12): ?>
-              <td class="score-card-table score-card-column-mid" data-toggle="tooltip" data-container="body" data-placement="left" title="<?php echo $jogos[2][$i]; ?>">
-                <?php echo $jogos[0][$i]; ?>
+            <td class="score-card-table" data-toggle="tooltip" data-container="body" data-placement="left" title="<?php echo $jogos[2][$i]; ?>">
+              <?php echo $jogos[0][$i]; ?>
 
-              </td>
-            <?php else: ?>
-              <td class="score-card-table score-card-column-bot" data-toggle="tooltip" data-container="body" data-placement="left" title="<?php echo $jogos[2][$i]; ?>">
-                <?php echo $jogos[0][$i]; ?>
-
-              </td>
-            <?php endif; ?>
+            </td>
             <td class="score-card-table">
               <?php echo $jogos[1][$i]; ?>
 

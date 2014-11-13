@@ -1,0 +1,58 @@
+.lobby table {
+	width: 90%;
+	height: 80%;
+	margin: 40px 20px 40px 20px;
+	background-color: #fff;
+}
+
+.lobby table tr td {
+	height: 40px;
+	border: 4px solid #428bca;
+	text-transform: uppercase;
+}
+
+.lobby-options {
+	height: 100px;
+}
+
+.lobby-clicable{
+	color: #428bca;
+	text-align: center;
+	font-size: 24px;
+	transition:all linear 0.2s;
+}
+
+.lobby-clicable:hover{
+	background-color: #428bca;
+	color: #fff;
+	cursor: pointer;
+}
+
+.lobby-clicked {
+	text-align: center;
+	font-size: 24px;
+	background-color: #428bca;
+	color: #fff;
+	cursor: pointer;
+}
+
+.selectables {
+	height: 100%;
+}
+
+
+.capitalize::-webkit-input-placeholder {
+   text-transform: capitalize;
+}
+
+.capitalize:-moz-placeholder { 
+   text-transform: capitalize;
+}
+
+.capitalize::-moz-placeholder {  
+   text-transform: capitalize;
+}
+
+.capitalize:-ms-input-placeholder { 
+   text-transform: capitalize;
+}

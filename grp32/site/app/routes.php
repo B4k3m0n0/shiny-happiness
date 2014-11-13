@@ -18,13 +18,25 @@ Route::get('/', function()
 
 Route::post('layout', 'ProjetoController@store');
 
-Route::post('login', 'LoginController@login');
 
-Route::get('login', 'ProjetoController@index');
+/*
+|--------------------------------------------------------------------------
+| Login Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('login', array('as' => 'login', 'uses' => 'UserController@index'));
 
-Route::get('signup', 'ProjetoController@signup');
+Route::post('login', array('as' => 'login', 'uses' => 'UserController@login'));
 
-Route::post('signup', 'LoginController@signup');
+
+/*
+|--------------------------------------------------------------------------
+| signup Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('signup', array('as' => 'signup', 'uses' => 'ProjetoController@signup'));
+
+Route::post('signup', array('as' => 'signup', 'uses' => 'UserController@signup'));
 
 
 /*CHAT ROUTES*/

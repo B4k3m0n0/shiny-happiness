@@ -4,6 +4,11 @@
 
 @extends('layouts.score-card')
 
+@section('styles')
+  @parent
+  {{ HTML::style('css/game.css') }}
+@stop
+
 @section('mainbody')
 
 <div class="circle">

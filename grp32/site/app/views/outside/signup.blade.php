@@ -4,9 +4,14 @@
 
 @section('mainbody')
 
+@section('styles')
+  @parent
+  {{ HTML::style('css/signup.css') }}
+@stop
+
 <div class="col-md-4 col-md-offset-4">
 
-  {{ Form::open(array('class' => 'border-login')) }}
+  {{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'signup')) }}
     <h3 class="center">Create your account</h3>
     <hr>
     <div class="div-obligatory">

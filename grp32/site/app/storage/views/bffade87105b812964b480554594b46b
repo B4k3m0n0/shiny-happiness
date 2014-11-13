@@ -1,0 +1,13 @@
+	<?php echo HTML::script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'); ?>
+
+
+	<?php echo HTML::script('https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js'); ?>
+
+
+	<?php echo HTML::script('js/bootstrap.min.js'); ?>
+
+
+	<?php echo HTML::script('js/dynamic.js'); ?>
+
+
+	<?php echo $__env->yieldContent('scripts'); ?>

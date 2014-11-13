@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'laravel-demo',
+			'database'  => 'bd-grp32',
 			'username'  => 'root',
 			'password'  => '2110131',
 			'charset'   => 'utf8',

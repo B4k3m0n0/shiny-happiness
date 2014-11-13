@@ -13,10 +13,10 @@ class CreateUsersTable extends Migration {
 	public function up()
 	{
 		Schema::create('users', function(Blueprint $table) {
-			$table->increments('id')->primary();
-			$table->string('username')->unique();
+			$table->increments('id');
+			$table->string('username')->unique()->lenght(20);
 			$table->string('password');
-			$table->string('fullname');
+			$table->string('fullname')->lenght(80);
 			$table->string('email')->unique();
 			$table->integer('creditcard')->lenght(12);
 			$table->date('birthdate');
@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration {
 			$table->string('facebook')->nullable();
 			$table->string('twitter')->nullable();
 			$table->boolean('admin')->default(false);
+			$keys = array('id', 'username', 'email');
 			$table->timestamps();
 		});
 	}
