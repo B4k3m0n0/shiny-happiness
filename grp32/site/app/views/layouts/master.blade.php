@@ -10,10 +10,10 @@
 		<div class="nav-top" role="navigation">
 			@yield('navbar')
 		</div>
-		<div class="leftbar col-md-2">
-			@yield('leftbar')
-		</div>
-		<div class="mainbody col-md-10">
+
+		@yield('leftbar')
+
+		<div class="mainbody col-md-12">
 			@yield('mainbody')
 		</div>
 		@yield('chat-room')

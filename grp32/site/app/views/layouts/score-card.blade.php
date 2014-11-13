@@ -6,7 +6,8 @@
 @stop
 
 @section('leftbar')
-<a class="score-card-button open fa fa-minus"></a>
+<div class="leftbar col-md-2">
+  <a class="score-card-button open fa fa-minus"></a>
   <div class="score-card open">
     <table>
       <thead>
@@ -29,4 +30,5 @@
       </tbody>
     </table>
   </div>
+</div>
 @stop

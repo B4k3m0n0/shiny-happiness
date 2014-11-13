@@ -11,7 +11,7 @@
 	<div class="chat-wrapper"  ng-controller="ChatController">
 		<div class="chat-top" >
 		  <div class="chat-user-image">
-				<img src="http://2.bp.blogspot.com/-wGkhtTgPpPg/VCxX5_0__QI/AAAAAAAAaME/R_D1UhoC-0Y/s1600/LeeSin_Square_0.png">
+				<img src="./img/tristana.png">
 		  </div>
 		  <p class="chat-top-title" ng-init="username = '{{$username}}'">{{$username}}</p>
 		</div>
