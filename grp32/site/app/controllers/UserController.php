@@ -47,4 +47,12 @@ class UserController extends BaseController {
 		User::create($signup);
 		return Redirect::to('login');
 	}
+
+	public function showProfile($userid)
+	{
+		$user = User::find($userid);
+		//var_dump('olaaaaao '.$username);
+
+		return View::make('profile')->with('user',$user);
+	}
 }

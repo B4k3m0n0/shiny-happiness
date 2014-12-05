@@ -76,3 +76,5 @@ Route::get('cube', function()
 {
 	return View::make('cube');
 });
+
+Route::get('profile/{userid}', array('as' => 'profile', 'uses' => 'UserController@showProfile')); //TODO mudar de maneira a que nao seja mostrado o id no URL
