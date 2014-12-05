@@ -9,14 +9,10 @@
 {{ HTML::style('css/profile.css') }}
 @stop
 
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br>
 <div class="col-md-4 col-md-offset-4" >
 
-	{{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'profile')) }} <!--TODO route = profile????-->
-
+	{{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'profile')) }}
 	
 	<h3 class="center">User Profile</h3>
 	<hr>
@@ -32,6 +28,13 @@
 	<br>		
 	<hr>
 	<fieldset disabled id="fieldsetProfile">
+
+		<div class="input-group margin-center margin-bottom-20">
+		
+			{{ HTML::image('https://wiki.bitnami.com/@api/deki/files/568/=laravel-welcome.png') }}
+
+			<input name="picture" type="file" id="picture"> <!--TODO Esconder esta opção quando nao é possivel editar o perfil-->
+		</div>
 		<div class="input-group margin-center margin-bottom-20">
 			{{ Form::labelStart('username', array('class'=>'input-group-addon signup-obligatory')) }}
 			{{ Form::label('username', ' ', array('class'=>'fa fa-user')) }}
