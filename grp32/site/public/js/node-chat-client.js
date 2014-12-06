@@ -1,11 +1,8 @@
-angular.module('chat', []).controller('ChatController', ['$scope', '$http', function($scope, $http) {
-
-/*------------- NODE FUNCTIONS -------------*/
-
+main.controller('ChatController', ['$scope', function($scope) {
 	var socket = io.connect('http://192.168.117.137:8080'),
-		serverStatus = false,
 		colorChosen = '#333';
 
+	$scope.serverStatus = false;
 	$scope.datas = [];
 	$scope.palettes = [
 		{'lines' : {
@@ -22,19 +19,21 @@ angular.module('chat', []).controller('ChatController', ['$scope', '$http', func
 			'color9' : {'background-color' : '#0417ab'}, 
 			'color10' : {'background-color' : '#fa0000'}
 		}}
-		];
+	];
 
 
 	/*Connections to server*/
 	socket.on('connect', function() {
 		socket.emit('clientConnect', $scope.username);
-		serverStatus = true;
+		$scope.serverStatus = true;
+		$scope.$apply();
 	    console.log('Connected');
 	});
 
 	socket.on('disconnect', function() {
 		console.log('Server is down');
-		serverStatus = false;
+		$scope.serverStatus = false;
+		$scope.$apply();
 	});
 	/*End connections to server*/
 
@@ -45,9 +44,7 @@ angular.module('chat', []).controller('ChatController', ['$scope', '$http', func
 			$scope.users = $scope.users.concat(newUser);
 		}
 		
-		$scope.$apply(function() {
-			$scope.users;
-		});
+		$scope.$apply();
 	});
 
 
@@ -57,7 +54,8 @@ angular.module('chat', []).controller('ChatController', ['$scope', '$http', func
 	};
 
 	function common () {
-		if ($scope.message != null && serverStatus) {
+		console.log($scope.message);
+		if ($scope.message != null && $scope.serverStatus) {
 			var chatMessage = { 'message': $scope.message, 'username': $scope.username, 'colorChosen': colorChosen};
 			socket.emit('clientToServerMessage', chatMessage);
 			$scope.message = null;
@@ -83,9 +81,9 @@ angular.module('chat', []).controller('ChatController', ['$scope', '$http', func
 	socket.on('serverToClientMessage', function (data) {
 		var currentTime = new Date(),
 			timer = addZero(currentTime.getHours()) + ':' + addZero(currentTime.getMinutes());
-			messageReplaced = data.message.replace(/\</g, '&lt'),
+			//messageReplaced = data.message.replace(/\</g, '&lt;'),
 			newMessage = [
-				{'time': timer, 'username': data.username, 'message': messageReplaced, 'color': data.colorChosen}
+				{'time': timer, 'username': data.username, 'message': data.message /*messageReplaced*/, 'color': data.colorChosen}
 			];
 
 		$scope.$apply(function() {
@@ -102,7 +100,6 @@ angular.module('chat', []).controller('ChatController', ['$scope', '$http', func
 		return colorChosen === item['background-color'];
 	};
 
-
 	window.onclick = function() {
 		if ($scope.showOptions && !$scope.overOptions && !$scope.overButton) {
 			$scope.showOptions = !$scope.showOptions;
@@ -110,10 +107,4 @@ angular.module('chat', []).controller('ChatController', ['$scope', '$http', func
 		}
 	};
 
-
-
-/*------------- END NODE FUNCTIONS -------------*/
-
 }]);
-
-angular.bootstrap(document.getElementById('chat'), ['chat']);

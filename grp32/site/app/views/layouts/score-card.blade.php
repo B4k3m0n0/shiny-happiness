@@ -1,5 +1,3 @@
-@yield('layouts.master')
-
 @section('styles')
   @parent
   {{ HTML::style('css/score-card.css') }}

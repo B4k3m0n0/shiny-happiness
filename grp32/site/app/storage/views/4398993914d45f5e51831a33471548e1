@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>YAHTZEE - The Game</title>
-		<link href="img/favicon.png" rel="shortcut icon">
-		<?php echo $__env->make('layouts.style', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	</head>
-	<body>
-		<div class="nav-top" role="navigation">
-			<?php echo $__env->yieldContent('navbar'); ?>
-		</div>
-		<div class="leftbar col-md-2">
-			<?php echo $__env->yieldContent('leftbar'); ?>
-		</div>
-		<div class="mainbody col-md-10">
-			<?php echo $__env->yieldContent('mainbody'); ?>
-		</div>
-		<?php echo $__env->yieldContent('chat-room'); ?>
-		
-		<?php echo $__env->make('layouts.script', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-		<?php echo HTML::script('http://192.168.117.137:8080/socket.io/socket.io.js'); ?>
+<html ng-app="main">
+<head>
+	<meta charset="UTF-8">
+	<title>YAHTZEE - The Game</title>
+	<link href="img/favicon.png" rel="shortcut icon">
+	<?php echo $__env->make('layouts.style', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</head>
+<body ng-controller="MainController">
+	<div class="nav-top" role="navigation">
+		<?php echo $__env->yieldContent('navbar'); ?>
+	</div>
 
-		<?php echo HTML::script('js/node-chat-client.js'); ?>
+	<a class="fa left-button" ng-class="{'fa-minus col-md-offset-2 col-sm-offset-2 col-xs-offset-2': leftBar, 'fa-plus': !leftBar}" ng-click="leftBar = !leftBar"></a>
+	<div class="leftbar col-md-2 col-sm-2 col-xs-2" ng-show="leftBar">
+		<?php echo $__env->yieldContent('leftbar'); ?>
+	</div>
 
-	</body>
+	<div class="mainbody" ng-class="{'col-md-12 col-sm-12 col-xs-12': !leftBar && !rightBar, 'col-md-10 col-sm-10 col-xs-10': leftBar && !rightBar, 'col-md-9 col-sm-9 col-xs-12': !leftBar && rightBar, 'col-md-7 col-sm-7 col-xs-10': leftBar && rightBar}">
+		<?php echo $__env->yieldContent('mainbody'); ?>
+	</div>
+
+	<a class="fa fa-minus hidden-xs right-button" ng-class="{'fa-minus col-md-3 col-sm-3': rightBar, 'fa-plus': !rightBar}" ng-click="rightBar = !rightBar"></a>
+	<div class="rightbar col-md-3 col-sm-3 hidden-xs" ng-show="rightBar">
+		<?php echo $__env->yieldContent('rightbar'); ?>
+	</div>
+
+	<?php echo HTML::script('http://192.168.117.137:8080/socket.io/socket.io.js'); ?>
+
+	<?php echo $__env->make('layouts.script', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</body>
 </html>

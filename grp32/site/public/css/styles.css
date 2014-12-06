@@ -2,16 +2,36 @@
 @import url(http://fonts.googleapis.com/css?family=Gloria+Hallelujah);
 
 
-.leftbar {
-	height: 1000px;
+.leftbar, .mainbody, .rightbar {
+	height: 100%;
 	top: 50px;
-	padding: 15px;
 }
 
-.mainbody {
-	top: 70px;
-	height: 400px;
-	float: left;
+.leftbar {
+	padding-left: 0;
+	height: 1000px;
+}
+
+.rightbar {
+	padding-right: 0;
+	position: fixed;
+	right: 0;
+	height: 100%;
+}
+
+.left-button, .right-button {
+	z-index: 10;
+	position: fixed;
+	top: 60px;
+}
+
+.left-button {
+	left: 10px;
+}
+
+.right-button {
+	right: 10px;
+	padding-left: 0;
 }
 
 .border-login {

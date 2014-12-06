@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>YAHTZEE - The Game</title>
 	<link href="./img/favicon.png" rel="shortcut icon">
-	<link href="./css/hello-styles.css" rel="stylesheet">
+	<link href="./css/hello.css" rel="stylesheet">
 </head>
 <body>
 	<div class="welcome">
@@ -34,8 +34,6 @@
 			<h1>YAHTZEE - The Game</h1>
 		</a>
 	</div>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="./js/hello.js"></script>
-
 </body>
 </html>

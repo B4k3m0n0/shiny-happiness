@@ -5,6 +5,11 @@
   {{ HTML::style('css/lobby.css') }}
 @stop
 
+@section('scripts')
+  @parent
+  {{ HTML::script('js/lobby.js') }}
+@stop
+
 @section('mainbody')
   <div id="lobby" class="lobby" ng-controller="LobbyController">
     <table>
@@ -100,8 +105,4 @@
       </tr>
     </table>
   </div>
-@stop
-
-@section('scripts')
-  {{ HTML::script('js/lobby.js') }}
 @stop

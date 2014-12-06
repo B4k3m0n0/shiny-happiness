@@ -9,9 +9,10 @@ class JogoController extends BaseController {
 	 */
 	protected $jogo;
 
-	public function __construct(YahtzeeCombinationCalculator $jogo)
+	public function __construct(YahtzeeCombinationCalculator $jogo, DiceLauncher $diceLauncher)
 	{
 		$this->jogo = $jogo;
+		$this->diceLauncher = $diceLauncher;
 	}
 
 	public function getJogo()
@@ -27,21 +28,7 @@ class JogoController extends BaseController {
 
 	public function jogoCall($dices)
 	{
-		$jogoPontos = array(
-			$this->jogo->getAcesScore($dices),
-			$this->jogo->getTwosScore($dices),
-			$this->jogo->getThreesScore($dices),
-			$this->jogo->getFoursScore($dices),
-			$this->jogo->getFivesScore($dices),
-			$this->jogo->getSixesScore($dices),
-			$this->jogo->get3ofKindScore($dices),
-			$this->jogo->get4ofKindScore($dices),
-			$this->jogo->getFullHouseScore($dices),
-			$this->jogo->getSmallStraightScore($dices),
-			$this->jogo->getLargeStraightScore($dices),
-			$this->jogo->getChanceScore($dices),
-			$this->jogo->getYahtzeeScore($dices),
-		);
+		$jogoPontos = $this->jogo->getScore($dices);
 
 		$jogoBonus = array(
 			'Aces',
@@ -79,4 +66,10 @@ class JogoController extends BaseController {
 
 		return $jogos;
 	}
+
+	public function randomDices()
+	{
+		return Response::json($this->diceLauncher->randomDices());
+	}
+
 }

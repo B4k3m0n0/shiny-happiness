@@ -1,102 +1,37 @@
 <?php
 
-class YahtzeeCombinationCalculator extends Eloquent {
+class YahtzeeCombinationCalculator {
 
-	public function getAcesScore($dices)
+	public function getScore($dices)
 	{
-		$count = 0;
-		$multiplier = 1;
-		foreach ($dices as $dice)
-		{
-			if ($dice == 1) {
-				$count++;
-			}
-		}
-		if ($count*$multiplier == 0) {
-			return null;
-		}
-		return $count*$multiplier;
+		$score = array_merge(array(), $this->getUpperScore($dices));
+		array_push($score, $this->get3ofKindScore($dices), $this->get4ofKindScore($dices), $this->getFullHouseScore($dices), $this->getSmallStraightScore($dices), $this->getLargeStraightScore($dices), $this->getChanceScore($dices), $this->getYahtzeeScore($dices));
+
+		return $score;
 	}
 
-	public function getTwosScore($dices)
+	public function getUpperScore($dices)
 	{
-		$count = 0;
-		$multiplier = 2;
-		foreach ($dices as $dice)
-		{
-			if ($dice == 2) {
-				$count++;
+		$counter = array_count_values($dices);
+		$result = array();
+
+		for ($i=1; $i <= 6; $i++) { 
+			if (!array_key_exists($i, $counter)) {
+				$counter[$i] = null;
 			}
 		}
-		if ($count*$multiplier == 0) {
-			return null;
-		}
-		return $count*$multiplier;
 
-	}
+		ksort($counter);
 
-	public function getThreesScore($dices)
-	{
-		$count = 0;
-		$multiplier = 3;
-		foreach ($dices as $dice)
-		{
-			if ($dice == 3) {
-				$count++;
+		foreach ($counter as $key => $value) {
+			if ($value != null) {
+				array_push($result, $key*$value);
+			}else{
+				array_push($result, null);
 			}
 		}
-		if ($count*$multiplier == 0) {
-			return null;
-		}
-		return $count*$multiplier;
-	}
 
-	public function getFoursScore($dices)
-	{
-		$count = 0;
-		$multiplier = 4;
-		foreach ($dices as $dice)
-		{
-			if ($dice == 4) {
-				$count++;
-			}
-		}
-		if ($count*$multiplier == 0) {
-			return null;
-		}
-		return $count*$multiplier;
-	}
-
-	public function getFivesScore($dices)
-	{
-		$count = 0;
-		$multiplier = 5;
-		foreach ($dices as $dice)
-		{
-			if ($dice == 5) {
-				$count++;
-			}
-		}
-		if ($count*$multiplier == 0) {
-			return null;
-		}
-		return $count*$multiplier;
-	}
-
-	public function getSixesScore($dices)
-	{
-		$count = 0;
-		$multiplier = 6;
-		foreach ($dices as $dice)
-		{
-			if ($dice == 6) {
-				$count++;
-			}
-		}
-		if ($count*$multiplier == 0) {
-			return null;
-		}
-		return $count*$multiplier;
+		return $result;
 	}
 
 	public function get3ofKindScore($dices)

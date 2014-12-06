@@ -4,4 +4,7 @@
 <?php echo HTML::style('css/styles.css'); ?>
 
 
+<?php echo HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); ?>
+
+
 <?php echo $__env->yieldContent('styles'); ?>

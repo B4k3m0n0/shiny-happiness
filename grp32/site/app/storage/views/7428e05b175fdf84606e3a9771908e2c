@@ -6,6 +6,12 @@
 
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('scripts'); ?>
+  @parent
+  <?php echo HTML::script('js/lobby.js'); ?>
+
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('mainbody'); ?>
   <div id="lobby" class="lobby" ng-controller="LobbyController">
     <table>
@@ -101,9 +107,4 @@
       </tr>
     </table>
   </div>
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('scripts'); ?>
-  <?php echo HTML::script('js/lobby.js'); ?>
-
 <?php $__env->stopSection(); ?>

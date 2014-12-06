@@ -1,4 +1,4 @@
-angular.module('lobby', []).controller('LobbyController', ['$scope', '$http', function($scope, $http) {
+main.controller('LobbyController', ['$scope', function($scope) {
 
 	$scope.options = {
 		'solo': {'single bot': {'1': 'start match'}, 'multi bot': {'1': 'number of bots', '2': 'start match'}},
@@ -42,5 +42,3 @@ angular.module('lobby', []).controller('LobbyController', ['$scope', '$http', fu
   	}
 
 }]);
-
-angular.bootstrap(document.getElementById('lobby'), ['lobby']);
