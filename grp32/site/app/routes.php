@@ -31,21 +31,12 @@ Route::post('login', array('as' => 'login', 'uses' => 'UserController@login'));
 
 /*
 |--------------------------------------------------------------------------
-| signup Routes
+| Signup Routes
 |--------------------------------------------------------------------------
 */
 Route::get('signup', array('as' => 'signup', 'uses' => 'ProjetoController@signup'));
 
 Route::post('signup', array('as' => 'signup', 'uses' => 'UserController@signup'));
-
-
-/*CHAT ROUTES*/
-
-Route::get('getMessage', 'ChatRoomController@getMessage');
-
-Route::post('storeMessage', 'ChatRoomController@storeMessage');
-
-/*END CHAT ROUTES*/
 
 
 /*GAME ROUTES*/
@@ -76,5 +67,12 @@ Route::get('cube', function()
 {
 	return View::make('cube');
 });
+
+
+/*DICE TESTES*/
+
+Route::get('randoms', array('as' => 'randoms', 'uses' => 'JogoController@randomDices'));
+
+Route::get('randoms', array('as' => 'randoms', 'uses' => 'JogoController@randomDices'));
 
 Route::get('profile/{userid}', array('as' => 'profile', 'uses' => 'UserController@showProfile')); //TODO mudar de maneira a que nao seja mostrado o id no URL
