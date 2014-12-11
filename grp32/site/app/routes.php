@@ -73,6 +73,8 @@ Route::get('cube', function()
 
 Route::get('randoms', array('as' => 'randoms', 'uses' => 'JogoController@randomDices'));
 
-Route::get('randoms', array('as' => 'randoms', 'uses' => 'JogoController@randomDices'));
+Route::get('profile', array('as' => 'profile', 'uses' => 'UserController@showProfile'));
 
-Route::get('profile/{userid}', array('as' => 'profile', 'uses' => 'UserController@showProfile')); //TODO mudar de maneira a que nao seja mostrado o id no URL
+Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'))->before('login'); //TODO por como post
+
+Route::get('lobby', array('as' => 'lobby', 'uses' => 'UserController@showLobby'));

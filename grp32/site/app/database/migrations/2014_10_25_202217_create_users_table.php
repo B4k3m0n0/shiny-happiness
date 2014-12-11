@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration {
 			$table->string('twitter')->nullable();
 			$table->boolean('admin')->default(false);
 			$keys = array('id', 'username', 'email');
+			$table->string('remember_token')->nullable()->lenght(100);
 			$table->timestamps();
 		});
 	}

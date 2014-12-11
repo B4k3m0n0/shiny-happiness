@@ -11,7 +11,6 @@ class UserController extends BaseController {
 
 	public function login()
 	{
-		$user = User::where('username', '=', Input::get('username'))->first();
 		$loginInput = array(
 			'username' => Input::get('username'),
 			'password' => Input::get('password')
@@ -19,8 +18,9 @@ class UserController extends BaseController {
 
 		if (Auth::attempt($loginInput))
 		{
+			//return $this->showLobby();
 			return View::make('projeto.dashboard')->with('username', Input::get('username'));
-    		/*return Redirect::intended('dashboard');*/
+
 		}
 		else
 		{
@@ -48,11 +48,43 @@ class UserController extends BaseController {
 		return Redirect::to('login');
 	}
 
-	public function showProfile($userid)
+	public function showProfile()
 	{
-		$user = User::find($userid);
+
+		if (Auth::check())
+		{
+			$id = Auth::id();
+
+			$user = User::find($id);
 		//var_dump('olaaaaao '.$username);
 
-		return View::make('profile')->with('user',$user);
+			return View::make('profile')->with('user',$user);
+		}
+		return Redirect::to('login');		
+	}
+
+
+	public function logout(){
+
+
+
+		Auth::logout(); 
+		//Session::flush();
+
+		return Redirect::to('login');
+
+		
+	}
+
+	public function showLobby()
+	{
+
+		if (Auth::check())
+		{
+			$username = Auth::user()->username;
+
+			return View::make('projeto.dashboard')->with('username', $username);
+		}
+		return Redirect::to('login');		
 	}
 }

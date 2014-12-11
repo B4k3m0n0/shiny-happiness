@@ -9,10 +9,14 @@
 {{ HTML::style('css/profile.css') }}
 @stop
 
-<br><br><br><br>
+<br>
+<br>
+<br>
+<br>
 <div class="col-md-4 col-md-offset-4" >
 
-	{{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'profile')) }}
+	{{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'profile')) }} <!--TODO route = profile????-->
+
 	
 	<h3 class="center">User Profile</h3>
 	<hr>
@@ -22,19 +26,12 @@
 	</div>
 	<div class="div-btnEditar">		
 
-		<button type="button" class="btn btn-default pull-right padding">Edit Profile</button> <!--TODO  fazer enable do fieldset ao clicar no botão-->
+		<button ng-init="toggleEdit = true" type="button" class="btn btn-default pull-right padding" ng-click="toggleEdit = false">Edit Profile</button>
 
 	</div>
 	<br>		
 	<hr>
-	<fieldset disabled id="fieldsetProfile">
-
-		<div class="input-group margin-center margin-bottom-20">
-		
-			{{ HTML::image('https://wiki.bitnami.com/@api/deki/files/568/=laravel-welcome.png') }}
-
-			<input name="picture" type="file" id="picture"> <!--TODO Esconder esta opção quando nao é possivel editar o perfil-->
-		</div>
+	<fieldset ng-disabled="toggleEdit" id="fieldsetProfile">
 		<div class="input-group margin-center margin-bottom-20">
 			{{ Form::labelStart('username', array('class'=>'input-group-addon signup-obligatory')) }}
 			{{ Form::label('username', ' ', array('class'=>'fa fa-user')) }}
