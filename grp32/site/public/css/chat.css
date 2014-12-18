@@ -30,6 +30,14 @@
 
 .chat-options a {
 	font-size: 16px !important;
+	cursor: pointer;
+}
+
+.chat-options, .close-list, .time-stamp {
+	-webkit-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .chat-options {

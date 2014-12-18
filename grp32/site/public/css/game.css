@@ -1,6 +1,6 @@
 .circle {
-	width: 600px;
-	height: 400px;
+	width: 100%;
+	height: 500px;
 	background: radial-gradient(#33cc5c, #00c060);
 	border: 20px solid #B57E3C;
 	box-shadow: 0px 0px 50px #B57E3C;
@@ -8,20 +8,27 @@
 
 .players {
 	background-color: #fff;
-	margin-top: 30px;
+	margin-top: 20px;
 }
 
-.players table tr td div {
-	width: 50px;
-	height: 50px;
-	margin: 5px;
+.players div {
+	float: left;
+	width: 10%;
+	height: 70px;
+	padding: 5px;
+}
+
+.players div div {
+	width: 100%;
+	height: 100%;
 	background-color: red;
 }
 
 .contentor {
 	left: 0;
 	position: relative;
-	width: 595px;
+	width: 100%;
+	height: 50px;
 	margin-left: 0;
 	margin-right: 0;
 	padding: 0;
@@ -29,9 +36,13 @@
 
 .grandient {
 	width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: linear-gradient(to right, rgba(255,255,255,0.9), transparent, rgba(255,255,255,0.9));
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: linear-gradient(to right, rgba(255,255,255,0.9), transparent, rgba(255,255,255,0.9));
+}
+
+.roll-button {
+	margin-top: 35%;
 }

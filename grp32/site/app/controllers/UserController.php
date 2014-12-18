@@ -14,13 +14,13 @@ class UserController extends BaseController {
 		$loginInput = array(
 			'username' => Input::get('username'),
 			'password' => Input::get('password')
-			);
+		);
 
 		if (Auth::attempt($loginInput))
 		{
-			//return $this->showLobby();
-			return View::make('projeto.dashboard')->with('username', Input::get('username'));
-
+			Session::put('username', Input::get('username'));
+			return Redirect::to('lobby');
+			/*return Redirect::intended('dashboard');*/
 		}
 		else
 		{

@@ -5,53 +5,26 @@
 
 
 <?php $__env->startSection('styles'); ?>
-  @parent
-  <?php echo HTML::style('css/game.css'); ?>
+@parent
+<?php echo HTML::style('css/game.css'); ?>
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('mainbody'); ?>
 
 <div class="circle">
-
+	<div class="text-center roll-button">
+		<button type="button" class="btn btn-warning btn-lg">ROLL DICE</button>
+	</div>
 </div>
 
 <div class="contentor">
 	<div class="players">
-		<table>
-			<tr>
-				<td>
-					<div></div>
-				</td>
-				<td>
-					<div></div>
-				</td>
-				<td>
-					<div></div>
-				</td>
-				<td>
-					<div></div>
-				</td>
-				<td>
-					<div></div>
-				</td>
-				<td>
-					<div></div>
-				</td>
-				<td>
-					<div></div>
-				</td>
-				<td>
-					<div></div>
-				</td>
-				<td>
-					<div></div>
-				</td>
-				<td>
-					<div></div>
-				</td>
-			</tr>
-		</table>
+		<?php for($i=0; $i < 10; $i++): ?>
+			<div>
+				<div></div>
+			</div>
+		<?php endfor; ?>
 	</div>
 	<div class="grandient"></div>
 </div>

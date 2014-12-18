@@ -1,11 +1,16 @@
+
+.lobby-create {
+	height: 200px !important;
+}
+
 .lobby table {
-	width: 90%;
+	width: 95%;
 	height: 80%;
 	margin: 40px 20px 40px 20px;
 	background-color: #fff;
 }
 
-.lobby table tr td {
+.lobby table tr td{
 	height: 40px;
 	border: 4px solid #428bca;
 	text-transform: uppercase;
@@ -19,12 +24,25 @@
 	color: #428bca;
 	text-align: center;
 	font-size: 24px;
-	transition:all linear 0.2s;
+	-webkit-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .lobby-clicable:hover{
 	background-color: #428bca;
 	color: #fff;
+	cursor: pointer;
+}
+
+.lobby-clicable:hover a{
+	color: #fff;
+	cursor: pointer;
+}
+
+.lobby-clicable:hover a:hover{
+	color: #3071a9;
 	cursor: pointer;
 }
 
@@ -42,17 +60,54 @@
 
 
 .capitalize::-webkit-input-placeholder {
-   text-transform: capitalize;
+	text-transform: capitalize;
 }
 
 .capitalize:-moz-placeholder { 
-   text-transform: capitalize;
+	text-transform: capitalize;
 }
 
 .capitalize::-moz-placeholder {  
-   text-transform: capitalize;
+	text-transform: capitalize;
 }
 
 .capitalize:-ms-input-placeholder { 
-   text-transform: capitalize;
+	text-transform: capitalize;
+}
+
+.spacer {
+	margin-top: 15px;
+}
+
+.lobby-games-list, .lobby-players-list{
+	text-align: center;
+	font-weight: bold;
+	font-size: 15px;
+	color: #428bca;
+}
+
+.lobby-games-list:hover td {
+	height: 80px;
+	font-size: 18px;
+	background-color: rgba(66,139,202,0.4);
+}
+
+.lobby-games-list td, .lobby-games-list:hover td, .lobby-clicable{
+	transition: all linear 0.2s;
+}
+
+.create-game-options {
+	margin: 6px 3px;
+}
+
+.no-upper, .lobby-players-list td {
+	text-transform: none !important;
+}
+
+.lobby-players-list td {
+	line-height: 40px;
+}
+
+.divisor {
+	border-right: 2px solid #428bca;
 }

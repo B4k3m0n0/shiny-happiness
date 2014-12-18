@@ -1,32 +1,12 @@
-.score-card.open{
+.score-card{
 	background-color: white;
 	width: 210px;
-	padding: 15px 15px;
+	padding: 15px 0;
 	border-right: 1px solid #ccc;
 	position: fixed;
 	left: 0;
 	top: 50px;
 	bottom: 0;
-}
-
-.score-card.closed {
-	display: none;
-}
-
-.score-card-button.open {
-	position: fixed;
-	margin-left: 10px;
-	left: 215px;
-	top: 60px;
-	float: left;
-}
-
-.score-card-button.closed {
-	position: fixed;
-	margin-left: 10px;
-	left: 0;
-	top: 60px;
-	float: left;
 }
 
 .score-card-table

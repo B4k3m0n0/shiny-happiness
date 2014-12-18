@@ -3,35 +3,52 @@
 
 
 .leftbar, .mainbody, .rightbar {
-	height: 100%;
 	top: 50px;
+}
+
+.leftbar, .rightbar {
+	position: fixed;
+	height: 100%;
 }
 
 .leftbar {
 	padding-left: 0;
-	height: 1000px;
+	left: 0;
 }
 
 .rightbar {
 	padding-right: 0;
-	position: fixed;
 	right: 0;
-	height: 100%;
 }
 
-.left-button, .right-button {
+.left-button-div, .right-button-div {
 	z-index: 10;
 	position: fixed;
 	top: 60px;
+	-webkit-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.left-button-div {
+	left: 10px;
+	padding-right: 0;
+}
+
+.right-button-div {
+	right: 10px;
+	padding-left: 0;
 }
 
 .left-button {
-	left: 10px;
+	float: right;
+	cursor: pointer;
 }
 
 .right-button {
-	right: 10px;
-	padding-left: 0;
+	float: left;
+	cursor: pointer;
 }
 
 .border-login {

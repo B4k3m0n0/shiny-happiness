@@ -8,7 +8,6 @@
 @parent
 <?php echo HTML::script('js/node-chat-client.js'); ?>
 
-
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('rightbar'); ?>
@@ -19,10 +18,10 @@
 				<div class="chat-user-image">
 					<img src="./img/tristana.png">
 				</div>
-				<p class="chat-top-title" ng-init="username = '<?php echo $username; ?>'"><?php echo $username; ?></p>
+				<p class="chat-top-title" ng-init="username = '<?php echo Session::get('username'); ?>'"><?php echo Session::get('username'); ?></p>
 			</div>
 			<div class="chat-body">
-				<ul>
+				<ul id="messages">
 					<li ng-repeat="data in datas"> 
 						<span class="chat-timer" ng-show="timeStamp">{{data.time}}</span>
 						<span class="chat-username-span" ng-style="{'color' : data.color}">{{data.username}}:</span>
@@ -47,7 +46,7 @@
 									</tr>
 								</table>
 							</div>
-							<div class="checkbox">
+							<div class="checkbox time-stamp">
 								<label>
 									<input type="checkbox" ng-model="timeStamp"> Time Stamp
 								</label>

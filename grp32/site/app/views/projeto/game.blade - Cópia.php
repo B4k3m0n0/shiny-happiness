@@ -12,9 +12,7 @@
 @section('mainbody')
 
 <div class="circle">
-	<div class="text-center roll-button">
-		<button type="button" class="btn btn-warning btn-lg">ROLL DICE</button>
-	</div>
+
 </div>
 
 <div class="contentor">

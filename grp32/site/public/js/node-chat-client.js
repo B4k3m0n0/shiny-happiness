@@ -1,7 +1,7 @@
 main.controller('ChatController', ['$scope', function($scope) {
 	var socket = io.connect('http://192.168.117.137:8080'),
 		colorChosen = '#333';
-
+		
 	$scope.serverStatus = false;
 	$scope.datas = [];
 	$scope.palettes = [
@@ -89,6 +89,9 @@ main.controller('ChatController', ['$scope', function($scope) {
 		$scope.$apply(function() {
 			$scope.datas = $scope.datas.concat(newMessage);
 		});
+		
+		var messageScroll = document.getElementById('messages');
+		messageScroll.scrollTop = messageScroll.scrollHeight;
 	});
 	/*End Message Process*/
 

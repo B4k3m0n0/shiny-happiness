@@ -1,35 +1,32 @@
 <?php $__env->startSection('styles'); ?>
-  @parent
-  <?php echo HTML::style('css/score-card.css'); ?>
+@parent
+<?php echo HTML::style('css/score-card.css'); ?>
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('leftbar'); ?>
-<div class="leftbar col-md-2">
-  <a class="score-card-button open fa fa-minus"></a>
-  <div class="score-card open">
-    <table>
-      <thead>
-        <tr>
-          <th class="score-card-table">COMBOS</th>
-          <th class="score-card-table">Player1</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php for($i = 0; $i < 13; $i++): ?>
-          <tr>
-            <td class="score-card-table" data-toggle="tooltip" data-container="body" data-placement="left" title="<?php echo $jogos[2][$i]; ?>">
-              <?php echo $jogos[0][$i]; ?>
+<div class="score-card">
+	<table>
+		<thead>
+			<tr>
+				<th class="score-card-table">COMBOS</th>
+				<th class="score-card-table">Player1</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php for($i = 0; $i < 13; $i++): ?>
+			<tr>
+				<td class="score-card-table" data-toggle="tooltip" data-container="body" data-placement="left" title="<?php echo $jogos[2][$i]; ?>">
+					<?php echo $jogos[0][$i]; ?>
 
-            </td>
-            <td class="score-card-table">
-              <?php echo $jogos[1][$i]; ?>
+				</td>
+				<td class="score-card-table">
+					<?php echo $jogos[1][$i]; ?>
 
-            </td>
-          </tr>
-        <?php endfor; ?>
-      </tbody>
-    </table>
-  </div>
+				</td>
+			</tr>
+			<?php endfor; ?>
+		</tbody>
+	</table>
 </div>
 <?php $__env->stopSection(); ?>

@@ -2,13 +2,13 @@
 
 
 
-<?php $__env->startSection('mainbody'); ?>
-
 <?php $__env->startSection('styles'); ?>
   @parent
   <?php echo HTML::style('css/signup.css'); ?>
 
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('mainbody'); ?>
 
 <div class="container">
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
@@ -135,7 +135,7 @@
     <div class="input-group input-auto margin-bottom-20">
       <?php echo Form::labelStart('twitter', array('class'=>'input-group-addon')); ?>
 
-      <?php echo Form::label('twitter', ' ', array('class'=>'fa fa-lock')); ?>
+      <?php echo Form::label('twitter', ' ', array('class'=>'fa fa-twitter')); ?>
 
       <?php echo Form::labelEnd(); ?>
 

@@ -28,7 +28,6 @@ Route::get('login', array('as' => 'login', 'uses' => 'UserController@index'));
 
 Route::post('login', array('as' => 'login', 'uses' => 'UserController@login'));
 
-
 /*
 |--------------------------------------------------------------------------
 | Signup Routes
@@ -45,9 +44,6 @@ Route::get('game', function()
 {
 	return View::make('projeto/game');
 });
-
-
-
 
 
 /*END GAME ROUTES*/
@@ -76,5 +72,4 @@ Route::get('randoms', array('as' => 'randoms', 'uses' => 'JogoController@randomD
 Route::get('profile', array('as' => 'profile', 'uses' => 'UserController@showProfile'));
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'))->before('login'); //TODO por como post
-
-Route::get('lobby', array('as' => 'lobby', 'uses' => 'UserController@showLobby'));
+Route::get('lobby', array('as' => 'lobby', 'uses' => 'LobbyController@index'));

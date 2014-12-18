@@ -2,12 +2,12 @@
 
 @extends('layouts.navbar')
 
-@section('mainbody')
-
 @section('styles')
   @parent
   {{ HTML::style('css/signup.css') }}
 @stop
+
+@section('mainbody')
 
 <div class="container">
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
@@ -88,7 +88,7 @@
     </div>
     <div class="input-group input-auto margin-bottom-20">
       {{ Form::labelStart('twitter', array('class'=>'input-group-addon')) }}
-      {{ Form::label('twitter', ' ', array('class'=>'fa fa-lock')) }}
+      {{ Form::label('twitter', ' ', array('class'=>'fa fa-twitter')) }}
       {{ Form::labelEnd() }}
       {{ Form::text('twitter', Input::old('twitter'), array('class'=>'form-control', 'placeholder'=>'Twitter')) }}
     </div>

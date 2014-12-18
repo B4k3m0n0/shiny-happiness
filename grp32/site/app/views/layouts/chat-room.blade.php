@@ -6,7 +6,6 @@
 @section('scripts')
 @parent
 {{ HTML::script('js/node-chat-client.js') }}
-
 @stop
 
 @section('rightbar')
@@ -17,10 +16,10 @@
 				<div class="chat-user-image">
 					<img src="./img/tristana.png">
 				</div>
-				<p class="chat-top-title" ng-init="username = '{{$username}}'">{{$username}}</p>
+				<p class="chat-top-title" ng-init="username = '{{Session::get('username')}}'">{{Session::get('username')}}</p>
 			</div>
 			<div class="chat-body">
-				<ul>
+				<ul id="messages">
 					<li ng-repeat="data in datas"> 
 						<span class="chat-timer" ng-show="timeStamp">@{{data.time}}</span>
 						<span class="chat-username-span" ng-style="{'color' : data.color}">@{{data.username}}:</span>
@@ -45,7 +44,7 @@
 									</tr>
 								</table>
 							</div>
-							<div class="checkbox">
+							<div class="checkbox time-stamp">
 								<label>
 									<input type="checkbox" ng-model="timeStamp"> Time Stamp
 								</label>

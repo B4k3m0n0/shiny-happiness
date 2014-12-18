@@ -11,17 +11,21 @@
 		<?php echo $__env->yieldContent('navbar'); ?>
 	</div>
 
-	<a class="fa left-button" ng-class="{'fa-minus col-md-offset-2 col-sm-offset-2 col-xs-offset-2': leftBar, 'fa-plus': !leftBar}" ng-click="leftBar = !leftBar"></a>
-	<div class="leftbar col-md-2 col-sm-2 col-xs-2" ng-show="leftBar">
+	<div class="left-button-div" ng-class="{'col-md-2 col-sm-2 col-xs-2': leftBar, '': !leftBar}">
+		<a class="fa fa-chevron-circle-right left-button" ng-class="{'fa-chevron-circle-right': leftBar, 'fa-chevron-circle-left': !leftBar}" ng-click="leftBar = !leftBar" ng-show="isLeftSet"></a>
+	</div>
+	<div class="leftbar col-md-2 col-sm-2 col-xs-2" ng-show="leftBar && isLeftSet">
 		<?php echo $__env->yieldContent('leftbar'); ?>
 	</div>
 
-	<div class="mainbody" ng-class="{'col-md-12 col-sm-12 col-xs-12': !leftBar && !rightBar, 'col-md-10 col-sm-10 col-xs-10': leftBar && !rightBar, 'col-md-9 col-sm-9 col-xs-12': !leftBar && rightBar, 'col-md-7 col-sm-7 col-xs-10': leftBar && rightBar}">
+	<div class="mainbody" ng-class="{'col-md-12 col-sm-12 col-xs-12': !leftBar && !rightBar, 'col-md-10 col-sm-10 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-2': leftBar && !rightBar, 'col-md-9 col-sm-9 col-xs-12': !leftBar && rightBar, 'col-md-7 col-sm-7 col-xs-10 col-md-offset-2 col-sm-offset-2 col-xs-offset-2': leftBar && rightBar}">
 		<?php echo $__env->yieldContent('mainbody'); ?>
 	</div>
 
-	<a class="fa fa-minus hidden-xs right-button" ng-class="{'fa-minus col-md-3 col-sm-3': rightBar, 'fa-plus': !rightBar}" ng-click="rightBar = !rightBar"></a>
-	<div class="rightbar col-md-3 col-sm-3 hidden-xs" ng-show="rightBar">
+	<div class="right-button-div hidden-xs" ng-class="{'col-md-3 col-sm-3': rightBar, '': !leftBar}">
+		<a class="fa fa-chevron-circle-right right-button" ng-class="{'fa-chevron-circle-right': rightBar, 'fa-chevron-circle-left': !rightBar}" ng-click="rightBar = !rightBar" ng-show="isRightSet"></a>
+	</div>
+	<div class="rightbar col-md-3 col-sm-3 hidden-xs" ng-show="rightBar && isRightSet">
 		<?php echo $__env->yieldContent('rightbar'); ?>
 	</div>
 

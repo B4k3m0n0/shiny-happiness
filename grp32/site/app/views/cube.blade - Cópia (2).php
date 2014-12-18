@@ -96,6 +96,7 @@
 	<div class="launchSpace">
 
 		<div class="space3d">
+
 			<div class="_3dbox">
 				<div class="_3dface _3dface--front">
 					<span>1</span>
@@ -116,8 +117,8 @@
 					<span>4</span>
 				</div>
 			</div>
-		</div>
 
+		</div>
 		<div class="space3d">
 
 			<div class="_3dbox">
@@ -245,22 +246,11 @@
 
 		/*moviment bot to top*/
 
-		var teste = getRandomInt(-4, 4)*100;
-		for (var i = 0; i < 5; i++) {
-			var topPos = getRandomInt(0, 200);
-			console.log(i+":"+teste);
-			var leftPos = getRandomInt(teste, teste+50);
-			if (teste >= 400) {
-				teste = -400;
-			}
-			teste+=100;
-			$('.space3d').eq(i).animate({
-				top: topPos+"px",
-				left: leftPos+"px"
-			}, 1000);
-		}
+		$('.space3d').animate({
+			top: "20px"
+		}, 2000);
 
-		setTimeout(setDice, 1000);
+		setTimeout(setDice, 2000);
 	});
 
 	var sides = ['rotateY(0deg)', 'rotateX(-90deg)', 'rotateY(90deg)', 'rotateY(-90deg)', 'rotateX(90deg)', 'rotateY(180deg)'],
