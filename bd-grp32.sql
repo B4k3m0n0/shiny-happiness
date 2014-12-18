@@ -2,10 +2,10 @@
 -- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tempo de Geração: 18/12/2014 às 16:49
+-- Máquina: localhost
+-- Data de Criação: 18-Dez-2014 às 17:24
 -- Versão do servidor: 5.5.38-0ubuntu0.14.04.1
--- Versão do PHP: 5.5.9-1ubuntu4.4
+-- versão do PHP: 5.5.9-1ubuntu4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Banco de dados: `bd-grp32`
+-- Base de Dados: `bd-grp32`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `bans`
+-- Estrutura da tabela `bans`
 --
 
 CREATE TABLE IF NOT EXISTS `bans` (
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `bans` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `games`
+-- Estrutura da tabela `games`
 --
 
 CREATE TABLE IF NOT EXISTS `games` (
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `games` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
 
 --
--- Fazendo dump de dados para tabela `games`
+-- Extraindo dados da tabela `games`
 --
 
 INSERT INTO `games` (`id`, `title`, `status`, `num_bots`, `num_players`, `winner`, `created_at`, `updated_at`) VALUES
@@ -87,7 +87,7 @@ INSERT INTO `games` (`id`, `title`, `status`, `num_bots`, `num_players`, `winner
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `migrations`
+-- Estrutura da tabela `migrations`
 --
 
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Fazendo dump de dados para tabela `migrations`
+-- Extraindo dados da tabela `migrations`
 --
 
 INSERT INTO `migrations` (`migration`, `batch`) VALUES
@@ -110,7 +110,7 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `plays`
+-- Estrutura da tabela `plays`
 --
 
 CREATE TABLE IF NOT EXISTS `plays` (
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `plays` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tournaments`
+-- Estrutura da tabela `tournaments`
 --
 
 CREATE TABLE IF NOT EXISTS `tournaments` (
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `tournaments` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users`
+-- Estrutura da tabela `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -165,6 +165,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `facebook` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `twitter` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `remember_token` text COLLATE utf8_unicode_ci,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
@@ -173,16 +174,16 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
--- Fazendo dump de dados para tabela `users`
+-- Extraindo dados da tabela `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `fullname`, `email`, `creditcard`, `birthdate`, `country`, `picture`, `address`, `phone`, `facebook`, `twitter`, `admin`, `created_at`, `updated_at`) VALUES
-(1, 'Mateus', '$2y$10$Pi2gacW0/RGrdcvXWv/QEO2RpDfcZC30vPDuGK0ibba2QpOvOlMVS', 'Mateus Silva', 'mateusgsilva99@gmail.com', 2147483647, '0000-00-00', 'Leiria', '', '', 0, '', '', 0, '2014-12-16 12:02:20', '2014-12-16 12:02:20');
+INSERT INTO `users` (`id`, `username`, `password`, `fullname`, `email`, `creditcard`, `birthdate`, `country`, `picture`, `address`, `phone`, `facebook`, `twitter`, `admin`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Mateus', '$2y$10$Pi2gacW0/RGrdcvXWv/QEO2RpDfcZC30vPDuGK0ibba2QpOvOlMVS', 'Mateus Silva', 'mateusgsilva99@gmail.com', 2147483647, '0000-00-00', 'Leiria', '', '', 0, '', '', 0, 'ADAXfvUIctCMKpNNrRRmNw851GZp7R4RAcx4beStfXcfpjVeHg4H3tXrEg4D', '2014-12-16 12:02:20', '2014-12-18 16:23:15');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users_games`
+-- Estrutura da tabela `users_games`
 --
 
 CREATE TABLE IF NOT EXISTS `users_games` (
@@ -197,23 +198,23 @@ CREATE TABLE IF NOT EXISTS `users_games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Restrições para dumps de tabelas
+-- Constraints for dumped tables
 --
 
 --
--- Restrições para tabelas `bans`
+-- Limitadores para a tabela `bans`
 --
 ALTER TABLE `bans`
   ADD CONSTRAINT `bans_banned_user_foreign` FOREIGN KEY (`banned_user`) REFERENCES `users` (`username`);
 
 --
--- Restrições para tabelas `plays`
+-- Limitadores para a tabela `plays`
 --
 ALTER TABLE `plays`
   ADD CONSTRAINT `plays_game_id_foreign` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`);
 
 --
--- Restrições para tabelas `users_games`
+-- Limitadores para a tabela `users_games`
 --
 ALTER TABLE `users_games`
   ADD CONSTRAINT `users_games_gameid_foreign` FOREIGN KEY (`gameId`) REFERENCES `games` (`id`),
