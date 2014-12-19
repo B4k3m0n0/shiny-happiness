@@ -27,6 +27,11 @@ class ProjetoController extends BaseController {
 	}
 
 	public function signup(){
+
+		if (Auth::check())
+		{
+			return Redirect::to('lobby');
+		}
 		return View::make('outside/signup');
 	}
 
@@ -75,7 +80,7 @@ class ProjetoController extends BaseController {
 			->withInput()
 			->withErrors($validation)
 			->with('message', 'There were validation errors.');*/
-	}
+		}
 
 	/**
 	 * Display the specified resource.
@@ -128,9 +133,9 @@ class ProjetoController extends BaseController {
 		}
 
 		return Redirect::route('projetos.edit', $id)
-			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+		->withInput()
+		->withErrors($validation)
+		->with('message', 'There were validation errors.');
 	}
 
 	/**

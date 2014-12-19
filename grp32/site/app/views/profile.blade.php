@@ -33,10 +33,10 @@
 	<hr>
 	<fieldset ng-disabled="toggleEdit" id="fieldsetProfile">
 		<div class="input-group margin-center margin-bottom-20">
-			{{ Form::labelStart('username', array('class'=>'input-group-addon signup-obligatory')) }}
-			{{ Form::label('username', ' ', array('class'=>'fa fa-user')) }}
-			{{ Form::labelEnd() }}
-			{{ Form::text('username', $user->username , array('class'=>'form-control', 'placeholder'=>'Username')) }}
+	  {{ Form::labelStart('username', array('class'=>'input-group-addon signup-obligatory')) }}
+	  {{ Form::label('username', ' ', array('class'=>'fa fa-user')) }}
+	  {{ Form::labelEnd() }}
+	  {{ Form::text('username', $user->username , array('class'=>'form-control', 'placeholder'=>'Username')) }}
 		</div>
 		<div class="input-group margin-center margin-bottom-20">
 			{{ Form::labelStart('fullname', array('class'=>'input-group-addon signup-obligatory')) }}
@@ -60,7 +60,7 @@
 			{{ Form::labelStart('birthdate', array('class'=>'input-group-addon signup-obligatory')) }}
 			{{ Form::label('birthdate', ' ', array('class'=>'fa fa-calendar')) }}
 			{{ Form::labelEnd() }}
-			{{ Form::text('birthdate', $user->birthdate, array('class'=>'form-control', 'placeholder'=>'Birth Date')) }}
+			{{ Form::text('birthdate', $user->birthdate, array('class'=>'form-control', 'placeholder'=>'Birth Date (dd-mm-yyyy)')) }}
 		</div>
 		<div class="input-group margin-center margin-bottom-20">
 			{{ Form::labelStart('country', array('class'=>'input-group-addon signup-obligatory')) }}

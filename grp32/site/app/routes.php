@@ -70,6 +70,10 @@ Route::get('cube', function()
 Route::get('randoms', array('as' => 'randoms', 'uses' => 'JogoController@randomDices'));
 
 Route::get('profile', array('as' => 'profile', 'uses' => 'UserController@showProfile'));
+Route::post('profile', array('as' => 'profile', 'uses' => 'UserController@editProfile'));
+
+
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'))->before('login'); //TODO por como post
 Route::get('lobby', array('as' => 'lobby', 'uses' => 'LobbyController@index'));
+
