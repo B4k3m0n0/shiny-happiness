@@ -3,27 +3,45 @@
 {{ HTML::style('css/navbar.css') }}
 @stop
 
+
+
 @section('navbar')
 <div class="container">
 	<div class="navbar-header">
-		<span class="navbar-brand">YAHTZEE</span>
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="fa fa-bars"></span>
-		</button>
+		<a class="navbar-brand" href="{{URL::to('lobby')}}" id="yahtezeeBrand">YAHTZEE</a>
 	</div>
-	<div class="collapse navbar-collapse navbar-responsive-collapse">
+
+	@if(Auth::check())
+
+	<div class="collapse navbar-collapse navbar-responsive-collapse" >
 		<ul class="nav navbar-nav navbar-right">
-			<li>
-				<a class="navbar-link">Algodão</a>
+			<li ng-class="{'active' : page == 'profile'}">
+				<a href="{{URL::to('profile')}}" class="navbar-link">Profile</a>
+			</li>
+			<li ng-class="{'active' : page == 'tournaments'}">
+				<a href="{{URL::to('tournaments')}}" class="navbar-link">Tournaments</a>
+			</li>
+			<li ng-class="{'active' : page == 'scores'}">
+				<a href="{{URL::to('scores')}}" class="navbar-link">Top Scores</a>
 			</li>
 			<li>
-				<a class="navbar-link">Púcaro</a>
-			</li>
-			<li>
-				<a class="navbar-link">Cadeirão</a>
+				<a href="{{URL::to('logout')}}" class="navbar-link">Logout</a>
 			</li>
 		</ul>
 	</div>
-</div>
-@stop
+	@else
+	<div class="collapse navbar-collapse navbar-responsive-collapse" >
+		<ul class="nav navbar-nav navbar-right">
+			<li ng-class="{'active' : page == 'scores'}">
+				<a href="{{URL::to('scores')}}" class="navbar-link">Top Scores</a>
+			</li>
+			<li>
+				<a href="{{URL::to('login')}}" class="navbar-link">Login</a>
+			</li>
+		</div>
+
+
+
+		@endif
+	</div>
+	@stop

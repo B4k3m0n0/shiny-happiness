@@ -34,7 +34,6 @@
 
 .active {
 	color: #313131;
-	padding-bottom: 12px;
 	border-bottom: 3px solid rgba(66,139,202,1);
 }
 
@@ -42,4 +41,12 @@
 	font-size: 20px;
 	font-family: 'Gloria Hallelujah', cursive;
 	border-bottom: 3px solid #428bca;
+}
+
+
+#yahtezeeBrand {
+	color: black;
+}
+#yahtezeeBrand:hover {
+	color: blue;
 }

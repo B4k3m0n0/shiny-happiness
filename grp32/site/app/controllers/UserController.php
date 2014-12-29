@@ -110,23 +110,43 @@ class UserController extends BaseController {
 
 	public function editProfile() {
 
-		$user = Session::get('username');
+		$user = Input::all();
 
-		$validator = Validator::make(Input::all(), User::$rules);
 
-		if ($validator->fails()) {
+//Debugbar::info($user);
+//Debugbar::info($user['username']);
+
+		$loggedUser = Auth::user()->username;
+		$message = '';	
+
+
+
+
+
+		$mail = User::where('email',$user['email'])->first();
+		//Debugbar::info($mail);
+		//Debugbar::info($mail->username != $loggedUser);
+
+		if ( $mail != null) {
+			if( $mail->username != $loggedUser)
+			{
+				$message = 'This email is already registered on the system.';
+			}
+		}
+
+		$validator = Validator::make(Input::except('username'), User::$rulesEdit);
+
+		if ($validator->fails()  || $message != '') {
 
 			$messages = $validator->messages();
 
 			return Redirect::to('profile')
 			->withInput()
-			->withErrors($validator);
+			->withErrors($validator)->with('message',$message);
 		}
 
 
-
 		$edit = array(
-			'username' => Input::get('username'),
 			'password' => Hash::make(Input::get('password')),
 			'fullname' => Input::get('fullname'),
 			'email' => Input::get('email'),
@@ -141,7 +161,12 @@ class UserController extends BaseController {
 			);
 
 
-		//User::create($signup); TODO MUDAR OS CAMPOS NA BASE DE DADOS
-		return Redirect::to('profile');
+		//Debugbar::info($edit->creditcard);
+
+		$messageSuccessful = 'Profile successfully updated!';
+		User::where('username', $loggedUser)->update($edit);		
+		return Redirect::to('profile')->with('messageSuccessful',$messageSuccessful);
 	}
+
+
 }

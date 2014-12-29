@@ -77,3 +77,7 @@ Route::post('profile', array('as' => 'profile', 'uses' => 'UserController@editPr
 Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'))->before('login'); //TODO por como post
 Route::get('lobby', array('as' => 'lobby', 'uses' => 'LobbyController@index'));
 
+Route::get('scores', array('as' => 'scores', 'uses' => 'LobbyController@showScores'));
+
+
+

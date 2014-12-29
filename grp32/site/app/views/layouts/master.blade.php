@@ -31,5 +31,30 @@
 
 	{{ HTML::script('http://192.168.216.134:8080/socket.io/socket.io.js') }}
 	@include('layouts.script')
+
+	<script type="text/javascript">
+
+	var x = document.getElementsByClassName("nav")[0].childNodes[1];
+	console.log(x);
+
+	(?=(href="))(.*)"$
+
+
+	/*main.controller('navbarController', ['$scope', function($scope){
+		if (document.URL == $scope.profile) {
+			$scope.page = 'profile';
+
+		}else if (document.URL == $scope.tournaments) {
+
+			$scope.page = 'tournaments';
+		}else{
+
+			$scope.page = 'scores';
+		};
+
+	}]);*/
+
+
+</script>
 </body>
 </html>

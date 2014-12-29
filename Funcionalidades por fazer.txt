@@ -1,0 +1,3 @@
+fotografia nos form e no profile
+top 10 - falta por as pontuaçoes na BD(mateus) e ir buscar (lobbyController)
+retype password no signup e no edit profile
