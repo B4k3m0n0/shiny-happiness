@@ -167,6 +167,4 @@ class UserController extends BaseController {
 		User::where('username', $loggedUser)->update($edit);		
 		return Redirect::to('profile')->with('messageSuccessful',$messageSuccessful);
 	}
-
-
 }
