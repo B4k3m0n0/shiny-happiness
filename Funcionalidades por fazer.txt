@@ -1,3 +1,4 @@
 fotografia nos form e no profile
 top 10 - falta por as pontuaçoes na BD(mateus) e ir buscar (lobbyController)
 campo de retype password na vista de profile esta fora do sitio
+Opçoes de admin
