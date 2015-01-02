@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->string('password');
 			$table->string('fullname')->lenght(80);
 			$table->string('email')->unique();
-			$table->bigInteger('creditcard')->lenght(12);
+			$table->bigInteger('creditcard')->lenght(16);
 			$table->date('birthdate');
 			$table->string('country');
 			$table->binary('picture')->nullable();

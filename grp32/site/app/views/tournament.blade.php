@@ -16,7 +16,7 @@
 
 <div class="col-md-4 col-md-offset-4" ng-controller="TournamentController">
 
-  {{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'tournament', 'name' => 'tournamentForm')) }}
+  {{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'tournaments', 'name' => 'tournamentForm')) }}
   <h3 class="center">Create a new tournament</h3>
   <hr>
   <div class="input-group margin-center margin-bottom-20">

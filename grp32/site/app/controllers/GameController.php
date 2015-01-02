@@ -195,36 +195,36 @@ class GameController extends BaseController {
 				Play::where('game_id', $id)->update($updatePlay);
 
 				return Response::json(array('diceGenerated' => $diceGenerated, 'boardResult' => $boardResult));
-			/*}*/
-		}
+				/*}*/
+			}
 
-		public function currentPlay()
-		{
-			$id = Input::get('id');
-			$currentPlay = Play::where('game_id', $id)->first();
-			if (Auth::user()->username == $currentPlay->current_player) {
-				$numRolls = Input::get('numRolls');
-				$scoreSelected = Input::get('scoreType');
-				$listPlayers = explode(';', $currentPlay->player_sequence);
-				$indexCurrentPlayer = array_search($currentPlay->current_player , $listPlayers);
+			public function currentPlay()
+			{
+				$id = Input::get('id');
+				$currentPlay = Play::where('game_id', $id)->first();
+				if (Auth::user()->username == $currentPlay->current_player) {
+					$numRolls = Input::get('numRolls');
+					$scoreSelected = Input::get('scoreType');
+					$listPlayers = explode(';', $currentPlay->player_sequence);
+					$indexCurrentPlayer = array_search($currentPlay->current_player , $listPlayers);
 
-				if ($indexCurrentPlayer == sizeof($listPlayers)-2) {
-					$currentPlayer = $listPlayers[0];
-					Debugbar::info("last to first");
-				}else{
-					$currentPlayer = $listPlayers[$indexCurrentPlayer+1];
-					Debugbar::info("seguinte");
+					if ($indexCurrentPlayer == sizeof($listPlayers)-2) {
+						$currentPlayer = $listPlayers[0];
+						Debugbar::info("last to first");
+					}else{
+						$currentPlayer = $listPlayers[$indexCurrentPlayer+1];
+						Debugbar::info("seguinte");
+					}
+
+					$newPlay = array(
+						'rolls' => $currentPlay->rolls.$numRolls.";",
+						'score_id' => $currentPlay->score_id.$scoreSelected.";",
+						'current_player' => $currentPlayer
+						);
+
+					Play::where('game_id', $id)->update($newPlay);
+
+					return Response::json(array('currentPlayer' => $currentPlayer));
 				}
-
-				$newPlay = array(
-					'rolls' => $currentPlay->rolls.$numRolls.";",
-					'score_id' => $currentPlay->score_id.$scoreSelected.";",
-					'current_player' => $currentPlayer
-					);
-
-				Play::where('game_id', $id)->update($newPlay);
-
-				return Response::json(array('currentPlayer' => $currentPlayer));
 			}
 		}
-	}

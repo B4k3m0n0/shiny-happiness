@@ -14,25 +14,28 @@ class LobbyController extends BaseController {
 
 	public function showScores(){
 		//create fake data on database
-		//UsersGame::delete();
-		/*UsersGame::insert(array('gameId' => '1', 'user' => 'Mateus'));
-		UsersGame::insert(array('gameId' => '1', 'user' => 'asdsad'));
-		UsersGame::insert(array('gameId' => '1', 'user' => 'aaaaaaaa'));
-		UsersGame::insert(array('gameId' => '2', 'user' => 'joao'));
-		UsersGame::insert(array('gameId' => '2', 'user' => 'coiso'));
-		UsersGame::insert(array('gameId' => '2', 'user' => 'coiso1'));
-		UsersGame::insert(array('gameId' => '2', 'user' => 'jonny15'));
-		UsersGame::insert(array('gameId' => '4', 'user' => 'Mateus'));
-		UsersGame::insert(array('gameId' => '4', 'user' => 'joao'));
-		UsersGame::insert(array('gameId' => '6', 'user' => 'jonny15'));
-		UsersGame::insert(array('gameId' => '6', 'user' => 'Mateus'));
-		UsersGame::insert(array('gameId' => '4', 'user' => 'joao'));*/
+		//Game::truncate();
+		Game::insert(array('game_name' => 'jogo1', 'game_owner' => 'joao','status' => 'Waiting','num_bots' => '7', 'num_players' => '2','winner' => 'joao'));
+		//UsersGame::truncate();
+		UsersGame::insert(array('game_id' => '1', 'user' => 'joao','score' => '100'));
+		UsersGame::insert(array('game_id' => '1', 'user' => 'fdfdhgfhgf','score' => '200'));
+		UsersGame::insert(array('game_id' => '1', 'user' => 'dfsdfsdfdsf1','score' => '300'));
+		UsersGame::insert(array('game_id' => '2', 'user' => 'dfsdfsdfdsf1','score' => '400'));
+		UsersGame::insert(array('game_id' => '2', 'user' => 'coiso','score' => '500'));
+		UsersGame::insert(array('game_id' => '2', 'user' => 'fdfdhgfhgf','score' => '600'));
+		UsersGame::insert(array('game_id' => '2', 'user' => 'coiso123','score' => '700'));
+		UsersGame::insert(array('game_id' => '4', 'user' => 'Mateussadsdf','score' => '800'));
+		UsersGame::insert(array('game_id' => '4', 'user' => 'joao','score' => '900'));
+		UsersGame::insert(array('game_id' => '6', 'user' => 'coiso123','score' => '1000'));
+		UsersGame::insert(array('game_id' => '6', 'user' => 'Mateussadsdf','score' => '1100'));
+		UsersGame::insert(array('game_id' => '4', 'user' => 'joao','score' => '1200'));
 
 
 
-		$scores = UsersGame::orderBy('id', 'desc')//TODO mudar id para os pontos obtidos no jogo
+		$scores = UsersGame::orderBy('score', 'desc')//TODO mudar id para os pontos obtidos no jogo
 		->take(10)
 		->get();
+		Debugbar::info($scores);
 
 
 
@@ -44,35 +47,20 @@ class LobbyController extends BaseController {
 			$date = explode(' ', $score->created_at);
 			array_push($data,$date[0]);	
 		}			
-		Debugbar::info($data);
-
-
-
-
-		
-		$gameTitles = array();
+				
+		$gameNames = array();
 
 		for ($i=0; $i < 10; $i++) { 
 			//Debugbar::info($scores[$i]->id);
-			$game = Game::where('id',$scores[$i]->gameId)
+			$game = Game::where('id',$scores[$i]->game_id)
 			->first();
-			array_push($gameTitles, $game->title);
+			array_push($gameNames, $game->game_name);
 		}
-
-
-		//Debugbar::info($gameTitles);
-		//$users = UsersGame::get();
-		/*foreach ($scores as $score)
-		{
-			var_dump($score->id .' ' . $score->user);
-		}*/
-
-		
 
 		//$games = Game::where('status', '<>', 'ended')->take(8)->get();
 		return View::make('scores',array(
 			'scores'=> $scores,
-			'gameTitles' => $gameTitles,
+			'gameNames' => $gameNames,
 			'data' => $data));	
 	}
 }

@@ -20,8 +20,6 @@
 	<h1 class="center">Highest Scores</h1>
 
 
-	<h1 class="center">TODO MUDAR O ID PARA PONTOS (LobbyController)</h1>
-
 	<table class="table table-bordered" >
 		<thead>
 			<tr>
@@ -32,17 +30,12 @@
 			</tr>
 		</thead>
 		<tbody>
-
-
-
-
-
 			@for($i=0;$i<10; $i++)
 			<tr>
 				<td>{{$scores[$i]->user}}</td>
-				<td>{{$scores[$i]->id}}</td>
+				<td>{{$scores[$i]->score}}</td>
 				<td>{{$data[$i]}}</td>
-				<td>{{$gameTitles[$i]}}</td>
+				<td>{{$gameNames[$i]}}</td>
 			</tr>
 			@endfor
 		</tbody>

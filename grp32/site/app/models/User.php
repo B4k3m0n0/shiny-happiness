@@ -38,7 +38,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'password_confirmation'       => 'required|min:8',
 		'fullname'      			  => 'required|alpha_spaces|min:5|max:80',
 		'email'						  => 'required|unique:users|email',
-		'creditcard' 				  => 'required|digits:11',
+		'creditcard' 				  => 'required|digits:16',
 		'birthdate'					  => 'required|date',
 		'country'					  => 'required|alpha',
 		'picture' 					  => 'image',
@@ -53,7 +53,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'password_confirmation'       => 'required|min:8',
 		'fullname'      			  => 'required|alpha_spaces|min:5|max:80',
 		'email'						  => 'email',
-		'creditcard' 				  => 'required|digits:11',
+		'creditcard' 				  => 'required|digits:16',
 		'birthdate'					  => 'required|date',
 		'country'					  => 'required|alpha',
 		'picture' 					  => 'image',
@@ -62,6 +62,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'facebook'					  => 'alpha',
 		'twitter' 					  => 'alpha'
 		);
+
+	public function getAge($date = 'now')
+	{
+		return intval(substr(date('Ymd') - date('Ymd', strtotime($date)), 0, -4));
+	}
 
 
 }

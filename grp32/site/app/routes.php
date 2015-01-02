@@ -16,8 +16,6 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::post('layout', 'ProjetoController@store');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +31,7 @@ Route::post('login', array('as' => 'login', 'uses' => 'UserController@login'));
 | Signup Routes
 |--------------------------------------------------------------------------
 */
-Route::get('signup', array('as' => 'signup', 'uses' => 'ProjetoController@signup'));
+Route::get('signup', array('as' => 'signup', 'uses' => 'UserController@signupView'));
 
 Route::post('signup', array('as' => 'signup', 'uses' => 'UserController@signup'));
 
@@ -71,17 +69,18 @@ Route::post('updateGame', array('as' => 'updateGame', 'uses' => 'GameController@
 /*LOBBY*/
 Route::get('lobby', array('as' => 'lobby', 'uses' => 'LobbyController@index'));
 
-Route::get('profile/{userid}', array('as' => 'profile', 'uses' => 'UserController@showProfile')); //TODO mudar de maneira a que nao seja mostrado o id no URL});
 /*START GAME*/
 Route::post('startGame', array('as' => 'startGame', 'uses' => 'GameController@start'));
-Route::get('game/{id}', array('as' => 'game', 'uses' => 'GameController@index'));=======
+Route::get('game/{id}', array('as' => 'game', 'uses' => 'GameController@index'));
 
-Route::get('tournament', array('as' => 'tournament', 'uses' => 'TournamentController@createTournament'));
-
-Route::post('tournament', array('as' => 'newTournament', 'uses' => 'TournamentController@createTournament'));
+Route::get('tournaments', array('as' => 'tournaments', 'uses' => 'TournamentController@createTournament'));
+Route::post('tournaments', array('as' => 'tournaments', 'uses' => 'TournamentController@createTournament'));
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'))->before('login'); //TODO por como post
 
 Route::get('scores', array('as' => 'scores', 'uses' => 'LobbyController@showScores'));
+
+
+Route::get('profile', array('as' => 'profile', 'uses' => 'UserController@showProfile'));
 Route::post('profile', array('as' => 'profile', 'uses' => 'UserController@editProfile'));
 

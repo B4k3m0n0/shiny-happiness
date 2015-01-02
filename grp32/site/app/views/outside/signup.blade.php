@@ -9,11 +9,15 @@
 
 @section('mainbody')
 
+<br> <!--TODO Tirar estes br-->
+<br>
+<br>
+<br>
 <div class="container" ng-controller="mainController">
   <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 
 
-    {{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'signup','name' => 'userForm')) }}
+    {{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'signup','name' => 'userForm','files'=>true)) }}
     <h3 class="center">Create your account</h3>
     <hr>
     <div class="div-obligatory">
@@ -91,6 +95,9 @@
               <div class="@if ($errors->has('creditcard')) has-error @endif">
                 @if ($errors->has('creditcard')) <p class="help-block">{{ $errors->first('creditcard') }}</p> @endif
               </div>
+              <div class="@if(Session::has('messageInvalidCC')) has-error @endif">
+                @if(Session::has('messageInvalidCC')) <p class="help-block">{{ Session::get('messageInvalidCC') }}</p> @endif 
+              </div>              
               <div class="input-group input-auto margin-bottom-20">
                 {{ Form::labelStart('creditcard', array('class'=>'input-group-addon signup-obligatory')) }}
                 {{ Form::label('creditcard', ' ', array('class'=>'fa fa-credit-card')) }}
@@ -103,11 +110,14 @@
              <div class="@if ($errors->has('birthdate')) has-error @endif">
               @if ($errors->has('birthdate')) <p class="help-block">{{ $errors->first('birthdate') }}</p> @endif
             </div>
+            <div class="@if(Session::has('messageInvalidAge')) has-error @endif">
+              @if(Session::has('messageInvalidAge')) <p class="help-block">{{ Session::get('messageInvalidAge') }}</p> @endif 
+            </div>  
             <div class="input-group input-auto margin-bottom-20">
               {{ Form::labelStart('birthdate', array('class'=>'input-group-addon signup-obligatory')) }}
               {{ Form::label('birthdate', ' ', array('class'=>'fa fa-calendar')) }}
               {{ Form::labelEnd() }}
-              {{ Form::text('birthdate', Input::old('birthdate'), array('class'=>'form-control', 'placeholder'=>'Birth Date (dd-mm-yyyy)','required')) }}
+              {{ Form::text('birthdate', Input::old('birthdate'), array('class'=>'form-control', 'placeholder'=>'Birth Date (yyyy-mm-dd)','required')) }}
             </div>
         <!-- *******************************************************************************************************
              *************************************************COUNTRY***********************************************
@@ -131,7 +141,8 @@
               {{ Form::labelStart('picture', array('class'=>'input-group-addon')) }}
               {{ Form::label('picture', ' ', array('class'=>'fa fa-camera')) }}
               {{ Form::labelEnd() }}
-              {{ Form::text('picture', Input::old('picture'), array('class'=>'form-control', 'placeholder'=>'Picture')) }}
+              {{ Form::file('picture','', array('class'=>'form-control')) }}
+
             </div>
         <!-- *******************************************************************************************************
              ************************************************ADDRESS************************************************

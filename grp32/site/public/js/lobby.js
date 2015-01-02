@@ -1,4 +1,4 @@
-var socket = io.connect('http://192.168.117.137:8080');
+var socket = io.connect('http://192.168.216.134:8080');
 
 var gameCreated;
 
@@ -154,7 +154,7 @@ main.controller('LobbyController', ['$scope', '$http', function($scope, $http) {
 			if ($scope.gameName == null) {
 				$scope.gameName = 'Unnamed Game';
 			}
-			$http.post('http://192.168.117.137/grp32/site/public/createGame', {'gameName': $scope.gameName, 'totalPlayersDefined': $scope.playerDefined.name, 'botsDefined': $scope.botDefined.name}).
+			$http.post('http://192.168.216.134/grp32/site/public/createGame', {'gameName': $scope.gameName, 'totalPlayersDefined': $scope.playerDefined.name, 'botsDefined': $scope.botDefined.name}).
 			success(function(data, status, headers, config) {
 				gameCreated = data;
 				socket.emit('createGame', gameCreated, $scope.username);
@@ -163,7 +163,7 @@ main.controller('LobbyController', ['$scope', '$http', function($scope, $http) {
 				console.log("unable to set data");
 			});
 		}else{
-			$http.post('http://192.168.117.137/grp32/site/public/startGame', {'id': gameCreated.id, 'players': $scope.playersOnLobby}).
+			$http.post('http://192.168.216.134/grp32/site/public/startGame', {'id': gameCreated.id, 'players': $scope.playersOnLobby}).
 			success(function(data, status, headers, config) {
 				socket.emit('startGame', gameCreated.id);
 			}).
@@ -175,7 +175,7 @@ main.controller('LobbyController', ['$scope', '$http', function($scope, $http) {
 
 	updateCreatedGame = function() {
 		if ($scope.createGameStatus == "Start") {
-			$http.post('http://192.168.117.137/grp32/site/public/updateGame', {'id': gameCreated.id, 'totalPlayersDefined': $scope.playerDefined.name, 'botsDefined': $scope.botDefined.name}).
+			$http.post('http://192.168.216.134/grp32/site/public/updateGame', {'id': gameCreated.id, 'totalPlayersDefined': $scope.playerDefined.name, 'botsDefined': $scope.botDefined.name}).
 			success(function(data, status, headers, config) {
 				socket.emit('updateGame', data);
 			}).
