@@ -24,29 +24,34 @@ main.controller('ChatController', ['$scope', function($scope) {
 
 	/*Connections to server*/
 	socket.on('connect', function() {
-		socket.emit('clientConnect', $scope.username);
+		socket.emit('connectToGameChat', $scope.gameId , $scope.username);
 		$scope.serverStatus = true;
-		$scope.$apply();
-	    console.log('Connected');
+		console.log('Connected');
 	});
 
 	socket.on('disconnect', function() {
-		console.log('Server is down');
 		$scope.serverStatus = false;
+		console.log('Server is down');
+	});
+
+	socket.on('listChatUsers', function (listUsersInChat) {
+		/*listUsersInChat = listUsersInChat.filter(function(elem, pos) {
+			return listUsersInChat.indexOf(elem) == pos;
+		});*/
+
+		$scope.players = [];
+		$scope.spectators = [];
+
+		for(index in listUsersInChat) {
+			if ($scope.playerSequence.indexOf(listUsersInChat[index]+';') != -1) {
+				$scope.players.push(listUsersInChat[index]);
+			}else{
+				$scope.spectators.push(listUsersInChat[index]);
+			}
+		}
 		$scope.$apply();
 	});
 	/*End connections to server*/
-
-	socket.on('users', function(usernamesConnected) {
-		$scope.users = [];
-		for (var i = 0; i < usernamesConnected.length; i++) {
-			newUser = usernamesConnected[i];
-			$scope.users = $scope.users.concat(newUser);
-		}
-		
-		$scope.$apply();
-	});
-
 
 	/*Message Process*/
 	$scope.submit = function() {
@@ -54,10 +59,9 @@ main.controller('ChatController', ['$scope', function($scope) {
 	};
 
 	function common () {
-		console.log($scope.message);
 		if ($scope.message != null && $scope.serverStatus) {
 			var chatMessage = { 'message': $scope.message, 'username': $scope.username, 'colorChosen': colorChosen};
-			socket.emit('clientToServerMessage', chatMessage);
+			socket.emit('clientToServerMessage', chatMessage, $scope.gameId);
 			$scope.message = null;
 		};
 	}
@@ -81,9 +85,8 @@ main.controller('ChatController', ['$scope', function($scope) {
 	socket.on('serverToClientMessage', function (data) {
 		var currentTime = new Date(),
 			timer = addZero(currentTime.getHours()) + ':' + addZero(currentTime.getMinutes());
-			//messageReplaced = data.message.replace(/\</g, '&lt;'),
 			newMessage = [
-				{'time': timer, 'username': data.username, 'message': data.message /*messageReplaced*/, 'color': data.colorChosen}
+				{'time': timer, 'username': data.username, 'message': data.message, 'color': data.colorChosen}
 			];
 
 		$scope.$apply(function() {

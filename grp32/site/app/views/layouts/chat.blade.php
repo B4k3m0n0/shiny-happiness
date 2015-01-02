@@ -5,7 +5,7 @@
 
 @section('scripts')
 @parent
-{{ HTML::script('js/node-chat-client.js') }}
+{{ HTML::script('js/chat.js') }}
 @stop
 
 @section('rightbar')
@@ -14,16 +14,16 @@
 		<div class="chat-wrapper">
 			<div class="chat-top" >
 				<div class="chat-user-image">
-					<img src="./img/tristana.png">
+					<img src="{{ asset('img/tristana.png') }}">
 				</div>
-				<p class="chat-top-title" ng-init="username = '{{Session::get('username')}}'">{{Session::get('username')}}</p>
+				<p class="chat-top-title" ng-init="username = '{{Auth::user()->username}}'; @if(isset($gameId)) gameId = '{{$gameId}}'; playerSequence = '{{$playerSequence}}' @endif">{{Auth::user()->username}}</p>
 			</div>
 			<div class="chat-body">
 				<ul id="messages">
 					<li ng-repeat="data in datas"> 
-						<span class="chat-timer" ng-show="timeStamp">@{{data.time}}</span>
-						<span class="chat-username-span" ng-style="{'color' : data.color}">@{{data.username}}:</span>
-						<span> @{{data.message}}</span>
+						<span class="chat-timer" ng-show="timeStamp">[[data.time]]</span>
+						<span class="chat-username-span" ng-style="{'color' : data.color}">[[data.username]]:</span>
+						<span> [[data.message]]</span>
 					</li>
 				</ul>
 			</div>
@@ -74,8 +74,10 @@
 			</div>
 			<div class="chat-users-body">
 				<ul>
-					<li class="type-user-span"><span>Spectator</span></li>
-					<li class="list-users-span" ng-repeat="user in users">@{{user}}</li>
+					<li class="type-user-span"><span>Players</span></li>
+					<li class="list-users-span" ng-repeat="player in players track by $index">[[player]]</li>
+					<li class="type-user-span"><span>Spectators</span></li>
+					<li class="list-users-span" ng-repeat="spectator in spectators track by $index">[[spectator]]</li>
 				</ul>
 			</div>
 		</div>

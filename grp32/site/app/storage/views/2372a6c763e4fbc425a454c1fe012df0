@@ -1,158 +1,157 @@
 
 
-
+<?php echo $__env->make('layouts.navbar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <?php $__env->startSection('styles'); ?>
-  @parent
-  <?php echo HTML::style('css/signup.css'); ?>
+@parent
+<?php echo HTML::style('css/signup.css'); ?>
 
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('mainbody'); ?>
 
 <div class="container">
-  <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 
-  <?php echo Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'signup')); ?>
+		<?php echo Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'signup')); ?>
 
-    <h3 class="center">Create your account</h3>
-    <hr>
-    <div class="div-obligatory">
-      <div class="box-obligatory"></div>
-      <span class="text-obligatory">- obligatory fields</span>
-    </div>
-    <hr>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('username', array('class'=>'input-group-addon signup-obligatory')); ?>
+		<h3 class="center">Create your account</h3>
+		<hr>
+		<div class="div-obligatory">
+			<div class="box-obligatory"></div>
+			<span class="text-obligatory">- obligatory fields</span>
+		</div>
+		<hr>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('username', array('class'=>'input-group-addon signup-obligatory')); ?>
 
-      <?php echo Form::label('username', ' ', array('class'=>'fa fa-user')); ?>
+			<?php echo Form::label('username', ' ', array('class'=>'fa fa-user')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('username', Input::old('username'), array('class'=>'form-control', 'placeholder'=>'Username')); ?>
+			<?php echo Form::text('username', Input::old('username'), array('class'=>'form-control', 'placeholder'=>'Username')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('password', array('class'=>'input-group-addon signup-obligatory')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('password', array('class'=>'input-group-addon signup-obligatory')); ?>
 
-      <?php echo Form::label('password', ' ', array('class'=>'fa fa-lock')); ?>
+			<?php echo Form::label('password', ' ', array('class'=>'fa fa-lock')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password')); ?>
+			<?php echo Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('fullname', array('class'=>'input-group-addon signup-obligatory')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('fullname', array('class'=>'input-group-addon signup-obligatory')); ?>
 
-      <?php echo Form::label('fullname', ' ', array('class'=>'fa fa-male')); ?>
+			<?php echo Form::label('fullname', ' ', array('class'=>'fa fa-male')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('fullname', Input::old('fullname'), array('class'=>'form-control', 'placeholder'=>'Full Name')); ?>
+			<?php echo Form::text('fullname', Input::old('fullname'), array('class'=>'form-control', 'placeholder'=>'Full Name')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('email', array('class'=>'input-group-addon signup-obligatory')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('email', array('class'=>'input-group-addon signup-obligatory')); ?>
 
-      <?php echo Form::label('email', ' ', array('class'=>'fa fa-envelope')); ?>
+			<?php echo Form::label('email', ' ', array('class'=>'fa fa-envelope')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::email('email', Input::old('email'), array('class'=>'form-control', 'placeholder'=>'E-Mail')); ?>
+			<?php echo Form::email('email', Input::old('email'), array('class'=>'form-control', 'placeholder'=>'E-Mail')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('creditcard', array('class'=>'input-group-addon signup-obligatory')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('creditcard', array('class'=>'input-group-addon signup-obligatory')); ?>
 
-      <?php echo Form::label('creditcard', ' ', array('class'=>'fa fa-credit-card')); ?>
+			<?php echo Form::label('creditcard', ' ', array('class'=>'fa fa-credit-card')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('creditcard', Input::old('creditcard'), array('class'=>'form-control', 'placeholder'=>'Credit Card')); ?>
+			<?php echo Form::text('creditcard', Input::old('creditcard'), array('class'=>'form-control', 'placeholder'=>'Credit Card')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('birthdate', array('class'=>'input-group-addon signup-obligatory')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('birthdate', array('class'=>'input-group-addon signup-obligatory')); ?>
 
-      <?php echo Form::label('birthdate', ' ', array('class'=>'fa fa-calendar')); ?>
+			<?php echo Form::label('birthdate', ' ', array('class'=>'fa fa-calendar')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('birthdate', Input::old('birthdate'), array('class'=>'form-control', 'placeholder'=>'Birth Date')); ?>
+			<?php echo Form::text('birthdate', Input::old('birthdate'), array('class'=>'form-control', 'placeholder'=>'Birth Date')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('country', array('class'=>'input-group-addon signup-obligatory')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('country', array('class'=>'input-group-addon signup-obligatory')); ?>
 
-      <?php echo Form::label('country', ' ', array('class'=>'fa fa-map-marker')); ?>
+			<?php echo Form::label('country', ' ', array('class'=>'fa fa-map-marker')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('country', Input::old('country'), array('class'=>'form-control', 'placeholder'=>'Country')); ?>
+			<?php echo Form::text('country', Input::old('country'), array('class'=>'form-control', 'placeholder'=>'Country')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('picture', array('class'=>'input-group-addon')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('picture', array('class'=>'input-group-addon')); ?>
 
-      <?php echo Form::label('picture', ' ', array('class'=>'fa fa-camera')); ?>
+			<?php echo Form::label('picture', ' ', array('class'=>'fa fa-camera')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('picture', Input::old('picture'), array('class'=>'form-control', 'placeholder'=>'Picture')); ?>
+			<?php echo Form::text('picture', Input::old('picture'), array('class'=>'form-control', 'placeholder'=>'Picture')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('address', array('class'=>'input-group-addon')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('address', array('class'=>'input-group-addon')); ?>
 
-      <?php echo Form::label('address', ' ', array('class'=>'fa fa-home')); ?>
+			<?php echo Form::label('address', ' ', array('class'=>'fa fa-home')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('address', Input::old('address'), array('class'=>'form-control', 'placeholder'=>'Address')); ?>
+			<?php echo Form::text('address', Input::old('address'), array('class'=>'form-control', 'placeholder'=>'Address')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('phone', array('class'=>'input-group-addon')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('phone', array('class'=>'input-group-addon')); ?>
 
-      <?php echo Form::label('phone', ' ', array('class'=>'fa fa-phone')); ?>
+			<?php echo Form::label('phone', ' ', array('class'=>'fa fa-phone')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('phone', Input::old('phone'), array('class'=>'form-control', 'placeholder'=>'Phone Number')); ?>
+			<?php echo Form::text('phone', Input::old('phone'), array('class'=>'form-control', 'placeholder'=>'Phone Number')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('facebook', array('class'=>'input-group-addon')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('facebook', array('class'=>'input-group-addon')); ?>
 
-      <?php echo Form::label('facebook', ' ', array('class'=>'fa fa-facebook-square')); ?>
+			<?php echo Form::label('facebook', ' ', array('class'=>'fa fa-facebook-square')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('facebook', Input::old('facebook'), array('class'=>'form-control', 'placeholder'=>'Facebook')); ?>
+			<?php echo Form::text('facebook', Input::old('facebook'), array('class'=>'form-control', 'placeholder'=>'Facebook')); ?>
 
-    </div>
-    <div class="input-group input-auto margin-bottom-20">
-      <?php echo Form::labelStart('twitter', array('class'=>'input-group-addon')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<?php echo Form::labelStart('twitter', array('class'=>'input-group-addon')); ?>
 
-      <?php echo Form::label('twitter', ' ', array('class'=>'fa fa-twitter')); ?>
+			<?php echo Form::label('twitter', ' ', array('class'=>'fa fa-twitter')); ?>
 
-      <?php echo Form::labelEnd(); ?>
+			<?php echo Form::labelEnd(); ?>
 
-      <?php echo Form::text('twitter', Input::old('twitter'), array('class'=>'form-control', 'placeholder'=>'Twitter')); ?>
+			<?php echo Form::text('twitter', Input::old('twitter'), array('class'=>'form-control', 'placeholder'=>'Twitter')); ?>
 
-    </div>
-  <div class="row input-auto">
-    <div>
-      <?php echo Form::submit('Create', array('class' => 'btn btn-success pull-right')); ?>
+		</div>
+		<div class="row input-auto">
+			<div>
+				<?php echo Form::submit('Create', array('class' => 'btn btn-success pull-right')); ?>
 
-      </div>
-  </div>
-  <?php echo Form::close(); ?>
+			</div>
+		</div>
+		<?php echo Form::close(); ?>
 
-</div>
+	</div>
 </div>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.navbar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

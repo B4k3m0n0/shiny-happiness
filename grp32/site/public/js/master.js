@@ -1,4 +1,7 @@
-var main = angular.module('main', []);
+var main = angular.module('main', [], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('[[');
+        $interpolateProvider.endSymbol(']]');
+    });
 
 main.controller('MainController', ['$scope', function($scope) {
 

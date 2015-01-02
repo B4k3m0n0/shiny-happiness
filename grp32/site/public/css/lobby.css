@@ -96,8 +96,12 @@
 	transition: all linear 0.2s;
 }
 
-.create-game-options {
+.users-list-options {
 	margin: 6px 3px;
+}
+
+.create-game-options {
+	margin-bottom: 10px;
 }
 
 .no-upper, .lobby-players-list td {
@@ -105,9 +109,26 @@
 }
 
 .lobby-players-list td {
-	line-height: 40px;
+	line-height: 44px;
 }
 
 .divisor {
 	border-right: 2px solid #428bca;
+}
+
+.player-icon {
+	margin-left: 15px;
+	height: 100%;
+	display: table;
+	line-height: 44px !important;
+}
+
+.lobby-players-line {
+	width: 26px;
+	height: 26px;
+	display: table-cell; vertical-align: middle;
+}
+
+.back-enter-game {
+	margin-right: 20px;
 }

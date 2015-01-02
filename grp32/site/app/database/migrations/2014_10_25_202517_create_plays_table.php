@@ -17,10 +17,12 @@ class CreatePlaysTable extends Migration {
 			$table->integer('game_id')->unsigned();
 			$table->foreign('game_id')->references('id')->on('games');
 			$table->text('player_sequence');
+			$table->string('current_player');
+			$table->foreign('current_player')->references('username')->on('users');
 			$table->text('rolls');
 			$table->text('dice_value');
-			$table->text('dice_saved_value');
-			$table->integer('score_id');
+			$table->text('dice_saved');
+			$table->text('score_id');
 			$table->timestamps();
 		});
 	}

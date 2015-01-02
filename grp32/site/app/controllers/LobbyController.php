@@ -6,7 +6,7 @@ class LobbyController extends BaseController {
 	{
 
 		$games = Game::where('status', '<>', 'ended')->take(8)->get();
-		return View::make('projeto.dashboard')->with('games', $games);
+		return View::make('lobby')->with('games', $games);
 		
 
 	}

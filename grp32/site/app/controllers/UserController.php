@@ -23,7 +23,6 @@ class UserController extends BaseController {
 
 		if (Auth::attempt($loginInput))
 		{
-			Session::put('username', Input::get('username'));
 			return Redirect::to('lobby');
 			/*return Redirect::intended('dashboard');*/
 		}
@@ -35,9 +34,7 @@ class UserController extends BaseController {
 
 
 	public function signup() {
-		
 		$validator = Validator::make(Input::all(), User::$rules);
-
 		if ($validator->fails()) {
 			$messages = $validator->messages();
 
@@ -63,9 +60,8 @@ class UserController extends BaseController {
 
 		User::create($signup);
 		return Redirect::to('login');
-
-
 	}
+
 
 	public function showProfile()
 	{
@@ -84,15 +80,10 @@ class UserController extends BaseController {
 
 
 	public function logout(){
-
-
-
 		Auth::logout(); 
 		//Session::flush();
 
 		return Redirect::to('login');
-
-		
 	}
 
 	public function showLobby()
@@ -118,9 +109,6 @@ class UserController extends BaseController {
 
 		$loggedUser = Auth::user()->username;
 		$message = '';	
-
-
-
 
 
 		$mail = User::where('email',$user['email'])->first();

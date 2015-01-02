@@ -1,50 +1,49 @@
 
 
+<?php echo $__env->make('layouts.navbar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
+<?php $__env->startSection('styles'); ?>
+@parent
+<?php echo HTML::style('css/signup.css'); ?>
+
+<?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('mainbody'); ?>
 
-<?php $__env->startSection('styles'); ?>
-  @parent
-  <?php echo HTML::style('css/signup.css'); ?>
-
-<?php $__env->stopSection(); ?>
-
 <div class="container">
-  <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+	<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 
-  <?php echo Form::open(array('class' => 'border-login')); ?>
+		<?php echo Form::open(array('class' => 'border-login')); ?>
 
-  	<h3 class="center">Login to your account</h3>
-  	<hr>
-  	<div class="input-group input-auto margin-bottom-20">
-  	  <span class="input-group-addon">
-  	  	<i class="fa fa-user"></i>
-  	  </span>
-  	  <?php echo Form::text('username', Input::old('username'), array('class'=>'form-control', 'placeholder'=>'Username')); ?>
+		<h3 class="center">Login to your account</h3>
+		<hr>
+		<div class="input-group input-auto margin-bottom-20">
+			<span class="input-group-addon">
+				<i class="fa fa-user"></i>
+			</span>
+			<?php echo Form::text('username', Input::old('username'), array('class'=>'form-control', 'placeholder'=>'Username')); ?>
 
-  	</div>
-  	<div class="input-group input-auto margin-bottom-20">
-      <span class="input-group-addon">
-      	<i class="fa fa-lock"></i>
-      </span>
-        <?php echo Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password')); ?>
+		</div>
+		<div class="input-group input-auto margin-bottom-20">
+			<span class="input-group-addon">
+				<i class="fa fa-lock"></i>
+			</span>
+			<?php echo Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password')); ?>
 
-    </div>
- 	<div class="input-auto row">
-    <div>
-      <?php echo link_to_route('signup', 'Signup', array(), array('class' => 'btn btn-info pull-left')); ?>
+		</div>
+		<div class="input-auto row">
+			<div>
+				<?php echo link_to_route('signup', 'Signup', array(), array('class' => 'btn btn-info pull-left')); ?>
 
-    </div>
- 	  <div>
-    	<?php echo Form::submit('Login', array('class' => 'btn btn-success pull-right')); ?>
+			</div>
+			<div>
+				<?php echo Form::submit('Login', array('class' => 'btn btn-success pull-right')); ?>
 
-    </div>
- 	</div>
-  <?php echo Form::close(); ?>
+			</div>
+		</div>
+		<?php echo Form::close(); ?>
 
-  </div>
+	</div>
 </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.navbar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

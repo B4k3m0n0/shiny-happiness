@@ -95,7 +95,7 @@
 
 	<div class="launchSpace">
 
-		<div class="space3d">
+		<div class="space3d" ng-click="selected(0)">
 			<div class="_3dbox">
 				<div class="_3dface _3dface--front">
 					<span>1</span>
@@ -118,31 +118,7 @@
 			</div>
 		</div>
 
-		<div class="space3d">
-
-			<div class="_3dbox">
-				<div class="_3dface _3dface--front">
-					<span>1</span>
-				</div>
-				<div class="_3dface _3dface--back">
-					<span>6</span>
-				</div>
-				<div class="_3dface _3dface--top">
-					<span>2</span>
-				</div>
-				<div class="_3dface _3dface--bottom">
-					<span>5</span>
-				</div>
-				<div class="_3dface _3dface--left">
-					<span>3</span>
-				</div>
-				<div class="_3dface _3dface--right">
-					<span>4</span>
-				</div>
-			</div>
-
-		</div>
-		<div class="space3d">
+		<div class="space3d" ng-click="selected(1)">
 
 			<div class="_3dbox">
 				<div class="_3dface _3dface--front">
@@ -166,7 +142,7 @@
 			</div>
 
 		</div>
-		<div class="space3d">
+		<div class="space3d" ng-click="selected(2)">
 
 			<div class="_3dbox">
 				<div class="_3dface _3dface--front">
@@ -190,7 +166,31 @@
 			</div>
 
 		</div>
-		<div class="space3d">
+		<div class="space3d" ng-click="selected(3)">
+
+			<div class="_3dbox">
+				<div class="_3dface _3dface--front">
+					<span>1</span>
+				</div>
+				<div class="_3dface _3dface--back">
+					<span>6</span>
+				</div>
+				<div class="_3dface _3dface--top">
+					<span>2</span>
+				</div>
+				<div class="_3dface _3dface--bottom">
+					<span>5</span>
+				</div>
+				<div class="_3dface _3dface--left">
+					<span>3</span>
+				</div>
+				<div class="_3dface _3dface--right">
+					<span>4</span>
+				</div>
+			</div>
+
+		</div>
+		<div class="space3d" ng-click="selected(4)">
 
 			<div class="_3dbox">
 				<div class="_3dface _3dface--front">
@@ -245,66 +245,85 @@
 
 		/*moviment bot to top*/
 
-		var teste = getRandomInt(-4, 4)*100;
-		for (var i = 0; i < 5; i++) {
-			var topPos = getRandomInt(0, 200);
-			console.log(i+":"+teste);
-			var leftPos = getRandomInt(teste, teste+50);
-			if (teste >= 400) {
-				teste = -400;
+		/*V2*/
+		var w = window.innerWidth;
+		var otherPos = [];
+		var aux = true;
+		var horizontalPos = getRandomInt(145-w/2, w/2+75);
+		otherPos.push(horizontalPos);
+		while(otherPos.length < 5){
+			horizontalPos = getRandomInt(145-w/2, w/2+75);
+			for (var i = 0; i < otherPos.length; i++) {
+				if (horizontalPos-60<otherPos[i]+(i*54) && horizontalPos+60>otherPos[i]+(i*54)) {
+					break;
+				}else if(i == otherPos.length-1){
+					otherPos.push(horizontalPos-(otherPos.length*54));
+					break;
+				}
 			}
-			teste+=100;
-			$('.space3d').eq(i).animate({
-				top: topPos+"px",
-				left: leftPos+"px"
-			}, 1000);
 		}
+		console.log("--------------------------");
+
+		for (var i = 0; i < otherPos.length; i++) {
+			var verticalPos = getRandomInt(0, 200);
+			console.log("este "+otherPos[i]);
+			$('.space3d').eq(i).animate({
+				top: verticalPos+"px",
+				left: otherPos[i]+"px"
+			}, 1000);
+		};
+
 
 		setTimeout(setDice, 1000);
 	});
 
-	var sides = ['rotateY(0deg)', 'rotateX(-90deg)', 'rotateY(90deg)', 'rotateY(-90deg)', 'rotateX(90deg)', 'rotateY(180deg)'],
-		dices;
+var sides = ['rotateY(0deg)', 'rotateX(-90deg)', 'rotateY(90deg)', 'rotateY(-90deg)', 'rotateX(90deg)', 'rotateY(180deg)'],
+	dices;
 
-	function setDice () {
-		clearInterval(cubeTimer);
-		for (var i = 0; i < 5; i++) {
-			document.getElementsByClassName('_3dbox')[i].style.transform = sides[dices[i]-1];
-		};
+function setDice () {
+	clearInterval(cubeTimer);
+	for (var i = 0; i < 5; i++) {
+		document.getElementsByClassName('_3dbox')[i].style.transform = sides[dices[i]-1];
+	};
+}
+
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+$('.stop').click(function() {
+	clearInterval(cubeTimer);
+	var number = getRandomInt(0, 5);
+	$('._3dbox').css('transform', sides[number]);
+	console.log(number);
+});
+
+
+
+/*ANGULAR*/
+angular.module('dice', []).controller('DiceController', ['$scope', '$http', function($scope, $http) {
+
+	$scope.getDices = function ()
+	{
+		$http.get('http://192.168.117.137/grp32/site/public/randoms').
+		success(function(data, status, headers, config) {
+			dices = data;
+		}).
+		error(function(data, status, headers, config) {
+			console.log("unable to get data");
+		});
+	};
+
+	$scope.selected = function (i) {
+		$('.space3d').eq(i).animate({
+			top: 180+"px",
+			left: 0+"px"
+		}, 500);
 	}
 
-	function getRandomInt(min, max) {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
-	}
-
-	$('.stop').click(function() {
-		clearInterval(cubeTimer);
-		var number = getRandomInt(0, 5);
-		$('._3dbox').css('transform', sides[number]);
-		console.log(number);
-	});
-
-	var sides = ["rotateY(0deg)", "rotateX(-90deg)", "rotateY(90deg)", "rotateY(-90deg)", "rotateX(90deg)", "rotateY(180deg)"];
+}]);
 
 
-
-	/*ANGULAR*/
-	angular.module('dice', []).controller('DiceController', ['$scope', '$http', function($scope, $http) {
-
-		$scope.getDices = function ()
-		{
-			$http.get('http://192.168.117.137/grp32/site/public/randoms').
-			success(function(data, status, headers, config) {
-				dices = data;
-			}).
-			error(function(data, status, headers, config) {
-				console.log("unable to get data");
-			});
-		};
-
-	}]);
-
-
-	</script>
+</script>
 </body>
 </html>

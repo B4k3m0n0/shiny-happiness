@@ -1,0 +1,71 @@
+.space3d {
+	position: relative;
+	transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	top: 350px;
+	left: 0;
+	perspective: 1000px;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+}
+
+._3dbox {
+	display: inline-block;
+	transition: all 0.85s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	text-align: center;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	transform-style: preserve-3d;
+}
+
+._3dface {
+	overflow: hidden;
+	position: absolute;
+	border: 1px solid #888;
+	background: #FFF;
+	color: #333;
+	font-size: 20px;
+	line-height: 50px;
+	/*opacity: 0.8;*/
+}
+
+._3dface--front {
+	width: 50px;
+	height: 50px;
+	transform: translate3d(0, 0, 25px);
+}
+
+._3dface--top {
+	width: 50px;
+	height: 50px;
+	transform: rotateX(90deg) translate3d(0, 0, 25px);
+}
+
+._3dface--bottom {
+	width: 50px;
+	height: 50px;
+	transform: rotateX(-90deg) translate3d(0, 0, 25px);
+}
+
+._3dface--left {
+	width: 50px;
+	height: 50px;
+	left: 50%;
+	margin-left: -25px;
+	transform: rotateY(-90deg) translate3d(0, 0, 25px);
+}
+
+._3dface--right {
+	width: 50px;
+	height: 50px;
+	left: 50%;
+	margin-left: -25px;
+	transform: rotateY(90deg) translate3d(0, 0, 25px);
+}
+
+._3dface--back {
+	width: 50px;
+	height: 50px;
+	transform: rotateY(180deg) translate3d(0, 0, 25px);
+}

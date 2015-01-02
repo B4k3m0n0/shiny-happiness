@@ -1,0 +1,147 @@
+.score-board {
+	z-index: 20;
+	background-color: rgba(255,255,255,0.85);
+	padding: 15px;
+	position: relative;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	display: inline-block;
+}
+
+.score-board-table {
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid #dadada;
+	padding: 10px;
+	font-size: 13px;
+	font-weight: 200;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.score-board table thead tr th:first-child, .score-board table tbody tr:last-child td:first-child, .score-board table tbody tr td:first-child, .score-special {
+	border-left: 2px solid #428bca;
+	border-right: 2px solid #428bca;
+}
+
+.score-board table thead tr th:first-child, .score-board table tbody tr:last-child td:first-child, .score-special {
+	border-top: 2px solid #428bca !important;
+	border-bottom: 2px solid #428bca !important;
+
+}
+
+.score-board table tbody tr td:first-child {
+	border-top: 1px solid #428bca;
+	border-bottom: 1px solid #428bca;
+}
+
+.tooltip .tooltip-inner {
+	background-color: #428bca;
+	width: 150px;
+}
+
+.tooltip .tooltip-arrow {
+	border-right-color: #428bca !important;
+}
+
+.score-board-button {
+	z-index: 20;
+	padding: 5px;
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	background-color: rgba(255,255,255,0.85);
+}
+
+.score-board-main {
+	z-index: 20;
+	left: 0;
+	position: absolute;
+}
+
+.score-board-button a {
+	-webkit-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.clicable {
+	cursor: pointer;
+}
+
+.board-animation, .selectedBonus{
+	padding: 0;
+}
+
+.board-animation:hover div {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 50% !important;
+	background-color: #428bca;
+	color: #fff;
+
+	/*animation*/
+	-webkit-animation-name: anim;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+	-webkit-animation-play-state: running;
+
+	animation-name: anim;
+	animation-duration: 1s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-play-state: running;
+}
+
+@-webkit-keyframes anim {
+	0% {
+		width: 15px;
+		height: 15px;
+		line-height: 15px;
+	}
+	50% {
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+	}
+	100% {
+		width: 15px;
+		height: 15px;
+		line-height: 15px;
+	}
+}
+
+/* Standard syntax */
+@keyframes anim {
+	0% {
+		width: 15px;
+		height: 15px;
+		line-height: 15px;
+	}
+	50% {
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
+	}
+	100% {
+		width: 15px;
+		height: 15px;
+		line-height: 15px;
+	}
+}
+
+.selectedBonus div {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 50% !important;
+	background-color: #428bca;
+	color: #fff;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+}

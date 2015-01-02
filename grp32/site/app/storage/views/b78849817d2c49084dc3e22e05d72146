@@ -16,13 +16,12 @@
 		<tbody>
 			<?php for($i = 0; $i < 13; $i++): ?>
 			<tr>
-				<td class="score-card-table" data-toggle="tooltip" data-container="body" data-placement="left" title="<?php echo $jogos[2][$i]; ?>">
-					<?php echo $jogos[0][$i]; ?>
+				<td class="score-card-table" data-toggle="tooltip" data-container="body" data-placement="right" title="<?php echo $game[1][$i]; ?>">
+					<?php echo $game[0][$i]; ?>
 
 				</td>
 				<td class="score-card-table">
-					<?php echo $jogos[1][$i]; ?>
-
+					<!--<?php echo $game[1][$i]; ?>-->
 				</td>
 			</tr>
 			<?php endfor; ?>

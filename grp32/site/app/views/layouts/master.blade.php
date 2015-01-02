@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>YAHTZEE - The Game</title>
-	<link href="img/favicon.png" rel="shortcut icon">
+	<link href="{{ asset('img/favicon.png') }}" rel="shortcut icon">
 	@include('layouts.style')
 </head>
 <body ng-controller="MainController">
@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="left-button-div" ng-class="{'col-md-2 col-sm-2 col-xs-2': leftBar, '': !leftBar}">
-		<a class="fa fa-chevron-circle-right left-button" ng-class="{'fa-chevron-circle-right': leftBar, 'fa-chevron-circle-left': !leftBar}" ng-click="leftBar = !leftBar" ng-show="isLeftSet"></a>
+		<a class="fa left-button" ng-class="{'fa-chevron-circle-left': leftBar, 'fa-chevron-circle-right': !leftBar}" ng-click="leftBar = !leftBar" ng-show="isLeftSet"></a>
 	</div>
 	<div class="leftbar col-md-2 col-sm-2 col-xs-2" ng-show="leftBar && isLeftSet">
 		@yield('leftbar')
@@ -23,13 +23,13 @@
 	</div>
 
 	<div class="right-button-div hidden-xs" ng-class="{'col-md-3 col-sm-3': rightBar, '': !leftBar}">
-		<a class="fa fa-chevron-circle-right right-button" ng-class="{'fa-chevron-circle-right': rightBar, 'fa-chevron-circle-left': !rightBar}" ng-click="rightBar = !rightBar" ng-show="isRightSet"></a>
+		<a class="fa right-button" ng-class="{'fa-chevron-circle-right': rightBar, 'fa-chevron-circle-left': !rightBar}" ng-click="rightBar = !rightBar" ng-show="isRightSet"></a>
 	</div>
 	<div class="rightbar col-md-3 col-sm-3 hidden-xs" ng-show="rightBar && isRightSet">
 		@yield('rightbar')
 	</div>
 
-	{{ HTML::script('http://192.168.216.134:8080/socket.io/socket.io.js') }}
+	{{ HTML::script('http://192.168.117.137:8080/socket.io/socket.io.js') }}
 	@include('layouts.script')
 
 	<script type="text/javascript">

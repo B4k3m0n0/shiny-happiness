@@ -9,26 +9,26 @@
 <body>
 	<div class="welcome">
 		<div class="space">
-		    <div class="cube">
-		      <div class="face front">
-		        <span>1</span>
-		      </div>
-		      <div class="face back">
-		        <span>6</span>
-		      </div>
-		      <div class="face top">
-		        <span>2</span>
-		      </div>
-		      <div class="face bottom">
-		        <span>5</span>
-		      </div>
-		      <div class="face left">
-		        <span>3</span>
-		      </div>
-		      <div class="face right">
-		        <span>4</span>
-		      </div>
-		    </div>
+			<div class="cube">
+				<div class="face front">
+					<span>1</span>
+				</div>
+				<div class="face back">
+					<span>6</span>
+				</div>
+				<div class="face top">
+					<span>2</span>
+				</div>
+				<div class="face bottom">
+					<span>5</span>
+				</div>
+				<div class="face left">
+					<span>3</span>
+				</div>
+				<div class="face right">
+					<span>4</span>
+				</div>
+			</div>
 		</div>
 		<a href="{{ URL::route('login') }}">
 			<h1>YAHTZEE - The Game</h1>

@@ -5,9 +5,24 @@ class YahtzeeCombinationCalculator {
 	public function getScore($dices)
 	{
 		$score = array_merge(array(), $this->getUpperScore($dices));
-		array_push($score, $this->get3ofKindScore($dices), $this->get4ofKindScore($dices), $this->getFullHouseScore($dices), $this->getSmallStraightScore($dices), $this->getLargeStraightScore($dices), $this->getChanceScore($dices), $this->getYahtzeeScore($dices));
+		array_push($score, $this->getSum(), $this->getBonus(), $this->get3ofKindScore($dices), $this->get4ofKindScore($dices), $this->getFullHouseScore($dices), $this->getSmallStraightScore($dices), $this->getLargeStraightScore($dices), $this->getChanceScore($dices), $this->getYahtzeeScore($dices), $this->getTotalScore());
 
 		return $score;
+	}
+
+	public function getSum()
+	{
+		return null;
+	}
+
+	public function getBonus()
+	{
+		return null;
+	}
+
+	public function getTotalScore()
+	{
+		return null;
 	}
 
 	public function getUpperScore($dices)
@@ -97,15 +112,17 @@ class YahtzeeCombinationCalculator {
 
 		for ($i=0; $i < $sizeDice; $i++)
 		{
-			if ($singleDices[$i] == $firstDice+$i) {
+			if ($singleDices[$i] == $firstDice+$count) {
 				$count++;
-			} elseif ($count == 0) {
+			} else {
+				$count = 0;
 				$firstDice = $singleDices[$i];
+				$i--;
 			}
-		}
 
-		if ($count >= 4) {
-			return 30;
+			if ($count >= 4) {
+				return 30;
+			}
 		}
 	}
 
@@ -119,15 +136,17 @@ class YahtzeeCombinationCalculator {
 
 		for ($i=0; $i < $sizeDice; $i++)
 		{
-			if ($singleDices[$i] == $firstDice+$i) {
+			if ($singleDices[$i] == $firstDice+$count) {
 				$count++;
-			} elseif ($count == 0) {
+			} else {
+				$count = 0;
 				$firstDice = $singleDices[$i];
+				$i--;
 			}
-		}
-
-		if ($count >= 5) {
-			return 40;
+			
+			if ($count >= 5) {
+				return 40;
+			}
 		}
 	}
 

@@ -16,16 +16,16 @@
 		<div class="chat-wrapper">
 			<div class="chat-top" >
 				<div class="chat-user-image">
-					<img src="./img/tristana.png">
+					<img src="<?php echo asset('img/tristana.png'); ?>">
 				</div>
-				<p class="chat-top-title" ng-init="username = '<?php echo Session::get('username'); ?>'"><?php echo Session::get('username'); ?></p>
+				<p class="chat-top-title" ng-init="username = '<?php echo Auth::user()->username; ?>'; <?php if(isset($gameId)): ?> gameId = '<?php echo $gameId; ?>' <?php endif; ?>"><?php echo Auth::user()->username; ?></p>
 			</div>
 			<div class="chat-body">
 				<ul id="messages">
 					<li ng-repeat="data in datas"> 
-						<span class="chat-timer" ng-show="timeStamp">{{data.time}}</span>
-						<span class="chat-username-span" ng-style="{'color' : data.color}">{{data.username}}:</span>
-						<span> {{data.message}}</span>
+						<span class="chat-timer" ng-show="timeStamp">[[data.time]]</span>
+						<span class="chat-username-span" ng-style="{'color' : data.color}">[[data.username]]:</span>
+						<span> [[data.message]]</span>
 					</li>
 				</ul>
 			</div>
@@ -76,8 +76,10 @@
 			</div>
 			<div class="chat-users-body">
 				<ul>
-					<li class="type-user-span"><span>Spectator</span></li>
-					<li class="list-users-span" ng-repeat="user in users">{{user}}</li>
+					<li class="type-user-span"><span>Players</span></li>
+					<li class="list-users-span" ng-repeat="user in users">[[user]]</li>
+					<li class="type-user-span"><span>Spectators</span></li>
+					<li class="list-users-span" ng-repeat="user in users">[[user]]</li>
 				</ul>
 			</div>
 		</div>

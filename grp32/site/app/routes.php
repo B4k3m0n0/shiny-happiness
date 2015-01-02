@@ -49,12 +49,7 @@ Route::get('game', function()
 /*END GAME ROUTES*/
 
 /*TESTE JOGO*/
-Route::get('jogo', function()
-{
-	return View::make('jogo');
-});
-
-Route::post('jogo', 'JogoController@getJogo');
+/*Route::get('game', array('as' => 'game', 'uses' => 'JogoController@index'));*/
 
 
 /*TESTE CUBE*/
@@ -65,19 +60,24 @@ Route::get('cube', function()
 });
 
 
-/*DICE TESTES*/
+/*GAME LOGIC ROUTES*/
+Route::post('getDice', array('as' => 'getDice', 'uses' => 'GameController@generateDice'));
+Route::post('currentPlay', array('as' => 'currentPlay', 'uses' => 'GameController@currentPlay'));
 
-Route::get('randoms', array('as' => 'randoms', 'uses' => 'JogoController@randomDices'));
+/*GAME CREATE*/
+Route::post('createGame', array('as' => 'createGame', 'uses' => 'GameController@create'));
+Route::post('updateGame', array('as' => 'updateGame', 'uses' => 'GameController@update'));
 
-Route::get('profile', array('as' => 'profile', 'uses' => 'UserController@showProfile'));
-Route::post('profile', array('as' => 'profile', 'uses' => 'UserController@editProfile'));
+/*LOBBY*/
+Route::get('lobby', array('as' => 'lobby', 'uses' => 'LobbyController@index'));
 
+/*START GAME*/
+Route::post('startGame', array('as' => 'startGame', 'uses' => 'GameController@start'));
+Route::get('game/{id}', array('as' => 'game', 'uses' => 'GameController@index'));=======
 
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'))->before('login'); //TODO por como post
-Route::get('lobby', array('as' => 'lobby', 'uses' => 'LobbyController@index'));
 
 Route::get('scores', array('as' => 'scores', 'uses' => 'LobbyController@showScores'));
-
-
+Route::post('profile', array('as' => 'profile', 'uses' => 'UserController@editProfile'));
 

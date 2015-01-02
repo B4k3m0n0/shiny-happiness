@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@extends('layouts.navbar')
+@include('layouts.navbar')
 
 @section('styles')
 @parent
