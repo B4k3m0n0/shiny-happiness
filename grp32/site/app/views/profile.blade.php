@@ -20,7 +20,7 @@
 <br>
 <div class="col-md-4 col-md-offset-4" ng-controller="ProfileController" >
 
-	{{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'profile')) }} <!--TODO route = profile????-->
+	{{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'profile','files'=>true)) }} <!--TODO route = profile????-->
 
   <h3 class="center">User Profile</h3>
   <hr>
@@ -35,8 +35,6 @@
     <p class="text-success">{{  Session::get('messageSuccessful')  }}</p>
   </div>
   @endif
-
-
 	<!--<div class="div-btnEditar">		
 
 		<button ng-init=" @if ($errors->has() || Session::has('message')) toggleEdit = false @endif toggleEdit = true" type="button" class="btn btn-default pull-right padding" ng-click="toggleEdit = false">Edit Profile</button>
@@ -44,6 +42,23 @@
 	</div>-->
 	<br>		
 	<hr>
+
+          <!-- *******************************************************************************************************
+               ************************************************PICTURE************************************************
+               *******************************************************************************************************-->
+
+               <div class="thumbnail margin-center" style="min-height:150;min-width:150;width:150;">
+                {{HTML::image($user['picture'], "user picture", array('style'=>'min-height:150;height:150;min-width:150;width:150;'))}}
+              </div>
+              <div class="@if ($errors->has('picture')) has-error @endif">
+                @if ($errors->has('picture')) <p class="help-block">{{ $errors->first('picture') }}</p> @endif
+              </div>
+              <div class="input-group margin-center margin-bottom-20">
+                {{ Form::labelStart('picture', array('class'=>'input-group-addon')) }}
+                {{ Form::label('picture', ' ', array('class'=>'fa fa-camera')) }}
+                {{ Form::labelEnd() }}
+                {{ Form::file('picture','', array('class'=>'form-control')) }}
+              </div>
 
           <!-- **************************************************************************************************
                *********************************************USERNAME*********************************************
@@ -70,7 +85,7 @@
                  {{ Form::labelStart('password', array('class'=>'input-group-addon signup-obligatory')) }}
                  {{ Form::label('password', ' ', array('class'=>'fa fa-lock')) }}
                  {{ Form::labelEnd() }}
-                 {{ Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password','required')) }}
+                 {{ Form::password('password', array('class'=>'form-control', 'placeholder'=>'Password')) }}
                </div>
 
           <!-- *******************************************************************************************************
@@ -80,7 +95,7 @@
                  {{ Form::labelStart('password_confirmation', array('class'=>'input-group-addon signup-obligatory')) }}
                  {{ Form::label('password_confirmation', ' ', array('class'=>'fa fa-lock')) }}
                  {{ Form::labelEnd() }}
-                 {{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder'=>'Password Confirmation','required')) }}
+                 {{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder'=>'Password Confirmation')) }}
                </div>
 
           <!-- *******************************************************************************************************
@@ -151,26 +166,14 @@
                 {{ Form::label('country', ' ', array('class'=>'fa fa-map-marker')) }}
                 {{ Form::labelEnd() }}
                 {{ Form::text('country', $user->country, array('class'=>'form-control', 'placeholder'=>'Country','required')) }}
-              </div>
-              <div class="@if ($errors->has('picture')) has-error @endif">
-                @if ($errors->has('picture')) <p class="help-block">{{ $errors->first('picture') }}</p> @endif
-              </div>
-          <!-- *******************************************************************************************************
-               ************************************************PICTURE************************************************
-               *******************************************************************************************************-->
-               <div class="input-group margin-center margin-bottom-20">
-                {{ Form::labelStart('picture', array('class'=>'input-group-addon')) }}
-                {{ Form::label('picture', ' ', array('class'=>'fa fa-camera')) }}
-                {{ Form::labelEnd() }}
-                {{ Form::text('picture', Input::old('picture'), array('class'=>'form-control', 'placeholder'=>'Picture')) }}
-              </div>
-              <div class="@if ($errors->has('address')) has-error @endif">
-                @if ($errors->has('address')) <p class="help-block">{{ $errors->first('address') }}</p> @endif
-              </div>
+              </div>    
           <!-- *******************************************************************************************************
                ************************************************ADDRESS************************************************
                *******************************************************************************************************-->
-               <div class="input-group margin-center margin-bottom-20">
+               <div class="@if ($errors->has('address')) has-error @endif">
+                @if ($errors->has('address')) <p class="help-block">{{ $errors->first('address') }}</p> @endif
+              </div>
+              <div class="input-group margin-center margin-bottom-20">
                 {{ Form::labelStart('address', array('class'=>'input-group-addon')) }}
                 {{ Form::label('address', ' ', array('class'=>'fa fa-home')) }}
                 {{ Form::labelEnd() }}

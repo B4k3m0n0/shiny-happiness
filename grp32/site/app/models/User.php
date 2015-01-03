@@ -41,7 +41,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'creditcard' 				  => 'required|digits:16',
 		'birthdate'					  => 'required|date',
 		'country'					  => 'required|alpha',
-		'picture' 					  => 'image',
+		'picture'					  => 'image|mimes:jpeg,jpg,png,bmp',
 		'address' 					  => 'alpha',
 		'phone' 		 			  => 'numeric',
 		'facebook'					  => 'alpha',
@@ -49,14 +49,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		);
 
 	public static $rulesEdit = array(
-		'password'      			  => 'required|min:8|confirmed',
-		'password_confirmation'       => 'required|min:8',
+		'password'      			  => 'min:8|confirmed',
+		'password_confirmation'       => 'min:8',
 		'fullname'      			  => 'required|alpha_spaces|min:5|max:80',
 		'email'						  => 'email',
 		'creditcard' 				  => 'required|digits:16',
 		'birthdate'					  => 'required|date',
 		'country'					  => 'required|alpha',
-		'picture' 					  => 'image',
+		'picture'					  => 'image|mimes:jpeg,jpg,png,bmp',
 		'address' 					  => 'alpha',
 		'phone' 					  => 'numeric',
 		'facebook'					  => 'alpha',

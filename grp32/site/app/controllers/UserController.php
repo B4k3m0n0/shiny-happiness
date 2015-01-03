@@ -65,10 +65,14 @@ class UserController extends BaseController {
 	public function signup() {
 
 
-		//var_dump(Input::file('picture'));
-  		//Debugbar::info(Input::file('picture')->getFilename());
+		$user = Input::all();
 
-  		$file = Input::file('picture');
+		Debugbar::info($user);
+		/*if (Input::hasFile('picture')) {
+			Debugbar::info('Tem picture');
+		}else{
+			Debugbar::info('Não tem picture');
+		}*/
 
 
 		$validCreditCard = false;
@@ -120,38 +124,71 @@ class UserController extends BaseController {
 			->with('messageInvalidAge', 'You must be 18 or older to register');
 		}
 
+		
+
+		//**Check date format and organize it for the database**//
+
+		$dateParts = explode("-", Input::get('birthdate'));
+		//Debugbar::info($dateParts);
+		if (strlen($dateParts[2]) == 4) {
+			$yearPart = $dateParts[2];
+			$monthPart = $dateParts[1];
+			$dayPart = $dateParts[0];
+			//$b = $yearPart.'-'.$monthPart.'-'.$dayPart;
+			//Debugbar::info($b.'   bbbbb');
+			$userBirthdate = $yearPart.'-'.$monthPart.'-'.$dayPart;
+			//Debugbar::info($signup['birthdate'].'olaaaaaa');
+		}else{
+			$userBirthdate = Input::get('birthdate');
+		}
+		//**End Check date format**//
+
+
+		//**PICTURE**//
+		if (Input::hasFile('picture')) {
+			$mimetype = Input::file('picture')->getClientOriginalExtension();
+			
+			$mime 			 = Input::file('picture')->getMimeType();
+			
+			$file            = Input::file('picture');
+			
+			$destinationPath = public_path().'/img/userPictures/';
+			
+			$filename        = $user['username'] .'.'. $mimetype;
+			
+			$uploadSuccess   = $file->move($destinationPath, $filename);
+			
+			if($uploadSuccess){
+				$user['picture']='img/userPictures/'.$filename; 
+				
+			}else{
+				$user['picture']='img/userPictures/defaultPicture.png';  
+
+			}
+		}else{
+			$user['picture']='img/userPictures/defaultPicture.png';  
+			
+		}
+		//**END PICTURE**//
+
+
 		$signup = array(
 			'username' 		=> Input::get('username'),
 			'password' 		=> Hash::make(Input::get('password')),
 			'fullname' 		=> Input::get('fullname'),
 			'email' 		=> Input::get('email'),
 			'creditcard'	=> Input::get('creditcard'),
-			'birthdate' 	=> Input::get('birthdate'),
+			'birthdate' 	=> $userBirthdate,
 			'country' 		=> Input::get('country'),
-			'picture' 		=> Input::get('picture'),
+			'picture' 		=> $user['picture'],
 			'address' 		=> Input::get('address'),
 			'phone' 		=> Input::get('phone'),
 			'facebook' 		=> Input::get('facebook'),
 			'twitter'		=> Input::get('twitter')
 			);
 
-		//$a = $signup->birthdate;	
-		Debugbar::info('$signup->birthdate');
 
-		$dateParts = explode("-", Input::get('birthdate'));
-		Debugbar::info($dateParts);
 
-		if (strlen($dateParts[2]) == 4) {
-
-			$yearPart = $dateParts[2];
-			$monthPart = $dateParts[1];
-			$dayPart = $dateParts[0];
-
-			$b = $yearPart.'-'.$monthPart.'-'.$dayPart;
-			Debugbar::info($b.'   bbbbb');
-			$signup['birthdate'] = $yearPart.'-'.$monthPart.'-'.$dayPart;
-			Debugbar::info($signup['birthdate'].'olaaaaaa');
-		}
 
 		
 		User::create($signup);
@@ -175,6 +212,9 @@ class UserController extends BaseController {
 			$id = Auth::id();
 			$user = User::find($id);
 
+
+			//$userPicture = User::where('username', $user['username'])->first()->picture;	
+			//Debugbar::info('Picture path: '.$user['picture']);
 			return View::make('profile')->with('user',$user);
 		}
 		return Redirect::to('login');		
@@ -202,8 +242,18 @@ class UserController extends BaseController {
 
 
 	public function editProfile() {
-
 		$user = Input::all();
+
+		Debugbar::info($user);
+
+		//Debugbar::info('Tem picture');
+		if (Input::hasFile('picture')) {
+			Debugbar::info('Tem picture');
+		}else{
+			Debugbar::info('Não tem picture');
+		}
+
+	//	Debugbar::info('Extensão: '.Input::file('picture')->getClientOriginalExtension());
 
 
 		$loggedUser = Auth::user()->username;
@@ -269,6 +319,38 @@ class UserController extends BaseController {
 			->with('messageInvalidAge', 'You must be 18 or older to register');
 		}
 
+		//**PICTURE**//
+		/*$userPicture = User::where('username', $user['username'])->first()->picture;	
+		Debugbar::info('Picture: '.$userPicture);*/
+
+		if (Input::hasFile('picture')) {
+			$mimetype = Input::file('picture')->getClientOriginalExtension();
+			Debugbar::info('Mimetype: '.$mimetype);
+			$mime = Input::file('picture')->getMimeType();
+			Debugbar::info('Mime: '.$mime);		
+			$file            = Input::file('picture');
+			Debugbar::info('File: '.$file);		
+
+			$destinationPath = public_path().'/img/userPictures/';
+			Debugbar::info('Destination Path: '.$destinationPath);	
+			$filename        = $user['username'] .'.'. $mimetype;
+			Debugbar::info('Filename: '.$filename);			
+			$uploadSuccess   = $file->move($destinationPath, $filename);
+			Debugbar::info('Upload Success: '.$uploadSuccess);	
+			if($uploadSuccess){
+				$userPicture = 'img/userPictures/'.$filename; 
+				Debugbar::info('Upload Secceeded!' .$userPicture );
+			}
+		}else{
+			$userPicture = User::where('username', $user['username'])->first()->picture;	
+			Debugbar::info('No image selected '.$userPicture);	
+
+		}
+		//$userPicture = User::where('username', $user['username'])->first()->picture;	
+
+		
+
+		//**END PICTURE**//
 
 
 		$edit = array(
@@ -278,7 +360,7 @@ class UserController extends BaseController {
 			'creditcard' => Input::get('creditcard'),
 			'birthdate' => Input::get('birthdate'),
 			'country' => Input::get('country'),
-			'picture' => Input::get('picture'),
+			'picture' => $userPicture,
 			'address' => Input::get('address'),
 			'phone' => Input::get('phone'),
 			'facebook' => Input::get('facebook'),
