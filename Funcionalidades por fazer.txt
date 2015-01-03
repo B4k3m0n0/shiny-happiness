@@ -1,4 +1,3 @@
 Opçoes de admin
 active na navbar
 lobby - da para juntar várias vezes ao mesmo jogo
-ir ao lobby quando nao se esta logado dá erro

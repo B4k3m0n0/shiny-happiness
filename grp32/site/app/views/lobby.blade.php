@@ -16,6 +16,32 @@
 @stop
 
 @section('mainbody')
+
+
+
+
+@if (!Auth::check())
+<div id="lobby" class="lobby" ng-controller="LobbyController">
+	<table ng-init="screenSelected = 'list'; username = 'Guest'" ng-show="screenSelected == 'list'">
+		<tr class="lobby-options" ng-init='games = {{$games}}'>
+			<td class="lobby-clicable" ng-click="filterByName(); predicate = 'title'">Game Name <a class="fa" ng-class="{'fa-chevron-circle-up': nameFilter == 2, 'fa-chevron-circle-down': nameFilter == 1, 'fa-chevron-circle-left': nameFilter == 0}"></a></td>
+			<td class="lobby-clicable" ng-click="filterBySize(); predicate = 'num_bots*1 + num_players*1'">Size <a class="fa" ng-class="{'fa-chevron-circle-up': sizeFilter == 2, 'fa-chevron-circle-down': sizeFilter == 1, 'fa-chevron-circle-left': sizeFilter == 0}"></a></td>
+			<td class="lobby-clicable" ng-click="filterByStatus(); predicate = 'status'">Status <a class="fa" ng-class="{'fa-chevron-circle-up': statusFilter == 2, 'fa-chevron-circle-down': statusFilter == 1, 'fa-chevron-circle-left': statusFilter == 0}"></a></td>
+			<td class="lobby-clicable" ng-click="filterByBots(); predicate = 'num_bots'">Bots <a class="fa" ng-class="{'fa-chevron-circle-up': botsFilter == 2, 'fa-chevron-circle-down': botsFilter == 1, 'fa-chevron-circle-left': botsFilter == 0}"></a></td>
+		</tr>
+		
+		<tr class="lobby-games-list" ng-repeat="game in games | orderBy:predicate:reverse" ng-controller="ItemController" ng-mouseenter="showIt()" ng-mouseleave="hideIt()">
+			<td class="no-upper">[[game.game_name]]
+				<br>
+				<button type="button" class="btn btn-info" ng-show="show">Spectate</button>
+			</td>
+			<td>[[game.num_bots*1 + game.num_players*1]]</td>
+			<td>[[game.status]]</td>
+			<td>[[game.num_bots]]</td>
+		</tr>
+	</table>
+</div>
+@else
 <div id="lobby" class="lobby" ng-controller="LobbyController">
 	<table ng-init="screenSelected = 'list'; username = '{{Auth::user()->username}}'" ng-show="screenSelected == 'list'">
 		<tr class="lobby-options" ng-init='games = {{$games}}'>
@@ -115,4 +141,5 @@
 		@endfor
 	</table>
 </div>
+@endif
 @stop
