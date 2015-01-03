@@ -73,8 +73,10 @@ Route::get('lobby', array('as' => 'lobby', 'uses' => 'LobbyController@index'));
 Route::post('startGame', array('as' => 'startGame', 'uses' => 'GameController@start'));
 Route::get('game/{id}', array('as' => 'game', 'uses' => 'GameController@index'));
 
-Route::get('tournaments', array('as' => 'tournaments', 'uses' => 'TournamentController@createTournament'));
-Route::post('tournaments', array('as' => 'tournaments', 'uses' => 'TournamentController@createTournament'));
+Route::get('tournaments', array('as' => 'tournaments', 'uses' => 'TournamentController@showTournaments'));
+
+Route::get('newTournament', array('as' => 'newTournament', 'uses' => 'TournamentController@showNewTournament'));
+Route::post('newTournament', array('as' => 'newTournament', 'uses' => 'TournamentController@createTournament'));
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'))->before('login'); //TODO por como post
 

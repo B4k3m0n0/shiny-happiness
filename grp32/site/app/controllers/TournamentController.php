@@ -1,6 +1,6 @@
 <?php
 
-class TournamentController extends \BaseController {
+class TournamentController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -8,11 +8,27 @@ class TournamentController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+	public function showTournaments(){
+
+		return View::make('tournaments/tournaments');
+	}
+
 
 	public function createTournament(){
-		$nRounds = array("Number of Rounds","1","2","3","4","5");
+		/*$nRounds = array("Number of Rounds","1","2","3","4","5");
+		return View::make('tournament', compact('nRounds'));*/
+	}
 
-		return View::make('tournament', compact('nRounds'));
+	public function showNewTournament(){
+
+			return View::make('tournaments/newTournament');
+
+		/*if (Auth::check() ){
+			$nRounds = array("Number of Rounds","1","2","3","4","5");
+			return View::make('tournaments/newTournament', compact('nRounds'));
+		}*/
+
+		
 	}
 
 	public function index()

@@ -12,6 +12,7 @@
 	</div>
 
 	@if(Auth::check())
+	<h4 class="nav navbar-nav navbar-center">Welcome {{Auth::user()->username}}</h4>
 
 	<div class="collapse navbar-collapse navbar-responsive-collapse" >
 		<ul class="nav navbar-nav navbar-right">
