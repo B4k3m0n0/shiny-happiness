@@ -1,5 +1,6 @@
-Opçoes de admin (neste momento so permite ir para a pagina de criar torneio se o user for admin )
+Opçoes de admin (neste momento so permite ir para a pagina de criar torneio se o user for admin e muda a imagem do dado intenamente(falta meter a imagem no dado))
 active na navbar
 lobby - da para juntar várias vezes ao mesmo jogo
 Na navbar o "welcome" está fora do sitio (falta centrar)
 criar Torneios, lista de torneios
+há um problema qualquer, em que passado algum tempo deixa de ser possivel entrar com um utilizador

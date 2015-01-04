@@ -18,8 +18,6 @@
 @section('mainbody')
 
 
-
-
 @if (!Auth::check())
 <div id="lobby" class="lobby" ng-controller="LobbyController">
 	<table ng-init="screenSelected = 'list'; username = 'Guest'" ng-show="screenSelected == 'list'">

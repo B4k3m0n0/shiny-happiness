@@ -86,3 +86,7 @@ Route::get('scores', array('as' => 'scores', 'uses' => 'LobbyController@showScor
 Route::get('profile', array('as' => 'profile', 'uses' => 'UserController@showProfile'));
 Route::post('profile', array('as' => 'profile', 'uses' => 'UserController@editProfile'));
 
+
+Route::get('settings', array('as' => 'settings', 'uses' => 'AdminController@showSettings'));
+Route::post('settings', array('as' => 'settings', 'uses' => 'AdminController@editSettings'));
+

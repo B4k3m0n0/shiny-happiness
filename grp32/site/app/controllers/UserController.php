@@ -339,7 +339,7 @@ class UserController extends BaseController {
 			Debugbar::info('Upload Success: '.$uploadSuccess);	
 			if($uploadSuccess){
 				$userPicture = 'img/userPictures/'.$filename; 
-				Debugbar::info('Upload Secceeded!' .$userPicture );
+				Debugbar::info('Upload Scceeded!' .$userPicture );
 			}
 		}else{
 			$userPicture = User::where('username', $user['username'])->first()->picture;	

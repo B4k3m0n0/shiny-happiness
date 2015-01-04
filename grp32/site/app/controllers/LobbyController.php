@@ -32,7 +32,7 @@ class LobbyController extends BaseController {
 
 
 
-		$scores = UsersGame::orderBy('score', 'desc')//TODO mudar id para os pontos obtidos no jogo
+		$scores = UsersGame::orderBy('score', 'desc')
 		->take(10)
 		->get();
 		Debugbar::info($scores);
