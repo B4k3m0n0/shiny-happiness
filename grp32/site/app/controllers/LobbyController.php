@@ -47,7 +47,7 @@ class LobbyController extends BaseController {
 			$date = explode(' ', $score->created_at);
 			array_push($data,$date[0]);	
 		}			
-				
+
 		$gameNames = array();
 
 		for ($i=0; $i < 10; $i++) { 
@@ -63,4 +63,30 @@ class LobbyController extends BaseController {
 			'gameNames' => $gameNames,
 			'data' => $data));	
 	}
+
+	public function showUsersList(){
+
+		$bannedUsersSearch = Ban::get();
+		$bannedUsers = '';
+		foreach ($bannedUsersSearch as $bannedUser) {
+			$bannedUsers = $bannedUsers.','.$bannedUser->banned_user;
+		}
+		//$bannedUsers = substr($bannedUsers, 1);
+		Debugbar::info("ssssss".$bannedUsers);
+
+
+		$allUsers = User::orderBy('username','asc')->get();//->paginate(20);
+		$users = '';
+		
+		foreach ($allUsers as $user) {
+			$users = $users.','.$user->username;
+			//array_push($users, $user->username);
+		}
+		$users = substr($users, 1);
+
+		Debugbar::info($users);
+		return View::make('usersList')->with('users',$users)->with('bannedUsers',$bannedUsers);
+	}
+
+
 }

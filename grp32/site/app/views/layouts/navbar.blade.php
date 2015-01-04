@@ -13,7 +13,7 @@
 
 
 	@if(Auth::check() && Auth::user()->admin == 1 )
-	<h4 class="nav navbar-nav navbar-center">Welcome {{Auth::user()->username}}</h4>
+	<h4 class="nav navbar-nav navbar-center">Welcome {{Auth::user()->username}} (Administrator)</h4>
 
 	<div class="collapse navbar-collapse navbar-responsive-collapse" >
 		<ul class="nav navbar-nav navbar-right">
@@ -35,6 +35,9 @@
 		</ul>
 	</div>
 	@elseif (Auth::check())
+	<h4 class="nav navbar-nav navbar-center">Welcome {{Auth::user()->username}} </h4>
+
+
 	<div class="collapse navbar-collapse navbar-responsive-collapse" >
 		<ul class="nav navbar-nav navbar-right">
 			<li ng-class="{'active' : page == 'profile'}">

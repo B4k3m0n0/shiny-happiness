@@ -1,5 +1,4 @@
-main
-.controller('TournamentController', ['$scope', function($scope) {
+main.controller('TournamentController', ['$scope', function($scope) {
     $scope.rounds = [
     { value: '1', label: '1 Round'}, 
     { value: '2', label: '2 Rounds'},

@@ -90,3 +90,12 @@ Route::post('profile', array('as' => 'profile', 'uses' => 'UserController@editPr
 Route::get('settings', array('as' => 'settings', 'uses' => 'AdminController@showSettings'));
 Route::post('settings', array('as' => 'settings', 'uses' => 'AdminController@editSettings'));
 
+
+Route::get('usersList', array('as' => 'usersList', 'uses' => 'LobbyController@showUsersList'));
+//Route::post('usersList', array('as' => 'usersList', 'uses' => 'LobbyController@banUser'));
+
+Route::post('toggleBanUser', array('as' => 'toggleBanUser', 'uses' => 'AdminController@toggleBanUser'));
+
+
+
+

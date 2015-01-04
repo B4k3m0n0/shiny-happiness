@@ -16,8 +16,8 @@ class CreateBansTable extends Migration {
 			$table->increments('id');
 			$table->string('banned_user');
 			$table->foreign('banned_user')->references('username')->on('users');
-			$table->text('reason');
-			$table->boolean('active')->default(true);
+			$table->text('reason')->nullable();
+			//$table->boolean('active')->default(true);
 			$table->timestamps();
 		});
 	}
