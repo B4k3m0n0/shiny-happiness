@@ -1,4 +1,3 @@
-Opçoes de admin (falta nao deixar banir admins)
 active na navbar
 lobby - da para juntar várias vezes ao mesmo jogo
 Na navbar o "welcome" está fora do sitio (falta centrar)

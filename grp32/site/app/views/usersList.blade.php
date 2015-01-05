@@ -24,7 +24,7 @@
 	<h1 class="center">Users List</h1>
 	
 
-	<table class="table table-bordered" ng-init="users='{{$users}}';bannedUsers='{{$bannedUsers}}'" >
+	<table class="table table-bordered" ng-init="users='{{$users}}';bannedUsers='{{$bannedUsers}}';me='{{Auth::user()->username}}'" >
 		<thead>
 			<tr>
 				<th>Player Name</th>
@@ -38,14 +38,11 @@
 		<tbody>
 
 			<tr ng-repeat="user in arrayUsers">
-				<td><a href="{{URL::to('otherUserProfile/[[user]]')}}">[[user]]</a></td>
+				<td><a href="{{URL::to('[[myProfile[$index] ]]')}}">[[user]]</a></td>
 				@if(Auth::user()->admin == 1)
 				<td>
-
 					<button class="btn" ng-click='toggleBanUser(user)' ng-class="bannedUsers.indexOf(','+user)==-1 ? 'btn-danger' : 'btn-success'">[[bannedUsers.indexOf(','+user)==-1 ? 'Ban' : 'Unban']]</button>
-					
-
-				</td>
+					</td>
 				@else
 				<td>
 					<span ng-class="bannedUsers.indexOf(','+user)==-1 ? 'text-success' : 'text-danger'">[[bannedUsers.indexOf(','+user)==-1 ? 'In good Standing' : 'Banned']]</span>
