@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration {
 			$table->bigInteger('creditcard')->lenght(16);
 			$table->date('birthdate');
 			$table->string('country');
-			$table->binary('picture')->nullable();
+			$table->string('picture')->nullable();
 			$table->string('address')->nullable();
 			$table->integer('phone')->nullable();
 			$table->string('facebook')->nullable();

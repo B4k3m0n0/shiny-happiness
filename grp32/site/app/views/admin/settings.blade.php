@@ -21,10 +21,7 @@
     {{ Form::open(array('class' => 'border-login', 'method' => 'post', 'route' => 'settings','name' => 'settingsForm','files'=>true)) }}
     <h3 class="center">Administrator Settings</h3>
     <hr>
-    <div class="div-obligatory">
-      <div class="box-obligatory"></div>
-      <span class="text-obligatory">- obligatory fields</span>
-    </div>
+    
     @if(Session::has('messageSuccessful'))
     <div class="bg-success">
       <p class="text-success">{{  Session::get('messageSuccessful')  }}</p>
@@ -38,7 +35,7 @@
     @endif
 
     <br/>
-    <hr>
+ 
         <!-- *******************************************************************************************************
              ***********************************************Dice Image**********************************************
              *******************************************************************************************************-->

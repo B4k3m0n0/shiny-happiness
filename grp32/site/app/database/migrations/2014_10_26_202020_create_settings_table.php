@@ -15,7 +15,7 @@ class CreateSettingsTable extends Migration {
 		Schema::create('settings', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('diceImageName')->nullable();	
-			$table->binary('diceImage')->nullable();
+			$table->string('diceImage')->nullable();
 			$table->timestamps();
 
 		});
