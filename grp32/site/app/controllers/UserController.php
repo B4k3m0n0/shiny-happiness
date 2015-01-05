@@ -215,11 +215,23 @@ class UserController extends BaseController {
 
 			//$userPicture = User::where('username', $user['username'])->first()->picture;	
 			//Debugbar::info('Picture path: '.$user['picture']);
-			return View::make('profile')->with('user',$user);
+			return View::make('profile/profile')->with('user',$user);
 		}
 		return Redirect::to('login');		
 	}
 
+
+	public function showOtherUserProfile($username)
+	{
+
+		if (Auth::check())
+		{
+			$user = User::where('username',$username)->first();
+
+			return View::make('profile/otherUserProfile')->with('user',$user);
+		}
+		return Redirect::to('login');		
+	}
 
 	public function logout(){
 		Auth::logout(); 

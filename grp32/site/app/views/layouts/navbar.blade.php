@@ -3,8 +3,6 @@
 {{ HTML::style('css/navbar.css') }}
 @stop
 
-
-
 @section('navbar')
 <div class="container">
 	<div class="navbar-header">
@@ -25,6 +23,9 @@
 			</li>
 			<li ng-class="{'active' : page == 'scores'}">
 				<a href="{{URL::to('scores')}}" class="navbar-link">Top Scores</a>
+			</li>
+			<li ng-class="{'active' : page == 'usersList'}">
+				<a href="{{URL::to('usersList')}}" class="navbar-link">Users List</a>
 			</li>
 			<li ng-class="{'active' : page == 'settings'}">
 				<a href="{{URL::to('settings')}}" class="navbar-link">Settings</a>
@@ -48,6 +49,9 @@
 			</li>
 			<li ng-class="{'active' : page == 'scores'}">
 				<a href="{{URL::to('scores')}}" class="navbar-link">Top Scores</a>
+			</li>
+			<li ng-class="{'active' : page == 'usersList'}">
+				<a href="{{URL::to('usersList')}}" class="navbar-link">Users List</a>
 			</li>
 			<li>
 				<a href="{{URL::to('logout')}}" class="navbar-link">Logout</a>

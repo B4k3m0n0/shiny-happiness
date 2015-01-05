@@ -48,7 +48,7 @@
                ************************************************PICTURE************************************************
                *******************************************************************************************************-->
 
-               <div class="thumbnail margin-center" style="min-height:150;min-width:150;width:150;">
+               <div class="thumbnail margin-center" style="min-height:150;min-width:150;width:160;">
                 {{HTML::image($user['picture'], "user picture", array('style'=>'min-height:150;height:150;min-width:150;width:150;'))}}
               </div>
               <div class="@if ($errors->has('picture')) has-error @endif">

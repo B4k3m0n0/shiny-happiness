@@ -44,8 +44,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'picture'					  => 'image|mimes:jpeg,jpg,png,bmp',
 		'address' 					  => 'alpha',
 		'phone' 		 			  => 'numeric',
-		'facebook'					  => 'alpha',
-		'twitter' 					  => 'alpha'
+		'facebook'					  => 'alpha_num',
+		'twitter' 					  => 'alpha_num'
 		);
 
 	public static $rulesEdit = array(
@@ -59,8 +59,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'picture'					  => 'image|mimes:jpeg,jpg,png,bmp',
 		'address' 					  => 'alpha',
 		'phone' 					  => 'numeric',
-		'facebook'					  => 'alpha',
-		'twitter' 					  => 'alpha'
+		'facebook'					  => 'alpha_num',
+		'twitter' 					  => 'alpha_num'
 		);
 
 	public function getAge($date = 'now')

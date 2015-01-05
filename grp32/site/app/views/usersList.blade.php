@@ -22,7 +22,7 @@
 <div class="col-md-4 col-md-offset-4" ng-controller='BanUserController'>
 
 	<h1 class="center">Users List</h1>
-	<h1 class="center">FALTA MANDAR PARA O PERFIL QUANDO SE CARREGA NO USERNAME</h1>
+	
 
 	<table class="table table-bordered" ng-init="users='{{$users}}';bannedUsers='{{$bannedUsers}}'" >
 		<thead>
@@ -38,12 +38,12 @@
 		<tbody>
 
 			<tr ng-repeat="user in arrayUsers">
-				<td><a href="">[[user]]</a></td>
+				<td><a href="{{URL::to('otherUserProfile/[[user]]')}}">[[user]]</a></td>
 				@if(Auth::user()->admin == 1)
 				<td>
-					
-					<button class="btn" ng-click='toggleBanUser(user)' ng-class="bannedUsers.indexOf(','+user)==-1 ? 'btn-danger' : 'btn-success'">[[bannedUsers.indexOf(','+user)==-1 ? 'Ban' : 'Unban']]</button>
 
+					<button class="btn" ng-click='toggleBanUser(user)' ng-class="bannedUsers.indexOf(','+user)==-1 ? 'btn-danger' : 'btn-success'">[[bannedUsers.indexOf(','+user)==-1 ? 'Ban' : 'Unban']]</button>
+					
 
 				</td>
 				@else

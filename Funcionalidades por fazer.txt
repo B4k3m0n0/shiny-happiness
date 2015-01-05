@@ -3,5 +3,4 @@ active na navbar
 lobby - da para juntar várias vezes ao mesmo jogo
 Na navbar o "welcome" está fora do sitio (falta centrar)
 criar Torneios, lista de torneios
-há um problema qualquer, em que passado algum tempo deixa de ser possivel entrar com um utilizador
 Apresentar mensagem de erro se o login for errado
