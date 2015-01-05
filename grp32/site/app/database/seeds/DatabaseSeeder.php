@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('PlaysTableSeeder');
 		$this->command->info('Plays  table seeded!');
 
-			DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
 
 	}

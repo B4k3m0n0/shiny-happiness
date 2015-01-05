@@ -7,7 +7,7 @@ class UsersGamesTableSeeder extends Seeder {
 	{
 
 		
-		for ($i=1; $i <= 10; $i++) { 
+		for ($i=1; $i <= 100; $i++) { 
 			$score = rand(5,375);	
 
 			UsersGame::insert(array(

@@ -6,7 +6,7 @@ class UsersTableSeeder extends Seeder {
 	public function run()
 	{
 	/*ADMINS*/
-		for ($i=1; $i <= 10; $i++) { 
+		for ($i=1; $i <= 100; $i++) { 
 		
 
 			User::insert(array(
@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder {
 
 		/*USERS*/
 
-		for ($i=1; $i <= 100; $i++) { 
+		for ($i=1; $i <= 1000; $i++) { 
 
 			User::insert(array(
 				'username' 		=> 'user'.$i,

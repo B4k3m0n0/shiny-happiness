@@ -8,7 +8,7 @@ class GamesTableSeeder extends Seeder {
 	{
 
 
-		for ($i=1; $i <= 10; $i++) { 
+		for ($i=1; $i <= 100; $i++) { 
 
 			Game::insert(array(
 				'game_name' => 'game'.$i,
@@ -22,7 +22,7 @@ class GamesTableSeeder extends Seeder {
 
 
 
-		for ($i=11; $i <= 20; $i++) { 
+		for ($i=101; $i <= 200; $i++) { 
 
 			Game::insert(array(
 				'game_name' => 'game'.$i,
