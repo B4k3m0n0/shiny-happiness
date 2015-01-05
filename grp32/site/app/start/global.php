@@ -79,8 +79,6 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
-require app_path().'/validators.php'; //Custom
-
 
 
 
@@ -96,4 +94,3 @@ Form::macro('labelEnd', function()
 {
     return '</label>';
 });
-

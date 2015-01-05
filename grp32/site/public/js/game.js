@@ -110,7 +110,8 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 		}
 	}
 
-	socket.on('gameSelectedBoard', function (i, currentPlayer) {
+	socket.on('gameSelectedBoard', function (i, currentPlayer, sum, bonus, totalScore) {
+		setBonus(sum, bonus, totalScore);
 		$scope.boardSelectedBonus[$scope.currentPlayer][i] = $scope.boardDataByPlayer[$scope.currentPlayer][i];
 		$scope.boardDataByPlayer[$scope.currentPlayer] = JSON.parse(JSON.stringify($scope.boardSelectedBonus[$scope.currentPlayer]));
 		$scope.currentPlayer = currentPlayer;
@@ -118,14 +119,18 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 		$scope.$apply();
 	});
 
-	$scope.selectBonus = function(i) {
-		if ($scope.boardDataByPlayer[$scope.currentPlayer][i] != null && $scope.me == $scope.currentPlayer) {
+	$scope.selectBonus = function(i, namePlayer) {
+		if ($scope.boardDataByPlayer[$scope.currentPlayer][i] != null && $scope.me == namePlayer && $scope.boardSelectedBonus[$scope.currentPlayer][i] == null) {
+			rerollPossible = false;
+			console.log("enter");
 			$scope.boardSelectedBonus[$scope.currentPlayer][i] = $scope.boardDataByPlayer[$scope.currentPlayer][i];
 			$scope.boardDataByPlayer[$scope.currentPlayer] = JSON.parse(JSON.stringify($scope.boardSelectedBonus[$scope.currentPlayer]));
 
 			$http.post('http://192.168.117.137/grp32/site/public/currentPlay', {'id': $scope.gameId, 'numRolls': $scope.playNumber, 'scoreType': i}).
 			success(function(data, status, headers, config) {
-				socket.emit('sendSelectedBoard', $scope.gameId, i, data.currentPlayer);
+				socket.emit('sendSelectedBoard', $scope.gameId, i, data.currentPlayer, data.sum, data.bonus, data.totalScore);
+				setBonus(data.sum, data.bonus, data.totalScore);
+
 				$scope.currentPlayer = data.currentPlayer;
 				resetPlay();
 			}).
@@ -133,6 +138,7 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 				console.log("unable to get data");
 			});
 			$scope.playNumber = 0;
+			rerollPossible = true;
 		}
 	}
 
@@ -140,10 +146,30 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 		return $scope.boardSelectedBonus[namePlayers][i] != null;
 	}
 
+	setBonus = function (sum, bonus, totalScore) {
+		if (sum != null) {
+			$scope.boardDataByPlayer[$scope.currentPlayer][6] = sum;
+			$scope.boardSelectedBonus[$scope.currentPlayer][6] = sum;
+			console.log("teste");
+		}
+
+		if (bonus != null) {
+			$scope.boardDataByPlayer[$scope.currentPlayer][7] = bonus;
+			$scope.boardSelectedBonus[$scope.currentPlayer][7] = bonus;
+			console.log("teste2");
+		}
+
+		if (totalScore != null) {
+			$scope.boardDataByPlayer[$scope.currentPlayer][15] = totalScore;
+			$scope.boardSelectedBonus[$scope.currentPlayer][15] = totalScore;
+			console.log("teste3");
+		}
+	}
+
 	resetPlay = function () {
 		$scope.diceRolled = false;
 		selectedDice = [];
-		resetDicePos();
+		resetAllDicePos();
 		diceAdder = [];
 	}
 
@@ -154,7 +180,6 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 				var rotationY = getRandomInt(-180, 180);
 
 				var cssRotation = "rotateX("+rotationX+"deg) rotateY("+rotationY+"deg)";
-
 				if (selectedDice.indexOf(i) == -1) {
 					document.getElementsByClassName('_3dbox')[i].style.transform = cssRotation;
 				}
@@ -188,11 +213,15 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 		}
 	}
 
-	resetDicePos = function () {
+	resetAllDicePos = function () {
 		for (var i = 0; i < horizontalVecPos.length; i++) {
-			document.getElementsByClassName('space3d')[i].style.top = 350+"px";
-			document.getElementsByClassName('space3d')[i].style.left = 0+"px";
+			resetDicePos(i);
 		}
+	}
+
+	resetDicePos = function (i) {
+		document.getElementsByClassName('space3d')[i].style.top = 350+"px";
+		document.getElementsByClassName('space3d')[i].style.left = 0+"px";
 	}
 
 	stopDice = function (dicePos, board) {
@@ -214,6 +243,122 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 			$scope.$apply();
 		}, 1000);
 	}
+
+
+	/*START GAME*/
+	var numberRolls = null;
+	var totalRolls = 0;
+	$scope.$watch('numberRolls', function () {
+		if ($scope.numberRolls != null) {
+			numberRolls = $scope.numberRolls.split(";");
+			numberRolls.pop();
+			for (var i = 0; i < numberRolls.length; i++) {
+				totalRolls += numberRolls[i]*1;
+			}
+			console.log(totalRolls);
+		}
+	});
+
+
+	var diceValues;
+	var diceSaved;
+
+	$scope.$watch('diceValues', function () {
+		if ($scope.diceValues != null) {
+			diceValues = $scope.diceValues.split(";");
+			diceValues.pop();
+			diceValues.splice(0, totalRolls);
+			console.log(diceValues);
+		}
+	});
+
+	$scope.$watch('diceSaved', function () {
+		if ($scope.diceSaved != null) {
+			diceSaved = $scope.diceSaved.split(";");
+			diceSaved.pop();
+			diceSaved.splice(0, totalRolls);
+			console.log(diceSaved);
+			diceApplier(diceValues, diceSaved);
+		}
+	});
+
+	diceApplier = function (listDice, listDiceSaved) {
+		for (var i = 0; i < listDice.length; i++) {
+			var listDiceVals = listDice[i].split(",");
+			var listDiceSavedVals = listDiceSaved[i].split(",");
+			var y = 0;
+			for (var k = 0; k < listDiceVals.length; k++) {
+				if (listDiceSavedVals.indexOf(y+"") == -1) {
+					diceAdder[y] = listDiceVals[k]*1;
+				}else{
+					k--;
+				}
+				y++;
+			}
+			if (i == listDice.length-1) {
+				for (var i = 0; i < listDiceSavedVals.length; i++) {
+					selectedDice.push(listDiceSavedVals[i]*1);
+				}
+			}
+		}
+		console.log(selectedDice);
+		console.log(diceAdder);
+	}
+
+	$scope.$watch('scores', function () {
+		if ($scope.scores != null) {
+			var scores = $scope.scores.split(";");
+			scores.pop();
+			var aux = 0;
+
+			if (diceAdder.length > 0) {
+				$http.post('http://192.168.117.137/grp32/site/public/getBoard', {'dice': diceAdder}).
+				success(function(data, status, headers, config) {
+					$scope.boardDataByPlayer[$scope.currentPlayer] = data.board;
+					$scope.playNumber = data.rolls;
+				}).
+				error(function(data, status, headers, config) {
+					console.log("unable to get data");
+				});
+			}
+
+			console.log(scores);
+
+			for (var i = 0; i < scores.length; i++) {
+				if (aux == $scope.namePlayers.length) {
+					aux = 0;
+				}
+				var points = scores[i].split(":");
+				if (points[0] == 6 || points[0] == 7 || points[0] == 15) {
+					if (aux == 0) {
+						aux = $scope.namePlayers.length-1;
+					}else{
+						aux--;
+					}
+				}
+				$scope.boardDataByPlayer[$scope.namePlayers[aux] ][points[0]] = points[1];
+				$scope.boardSelectedBonus[$scope.namePlayers[aux] ][points[0]] = points[1];
+				aux++;
+			}
+			console.log(diceAdder);
+
+			if (diceValues.length == 0) {
+				resetAllDicePos();
+			}else if (selectedDice.length > 0) {
+				for (var i = 0; i < selectedDice.length; i++) {
+					document.getElementsByClassName('_3dbox')[selectedDice[i]].style.transform = sides[diceAdder[selectedDice[i]]-1];
+					resetDicePos(selectedDice[i]);
+				}
+				diceOnScreen();
+				stopDice(diceAdder, $scope.boardDataByPlayer);
+			}else{
+				diceOnScreen();
+				stopDice(diceAdder, $scope.boardDataByPlayer);
+			}
+		}
+	});
+
+/*END START GAME*/
 
 }]);
 

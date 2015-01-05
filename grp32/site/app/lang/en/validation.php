@@ -26,7 +26,7 @@ return array(
 		"file"    => "The :attribute must be between :min and :max kilobytes.",
 		"string"  => "The :attribute must be between :min and :max characters.",
 		"array"   => "The :attribute must have between :min and :max items.",
-		),
+	),
 	"confirmed"            => "The :attribute confirmation does not match.",
 	"date"                 => "The :attribute is not a valid date.",
 	"date_format"          => "The :attribute does not match the format :format.",
@@ -44,14 +44,14 @@ return array(
 		"file"    => "The :attribute may not be greater than :max kilobytes.",
 		"string"  => "The :attribute may not be greater than :max characters.",
 		"array"   => "The :attribute may not have more than :max items.",
-		),
+	),
 	"mimes"                => "The :attribute must be a file of type: :values.",
 	"min"                  => array(
 		"numeric" => "The :attribute must be at least :min.",
 		"file"    => "The :attribute must be at least :min kilobytes.",
 		"string"  => "The :attribute must be at least :min characters.",
 		"array"   => "The :attribute must have at least :min items.",
-		),
+	),
 	"not_in"               => "The selected :attribute is invalid.",
 	"numeric"              => "The :attribute must be a number.",
 	"regex"                => "The :attribute format is invalid.",
@@ -67,7 +67,7 @@ return array(
 		"file"    => "The :attribute must be :size kilobytes.",
 		"string"  => "The :attribute must be :size characters.",
 		"array"   => "The :attribute must contain :size items.",
-		),
+	),
 	"unique"               => "The :attribute has already been taken.",
 	"url"                  => "The :attribute format is invalid.",
 
@@ -85,8 +85,8 @@ return array(
 	'custom' => array(
 		'attribute-name' => array(
 			'rule-name' => 'custom-message',
-			),
 		),
+	),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -100,15 +100,5 @@ return array(
 	*/
 
 	'attributes' => array(),
-
-	/*
-|--------------------------------------------------------------------------
-| Custom Validation Rules
-|--------------------------------------------------------------------------
-|
-| Custom rules created in app/validators.php
-|
-*/
-	"alpha_spaces"     => "The :attribute may only contain letters and spaces.",
 
 );

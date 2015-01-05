@@ -5,11 +5,12 @@ class YahtzeeCombinationCalculator {
 	public function getScore($dices)
 	{
 		$score = array_merge(array(), $this->getUpperScore($dices));
-		array_push($score, $this->getSum(), $this->getBonus(), $this->get3ofKindScore($dices), $this->get4ofKindScore($dices), $this->getFullHouseScore($dices), $this->getSmallStraightScore($dices), $this->getLargeStraightScore($dices), $this->getChanceScore($dices), $this->getYahtzeeScore($dices), $this->getTotalScore());
+		array_push($score, null, null, $this->get3ofKindScore($dices), $this->get4ofKindScore($dices), $this->getFullHouseScore($dices), $this->getSmallStraightScore($dices), $this->getLargeStraightScore($dices), $this->getChanceScore($dices), $this->getYahtzeeScore($dices), null);
 
 		return $score;
 	}
 
+/*
 	public function getSum()
 	{
 		return null;
@@ -24,7 +25,7 @@ class YahtzeeCombinationCalculator {
 	{
 		return null;
 	}
-
+*/
 	public function getUpperScore($dices)
 	{
 		$counter = array_count_values($dices);
@@ -42,7 +43,7 @@ class YahtzeeCombinationCalculator {
 			if ($value != null) {
 				array_push($result, $key*$value);
 			}else{
-				array_push($result, null);
+				array_push($result, 0);
 			}
 		}
 
@@ -63,7 +64,7 @@ class YahtzeeCombinationCalculator {
 				return $value;
 			}
 		}
-
+		return 0;
 	}
 
 	public function get4ofKindScore($dices)
@@ -82,6 +83,7 @@ class YahtzeeCombinationCalculator {
 				return $value;
 			}
 		}
+		return 0;
 	}
 
 	public function getFullHouseScore($dices)
@@ -100,6 +102,7 @@ class YahtzeeCombinationCalculator {
 				}
 			}
 		}
+		return 0;
 	}
 
 	public function getSmallStraightScore($dices)
@@ -124,6 +127,7 @@ class YahtzeeCombinationCalculator {
 				return 30;
 			}
 		}
+		return 0;
 	}
 
 	public function getLargeStraightScore($dices)
@@ -148,6 +152,7 @@ class YahtzeeCombinationCalculator {
 				return 40;
 			}
 		}
+		return 0;
 	}
 
 	public function getChanceScore($dices)
@@ -172,6 +177,7 @@ class YahtzeeCombinationCalculator {
 				return 50;
 			}
 		}
+		return 0;
 	}
 
 	public function hasDuplicates($dices)

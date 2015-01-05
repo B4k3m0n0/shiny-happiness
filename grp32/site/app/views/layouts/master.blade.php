@@ -29,9 +29,7 @@
 		@yield('rightbar')
 	</div>
 
-	{{ HTML::script('http://192.168.216.134:8080/socket.io/socket.io.js') }}
+	{{ HTML::script('http://192.168.117.137:8080/socket.io/socket.io.js') }}
 	@include('layouts.script')
-
-	
 </body>
 </html>

@@ -61,6 +61,7 @@ Route::get('cube', function()
 /*GAME LOGIC ROUTES*/
 Route::post('getDice', array('as' => 'getDice', 'uses' => 'GameController@generateDice'));
 Route::post('currentPlay', array('as' => 'currentPlay', 'uses' => 'GameController@currentPlay'));
+Route::post('getBoard', array('as' => 'getBoard', 'uses' => 'GameController@getBoard'));
 
 /*GAME CREATE*/
 Route::post('createGame', array('as' => 'createGame', 'uses' => 'GameController@create'));

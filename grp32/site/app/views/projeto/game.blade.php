@@ -20,7 +20,7 @@
 
 <div  ng-controller="GameController">
 	<div class="score-board-main">
-		<div class="score-board" ng-show="scoreButton" ng-init="listPlayers = '{{$playerSequence}}'; gameId = '{{$id}}'; currentPlayer = '{{$currentPlayer}}'; me = '{{Auth::user()->username}}'">
+		<div class="score-board" ng-show="scoreButton" ng-init="listPlayers = '{{$playerSequence}}'; gameId = '{{$id}}'; currentPlayer = '{{$currentPlayer}}'; me = '{{Auth::user()->username}}'; numberRolls = '{{$numberRolls}}'; diceValues = '{{$diceValues}}'; diceSaved = '{{$diceSaved}}'; scores = '{{$scores}}';">
 			<table>
 				<thead>
 					<tr>
@@ -34,7 +34,7 @@
 						<td class="score-board-table" data-toggle="tooltip" data-container="body" data-placement="right" title="{{$scoreBoard[1][$i]}}" ng-class="{'score-special': '{{$scoreBoard[0][$i]}}' == 'Sum' || '{{$scoreBoard[0][$i]}}' == 'Bonus'}">
 							{{$scoreBoard[0][$i]}}
 						</td>
-						<td class="score-board-table" ng-repeat="namePlayer in namePlayers" @if(strpos($playerSequence, Auth::user()->username.';') !== false) ng-class="{'clicable board-animation': !isBonusSelected({{$i}}, namePlayer) && isNotNull({{$i}}, namePlayer) && currentPlayer == me && namePlayer == me && !('{{$scoreBoard[0][$i]}}' == 'Sum' || '{{$scoreBoard[0][$i]}}' == 'Bonus' || '{{$scoreBoard[0][$i]}}' == 'TOTAL SCORE'), 'selectedBonus': isBonusSelected({{$i}}, namePlayer) && isNotNull({{$i}}, namePlayer)}" @endif ng-click="selectBonus({{$i}})">
+						<td class="score-board-table" ng-repeat="namePlayer in namePlayers" @if(strpos($playerSequence, Auth::user()->username.';') !== false) ng-class="{'clicable board-animation': !isBonusSelected({{$i}}, namePlayer) && isNotNull({{$i}}, namePlayer) && currentPlayer == me && namePlayer == me && !('{{$scoreBoard[0][$i]}}' == 'Sum' || '{{$scoreBoard[0][$i]}}' == 'Bonus' || '{{$scoreBoard[0][$i]}}' == 'TOTAL SCORE'), 'selectedBonus': isBonusSelected({{$i}}, namePlayer) && isNotNull({{$i}}, namePlayer)}" @endif ng-click="selectBonus({{$i}}, namePlayer)">
 							<div>
 								[[boardDataByPlayer[namePlayer][{{$i}}] ]]
 							</div>

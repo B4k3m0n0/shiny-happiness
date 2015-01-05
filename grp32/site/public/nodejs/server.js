@@ -107,8 +107,8 @@ server.on('connection', function (socket) {
 		socket.broadcast.to('Game-'+gameID).emit('gameSelectedDice', selectedDice);
 	});
 
-	socket.on('sendSelectedBoard', function (gameID, selectedDice, currentPlayer){
-		socket.broadcast.to('Game-'+gameID).emit('gameSelectedBoard', selectedDice, currentPlayer);
+	socket.on('sendSelectedBoard', function (gameID, selectedDice, currentPlayer, sum, bonus, totalScore){
+		socket.broadcast.to('Game-'+gameID).emit('gameSelectedBoard', selectedDice, currentPlayer, sum, bonus, totalScore);
 	});
 
 	/*End Game data exchange*/

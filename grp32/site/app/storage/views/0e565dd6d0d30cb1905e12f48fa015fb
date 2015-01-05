@@ -24,7 +24,7 @@
 
 <div  ng-controller="GameController">
 	<div class="score-board-main">
-		<div class="score-board" ng-show="scoreButton" ng-init="listPlayers = '<?php echo $playerSequence; ?>'; gameId = '<?php echo $id; ?>'; currentPlayer = '<?php echo $currentPlayer; ?>'; me = '<?php echo Auth::user()->username; ?>'">
+		<div class="score-board" ng-show="scoreButton" ng-init="listPlayers = '<?php echo $playerSequence; ?>'; gameId = '<?php echo $id; ?>'; currentPlayer = '<?php echo $currentPlayer; ?>'; me = '<?php echo Auth::user()->username; ?>'; numberRolls = '<?php echo $numberRolls; ?>'; diceValues = '<?php echo $diceValues; ?>'; diceSaved = '<?php echo $diceSaved; ?>'; scores = '<?php echo $scores; ?>';">
 			<table>
 				<thead>
 					<tr>
@@ -39,7 +39,7 @@
 							<?php echo $scoreBoard[0][$i]; ?>
 
 						</td>
-						<td class="score-board-table" ng-repeat="namePlayer in namePlayers" <?php if(strpos($playerSequence, Auth::user()->username.';') !== false): ?> ng-class="{'clicable board-animation': !isBonusSelected(<?php echo $i; ?>, namePlayer) && isNotNull(<?php echo $i; ?>, namePlayer) && currentPlayer == me && namePlayer == me && !('<?php echo $scoreBoard[0][$i]; ?>' == 'Sum' || '<?php echo $scoreBoard[0][$i]; ?>' == 'Bonus' || '<?php echo $scoreBoard[0][$i]; ?>' == 'TOTAL SCORE'), 'selectedBonus': isBonusSelected(<?php echo $i; ?>, namePlayer) && isNotNull(<?php echo $i; ?>, namePlayer)}" <?php endif; ?> ng-click="selectBonus(<?php echo $i; ?>)">
+						<td class="score-board-table" ng-repeat="namePlayer in namePlayers" <?php if(strpos($playerSequence, Auth::user()->username.';') !== false): ?> ng-class="{'clicable board-animation': !isBonusSelected(<?php echo $i; ?>, namePlayer) && isNotNull(<?php echo $i; ?>, namePlayer) && currentPlayer == me && namePlayer == me && !('<?php echo $scoreBoard[0][$i]; ?>' == 'Sum' || '<?php echo $scoreBoard[0][$i]; ?>' == 'Bonus' || '<?php echo $scoreBoard[0][$i]; ?>' == 'TOTAL SCORE'), 'selectedBonus': isBonusSelected(<?php echo $i; ?>, namePlayer) && isNotNull(<?php echo $i; ?>, namePlayer)}" <?php endif; ?> ng-click="selectBonus(<?php echo $i; ?>, namePlayer)">
 							<div>
 								[[boardDataByPlayer[namePlayer][<?php echo $i; ?>] ]]
 							</div>
