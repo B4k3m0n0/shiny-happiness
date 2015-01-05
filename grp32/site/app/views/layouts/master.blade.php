@@ -32,35 +32,6 @@
 	{{ HTML::script('http://192.168.216.134:8080/socket.io/socket.io.js') }}
 	@include('layouts.script')
 
-	<script type="text/javascript">
-
-	var x = document.getElementsByClassName("nav")[0].childNodes[1];
-	console.log(x.getAttribute("href"));
-
-var matches = x.match(/((.)\2*)/g);
-
-console.log(matches);
-
-	/*var regex = document.getElementsByClassName("nav")[0].childNodes[1].match(/(?=(href="))(.*)"$/g);
-console.log(regex);*/
-	//(?=(href="))(.*)"$
-
-
-	/*main.controller('navbarController', ['$scope', function($scope){
-		if (document.URL == $scope.profile) {
-			$scope.page = 'profile';
-
-		}else if (document.URL == $scope.tournaments) {
-
-			$scope.page = 'tournaments';
-		}else{
-
-			$scope.page = 'scores';
-		};
-
-	}]);*/
-
-
-</script>
+	
 </body>
 </html>

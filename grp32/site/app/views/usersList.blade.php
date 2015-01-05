@@ -22,7 +22,6 @@
 <div class="col-md-4 col-md-offset-4" ng-controller='BanUserController'>
 
 	<h1 class="center">Users List</h1>
-	
 
 	<table class="table table-bordered" ng-init="users='{{$users}}';bannedUsers='{{$bannedUsers}}';me='{{Auth::user()->username}}'" >
 		<thead>

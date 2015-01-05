@@ -5,12 +5,32 @@ class LobbyController extends BaseController {
 	public function index()
 	{
 
+		$userIsBanned = 0;
 		$games = Game::where('status', '<>', 'ended')->take(8)->get();
-		return View::make('lobby')->with('games', $games);
+
 		
 
-	}
+		if (Auth::check()) {
+			$loggedUser = Auth::user()->username;
 
+			$bannedUsersSearch = Ban::get();
+
+			$banned = array();
+			foreach ($bannedUsersSearch as $bannedUser) {
+				array_push($banned, $bannedUser->banned_user);
+
+			}
+			if (in_array($loggedUser, $banned)) {
+				$userIsBanned = true;
+			}
+		}
+		//Debugbar::info("Banned User = ".$userIsBanned);
+
+		return View::make('lobby')->with('games', $games)->with('userIsBanned', $userIsBanned);
+
+
+		
+	}
 
 	public function showScores(){
 		//create fake data on database

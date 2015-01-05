@@ -5,9 +5,8 @@ class SettingsTableSeeder extends Seeder {
 
 	public function run()
 	{
-DB::table('settings')->delete();
 
-		for ($i=1; $i <= 10; $i++) { 
+		for ($i=1; $i <= 1000; $i++) { 
 
 			Setting::insert(array(
 				'diceImageName' => 'defaultDiceImage.png',

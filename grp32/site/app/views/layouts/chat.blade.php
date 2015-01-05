@@ -14,9 +14,9 @@
 		<div class="chat-wrapper">
 			<div class="chat-top" >
 				<div class="chat-user-image">
-					<img src="{{ asset('img/tristana.png') }}">
+					<img src="{{HTML::image(Auth::user()->picture)}}">
 				</div>
-				<p class="chat-top-title" ng-init="username = '{{Auth::user()->username}}'; @if(isset($gameId)) gameId = '{{$gameId}}'; playerSequence = '{{$playerSequence}}' @endif">{{Auth::user()->username}}</p>
+				<p class="chat-top-title" ng-init="username = @if(Auth::check() == true){{Auth::user()->username}}@else Spectator @endif; @if(isset($gameId)) gameId = '{{$gameId}}'; playerSequence = '{{$playerSequence}}' @endif">@if(Auth::check() == true){{Auth::user()->username}}@else Spectator @endif</p>
 			</div>
 			<div class="chat-body">
 				<ul id="messages">

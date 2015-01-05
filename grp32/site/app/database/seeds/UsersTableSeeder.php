@@ -5,10 +5,9 @@ class UsersTableSeeder extends Seeder {
 
 	public function run()
 	{
-		DB::table('users')->delete();
-
+	/*ADMINS*/
 		for ($i=1; $i <= 10; $i++) { 
-			/*ADMINS*/
+		
 
 			User::insert(array(
 				'username' 		=> 'admin'.$i,
