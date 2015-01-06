@@ -64,9 +64,11 @@ server.on('connection', function (socket) {
 	});
 
 	socket.on('joinedGame', function (gameID, username) {
-		gameRooms[gameID].push(username);
-		socket.emit('gameMyJoin', gameRooms[gameID], gamesToUpdate[gameID]);
-		socket.broadcast.to(gameID).emit('gameOthersJoin', gameRooms[gameID]);
+		if (gameRooms[gameID].indexOf(username) != -1) {
+			gameRooms[gameID].push(username);
+			socket.emit('gameMyJoin', gameRooms[gameID], gamesToUpdate[gameID]);
+			socket.broadcast.to(gameID).emit('gameOthersJoin', gameRooms[gameID]);
+		}
 	});
 
 	socket.on('exitGame', function (gameID, username) {

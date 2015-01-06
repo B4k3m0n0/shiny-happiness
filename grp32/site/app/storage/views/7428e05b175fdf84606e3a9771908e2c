@@ -18,6 +18,29 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('mainbody'); ?>
+
+<?php if(!Auth::check() || $userIsBanned == 1): ?>
+<div id="lobby" class="lobby" ng-controller="LobbyController">
+	<table ng-init="screenSelected = 'list'; username = 'Guest'" ng-show="screenSelected == 'list'">
+		<tr class="lobby-options" ng-init='games = <?php echo $games; ?>'>
+			<td class="lobby-clicable" ng-click="filterByName(); predicate = 'title'">Game Name <a class="fa" ng-class="{'fa-chevron-circle-up': nameFilter == 2, 'fa-chevron-circle-down': nameFilter == 1, 'fa-chevron-circle-left': nameFilter == 0}"></a></td>
+			<td class="lobby-clicable" ng-click="filterBySize(); predicate = 'num_bots*1 + num_players*1'">Size <a class="fa" ng-class="{'fa-chevron-circle-up': sizeFilter == 2, 'fa-chevron-circle-down': sizeFilter == 1, 'fa-chevron-circle-left': sizeFilter == 0}"></a></td>
+			<td class="lobby-clicable" ng-click="filterByStatus(); predicate = 'status'">Status <a class="fa" ng-class="{'fa-chevron-circle-up': statusFilter == 2, 'fa-chevron-circle-down': statusFilter == 1, 'fa-chevron-circle-left': statusFilter == 0}"></a></td>
+			<td class="lobby-clicable" ng-click="filterByBots(); predicate = 'num_bots'">Bots <a class="fa" ng-class="{'fa-chevron-circle-up': botsFilter == 2, 'fa-chevron-circle-down': botsFilter == 1, 'fa-chevron-circle-left': botsFilter == 0}"></a></td>
+		</tr>
+		
+		<tr class="lobby-games-list" ng-repeat="game in games | orderBy:predicate:reverse" ng-controller="ItemController" ng-mouseenter="showIt()" ng-mouseleave="hideIt()">
+			<td class="no-upper">[[game.game_name]]
+				<br>
+				<a href="<?php echo URL::to('game/[[game.id]]'); ?>" class="btn btn-info" ng-show="show">Spectate</a>
+			</td>
+			<td>[[game.num_bots*1 + game.num_players*1]]</td>
+			<td>[[game.status]]</td>
+			<td>[[game.num_bots]]</td>
+		</tr>
+	</table>
+</div>
+<?php else: ?>
 <div id="lobby" class="lobby" ng-controller="LobbyController">
 	<table ng-init="screenSelected = 'list'; username = '<?php echo Auth::user()->username; ?>'" ng-show="screenSelected == 'list'">
 		<tr class="lobby-options" ng-init='games = <?php echo $games; ?>'>
@@ -35,87 +58,87 @@
 			<td class="no-upper">[[game.game_name]]
 				<br>
 				<button type="button" class="btn btn-primary" ng-show="show && notFull" ng-click="screenSelectedtoEnter(game)">Enter</button>
-				<button type="button" class="btn btn-info" ng-show="show">Spectate</button>
-			</td>
-			<td>[[game.num_bots*1 + game.num_players*1]]</td>
-			<td>[[game.status]]</td>
-			<td>[[game.num_bots]]</td>
-		</tr>
-	</table>
+				<a href="<?php echo URL::to('game/[[game.id]]'); ?>" class="btn btn-info" ng-show="show">Spectate</a>			</td>
+				<td>[[game.num_bots*1 + game.num_players*1]]</td>
+				<td>[[game.status]]</td>
+				<td>[[game.num_bots]]</td>
+			</tr>
+		</table>
 
 
-	<table ng-show="screenSelected == 'create game'">
-		<tr>
-			<td colspan='2' class="lobby-create">
-				<div class="col-sm-4 divisor">
-					<label for="gameName" class="control-label">Game Name:</label>
-					<input type="text" class="form-control" ng-model="gameName" id="gameName" ng-disabled= "createGameStatus == 'Start'" placeholder="Game Name">
-				</div>
-				<div class="col-sm-4 divisor">
-					<label for="numPlayers" class="control-label">Total Number of Players:</label>
-					<select class="form-control create-game-options" id="numPlayers" ng-model="playerDefined" ng-options="player.name for player in players" ng-change="redefineBots()">
-					</select>
-					<label for="numBots" class="control-label">Number of Bots:</label>
-					<select class="form-control" id="numBots" ng-model="botDefined" ng-options="bot.name for bot in bots">
-					</select>
-				</div>
-				<div class="col-sm-4">
-					<button type="button" class="btn btn-primary create-game-options" ng-click="gameCreator()">[[createGameStatus]]</button>
-					<button type="button" class="btn btn-danger create-game-options" ng-show="createGameStatus == 'Start'" ng-click="destroyGame()" ng-hide="enterGameId != null">Stop Game</button>
-					<a href="<?php echo URL::to('game/[[enterGameId]]'); ?>" type="button" class="btn btn-warning create-game-options" ng-show="enterGameId != null">Enter Game</a>
-					<br>
-					<button type="button" class="btn btn-info create-game-options" ng-click="screenSelected = 'list'">Back to Avalible Games</button>
-					<br>
-					<div class="bg-danger" ng-show="noFullGame && createGameStatus == 'Start'">
-						<span class="text-danger">Starting a non full game will remove the empty places. Press start again to continue.</span>
+		<table ng-show="screenSelected == 'create game'">
+			<tr>
+				<td colspan='2' class="lobby-create">
+					<div class="col-sm-4 divisor">
+						<label for="gameName" class="control-label">Game Name:</label>
+						<input type="text" class="form-control" ng-model="gameName" id="gameName" ng-disabled= "createGameStatus == 'Start'" placeholder="Game Name">
 					</div>
-				</div>
-			</td>
-		</tr>
-		<?php for($i=1; $i <= 5; $i++): ?>
-		<tr class="lobby-players-list">
-			<?php for($j=1; $j >= 0; $j--): ?>
-			<td ng-controller="CreateGameController" ng-init="position = <?php echo $i+$i-$j; ?>" ng-class="{'text-danger bg-danger': state == 'remove'}">
-				<div class="pull-left player-icon">
-					<i class="fa fa-2x lobby-players-line" ng-class="{'fa-android': state == 'bot', 'fa-spinner fa-spin': state == 'waiting', 'fa-male': state == 'user', 'fa-lock': state == 'remove'}"></i>
-				</div>
-				[[username]]
-				<div class="pull-right">
-					<button type="button" class="btn btn-primary users-list-options" ng-click="botUpdater(position)" ng-hide="state == 'remove' || state == 'user'">[[bot]]</button>
-					<button type="button" class="btn btn-danger users-list-options" ng-hide="place == null" ng-click="placeUpdater(position)">[[place]]</button>
-				</div>
-			</td>
+					<div class="col-sm-4 divisor">
+						<label for="numPlayers" class="control-label">Total Number of Players:</label>
+						<select class="form-control create-game-options" id="numPlayers" ng-model="playerDefined" ng-options="player.name for player in players" ng-change="redefineBots()">
+						</select>
+						<label for="numBots" class="control-label">Number of Bots:</label>
+						<select class="form-control" id="numBots" ng-model="botDefined" ng-options="bot.name for bot in bots">
+						</select>
+					</div>
+					<div class="col-sm-4">
+						<button type="button" class="btn btn-primary create-game-options" ng-click="gameCreator()">[[createGameStatus]]</button>
+						<button type="button" class="btn btn-danger create-game-options" ng-show="createGameStatus == 'Start'" ng-click="destroyGame()" ng-hide="enterGameId != null">Stop Game</button>
+						<a href="<?php echo URL::to('game/[[enterGameId]]'); ?>" type="button" class="btn btn-warning create-game-options" ng-show="enterGameId != null">Enter Game</a>
+						<br>
+						<button type="button" class="btn btn-info create-game-options" ng-click="screenSelected = 'list'">Back to Avalible Games</button>
+						<br>
+						<div class="bg-danger" ng-show="noFullGame && createGameStatus == 'Start'">
+							<span class="text-danger">Starting a non full game will remove the empty places. Press start again to continue.</span>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<?php for($i=1; $i <= 5; $i++): ?>
+			<tr class="lobby-players-list">
+				<?php for($j=1; $j >= 0; $j--): ?>
+				<td ng-controller="CreateGameController" ng-init="position = <?php echo $i+$i-$j; ?>" ng-class="{'text-danger bg-danger': state == 'remove'}">
+					<div class="pull-left player-icon">
+						<i class="fa fa-2x lobby-players-line" ng-class="{'fa-android': state == 'bot', 'fa-spinner fa-spin': state == 'waiting', 'fa-male': state == 'user', 'fa-lock': state == 'remove'}"></i>
+					</div>
+					[[username]]
+					<div class="pull-right">
+						<button type="button" class="btn btn-primary users-list-options" ng-click="botUpdater(position)" ng-hide="state == 'remove' || state == 'user'">[[bot]]</button>
+						<button type="button" class="btn btn-danger users-list-options" ng-hide="place == null" ng-click="placeUpdater(position)">[[place]]</button>
+					</div>
+				</td>
+				<?php endfor; ?>
+			</tr>
 			<?php endfor; ?>
-		</tr>
-		<?php endfor; ?>
-	</table>
+		</table>
 
-	<table ng-show="screenSelected == 'enter game'">
-		<tr>
-			<td colspan='2' class="lobby-create">
-				<div class="text-center">
-					<h1><small>Game Name:</small> [[enteredGame.game_name]]</h1>
-				</div>
-				<div class="text-center">
-					<h2><small>Game Owner:</small> [[enteredGame.game_owner]]</h2>
-				</div>
-				<button type="button" class="btn btn-info pull-right back-enter-game" ng-click="screenSelected = 'list'; exitGame()">Back to Avalible Games</button>
-				<a href="<?php echo URL::to('game/[[enterGameId]]'); ?>" type="button" class="btn btn-warning pull-right back-enter-game" ng-show="enterGameId != null">Enter Game</a>
-			</td>
-		</tr>
-		<?php for($i=1; $i <= 5; $i++): ?>
-		<tr class="lobby-players-list">
-			<?php for($j=1; $j >= 0; $j--): ?>
-			<td ng-controller="JoinGameController" ng-init="position = <?php echo $i+$i-$j; ?>" ng-class="{'text-danger bg-danger': state == 'remove'}">
-				<div class="pull-left player-icon">
-					<i class="fa fa-2x lobby-players-line" ng-class="{'fa-android': state == 'bot', 'fa-spinner fa-spin': state == 'waiting', 'fa-male': state == 'user', 'fa-lock': state == 'remove'}"></i>
-				</div>
-				[[username]]
-			</td>
+		<table ng-show="screenSelected == 'enter game'">
+			<tr>
+				<td colspan='2' class="lobby-create">
+					<div class="text-center">
+						<h1><small>Game Name:</small> [[enteredGame.game_name]]</h1>
+					</div>
+					<div class="text-center">
+						<h2><small>Game Owner:</small> [[enteredGame.game_owner]]</h2>
+					</div>
+					<button type="button" class="btn btn-info pull-right back-enter-game" ng-click="screenSelected = 'list'; exitGame()">Back to Avalible Games</button>
+					<a href="<?php echo URL::to('game/[[enterGameId]]'); ?>" type="button" class="btn btn-warning pull-right back-enter-game" ng-show="enterGameId != null">Enter Game</a>
+				</td>
+			</tr>
+			<?php for($i=1; $i <= 5; $i++): ?>
+			<tr class="lobby-players-list">
+				<?php for($j=1; $j >= 0; $j--): ?>
+				<td ng-controller="JoinGameController" ng-init="position = <?php echo $i+$i-$j; ?>" ng-class="{'text-danger bg-danger': state == 'remove'}">
+					<div class="pull-left player-icon">
+						<i class="fa fa-2x lobby-players-line" ng-class="{'fa-android': state == 'bot', 'fa-spinner fa-spin': state == 'waiting', 'fa-male': state == 'user', 'fa-lock': state == 'remove'}"></i>
+					</div>
+					[[username]]
+				</td>
+				<?php endfor; ?>
+			</tr>
 			<?php endfor; ?>
-		</tr>
-		<?php endfor; ?>
-	</table>
-</div>
-<?php $__env->stopSection(); ?>
+		</table>
+	</div>
+	<?php endif; ?>
+	<?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -70,10 +70,8 @@
 			<li>
 				<a href="{{URL::to('login')}}" class="navbar-link">Login</a>
 			</li>
-		</div>
-
-
-
-		@endif
+		</ul>
 	</div>
-	@stop
+	@endif
+</div>
+@stop

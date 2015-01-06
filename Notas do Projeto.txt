@@ -1,0 +1,20 @@
+Alunos:
+João Dias 2110095
+Mateus Silva 2110131
+Ricardo Ribeiro 2110129
+Ruben Nunes 2111226
+
+Por erros de configuração, não foi usado o vagrant/homestead no desenvolvimento do projecto. Será enviada no DVD a máquina virtual Ubuntu 14.04 pronta a correr.
+
+
+Para executar o ficheiro de node js, é necessário executar o seguinte comando: 'nodejs server.js' na directoria 'grp32\site\public\nodejs'
+
+Para efeitos de teste existem previamente criados alguns utilizadores:
+-100 administradores (username: admin1 até admin 100; password:1234567890)
+-1000 utilizadores (username: user1 até admin 1000; password:1234567890)
+-100 dos utilizadores já se encontram como banidos (user10 até user100)
+
+
+Existe um problema ao executar os seeds para a base de dados pela segunda vez. Para tal, usamos uma de duas opções:
+1-Eliminar a base de dados do phpmyadmin, criar a base de dados de novo (nome: bd-grp32) e fazer migrates e seed
+2-Importar a base de dados fornecida nos ficheiros do projecto.
