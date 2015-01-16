@@ -1,5 +1,5 @@
 /*ANGULAR*/
-var socket = io.connect('http://192.168.117.137:8080');
+var socket = io.connect('http://192.168.216.134:8080');
 
 main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 
@@ -58,7 +58,7 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 			for (var i = 0; i < selectedDice.length; i++) {
 				numsGot.push(diceAdder[selectedDice[i]]);
 			}
-			$http.post('http://192.168.117.137/grp32/site/public/getDice', {'numberGot': numsGot, 'diceSelected': selectedDice, 'id': $scope.gameId}).
+			$http.post('http://192.168.216.134/grp32/site/public/getDice', {'numberGot': numsGot, 'diceSelected': selectedDice, 'id': $scope.gameId}).
 			success(function(data, status, headers, config) {
 				diceAdder = [];
 				newDice = data.diceGenerated;
@@ -126,7 +126,7 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 			$scope.boardSelectedBonus[$scope.currentPlayer][i] = $scope.boardDataByPlayer[$scope.currentPlayer][i];
 			$scope.boardDataByPlayer[$scope.currentPlayer] = JSON.parse(JSON.stringify($scope.boardSelectedBonus[$scope.currentPlayer]));
 
-			$http.post('http://192.168.117.137/grp32/site/public/currentPlay', {'id': $scope.gameId, 'numRolls': $scope.playNumber, 'scoreType': i}).
+			$http.post('http://192.168.216.134/grp32/site/public/currentPlay', {'id': $scope.gameId, 'numRolls': $scope.playNumber, 'scoreType': i}).
 			success(function(data, status, headers, config) {
 				socket.emit('sendSelectedBoard', $scope.gameId, i, data.currentPlayer, data.sum, data.bonus, data.totalScore);
 				setBonus(data.sum, data.bonus, data.totalScore);
@@ -312,7 +312,7 @@ main.controller('GameController', ['$scope', '$http', function($scope, $http) {
 			var aux = 0;
 
 			if (diceAdder.length > 0) {
-				$http.post('http://192.168.117.137/grp32/site/public/getBoard', {'dice': diceAdder}).
+				$http.post('http://192.168.216.134/grp32/site/public/getBoard', {'dice': diceAdder}).
 				success(function(data, status, headers, config) {
 					$scope.boardDataByPlayer[$scope.currentPlayer] = data.board;
 					$scope.playNumber = data.rolls;

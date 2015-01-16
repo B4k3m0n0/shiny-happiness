@@ -10,7 +10,10 @@ class TournamentController extends BaseController {
 	 */
 	public function showTournaments(){
 
-		return View::make('tournaments/tournaments');
+		if (Auth::check()) {
+			return View::make('tournaments/tournaments');
+		}
+		return Redirect::to('login');
 	}
 
 
@@ -21,14 +24,16 @@ class TournamentController extends BaseController {
 
 	public function showNewTournament(){
 
+		if (Auth::check() ){
 			return View::make('tournaments/newTournament');
+		}
+		return Redirect::to('login');
 
 		/*if (Auth::check() ){
 			$nRounds = array("Number of Rounds","1","2","3","4","5");
 			return View::make('tournaments/newTournament', compact('nRounds'));
 		}*/
-
-		
+	
 	}
 
 	public function index()

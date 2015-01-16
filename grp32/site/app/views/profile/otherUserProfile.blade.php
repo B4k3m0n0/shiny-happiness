@@ -9,16 +9,13 @@
 {{ HTML::style('css/profile.css') }}
 @stop
 
-@section('scripts')
-@parent
-{{ HTML::script('js/profile.js') }}
-@stop
+
 
 <br> <!--TODO Tirar estes br-->
 <br>
 <br>
 <br>
-<div class="col-md-4 col-md-offset-4" ng-controller="ProfileController" >
+<div class="col-md-4 col-md-offset-4">
 
 	{{ Form::open(array('class' => 'border-login')) }} <!--TODO route = profile????-->
 

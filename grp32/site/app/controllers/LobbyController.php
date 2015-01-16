@@ -6,7 +6,7 @@ class LobbyController extends BaseController {
 	{
 
 		$userIsBanned = 0;
-		$games = Game::where('status', '<>', 'ended')->take(8)->get();
+		$games = Game::where('status', '<>', 'ended')->take(8)->orderBy('id','desc')->get();
 
 		
 
@@ -35,7 +35,7 @@ class LobbyController extends BaseController {
 	public function showScores(){
 		//create fake data on database
 		//Game::truncate();
-		Game::insert(array('game_name' => 'jogo1', 'game_owner' => 'joao','status' => 'Waiting','num_bots' => '7', 'num_players' => '2','winner' => 'joao'));
+		/*Game::insert(array('game_name' => 'jogo1', 'game_owner' => 'joao','status' => 'Waiting','num_bots' => '7', 'num_players' => '2','winner' => 'joao'));
 		//UsersGame::truncate();
 		UsersGame::insert(array('game_id' => '1', 'user' => 'joao','score' => '100'));
 		UsersGame::insert(array('game_id' => '1', 'user' => 'fdfdhgfhgf','score' => '200'));
@@ -48,7 +48,7 @@ class LobbyController extends BaseController {
 		UsersGame::insert(array('game_id' => '4', 'user' => 'joao','score' => '900'));
 		UsersGame::insert(array('game_id' => '6', 'user' => 'coiso123','score' => '1000'));
 		UsersGame::insert(array('game_id' => '6', 'user' => 'Mateussadsdf','score' => '1100'));
-		UsersGame::insert(array('game_id' => '4', 'user' => 'joao','score' => '1200'));
+		UsersGame::insert(array('game_id' => '4', 'user' => 'joao','score' => '1200'));*/
 
 
 
@@ -71,7 +71,7 @@ class LobbyController extends BaseController {
 		$gameNames = array();
 
 		for ($i=0; $i < 10; $i++) { 
-			//Debugbar::info($scores[$i]->id);
+			Debugbar::info("ID: "+$scores[$i]->game_id);
 			$game = Game::where('id',$scores[$i]->game_id)
 			->first();
 			array_push($gameNames, $game->game_name);
@@ -86,26 +86,31 @@ class LobbyController extends BaseController {
 
 	public function showUsersList(){
 
-		$bannedUsersSearch = Ban::get();
-		$bannedUsers = '';
-		foreach ($bannedUsersSearch as $bannedUser) {
-			$bannedUsers = $bannedUsers.','.$bannedUser->banned_user;
+		if (Auth::check()) {
+			
+			$bannedUsersSearch = Ban::get();
+			$bannedUsers = '';
+			foreach ($bannedUsersSearch as $bannedUser) {
+				$bannedUsers = $bannedUsers.','.$bannedUser->banned_user;
+			}
+			//$bannedUsers = substr($bannedUsers, 1);
+			Debugbar::info("ssssss".$bannedUsers);
+
+
+			$allUsers = User::orderBy('username','asc')->get();//->paginate(20);
+			$users = '';
+
+			foreach ($allUsers as $user) {
+				$users = $users.','.$user->username;
+				//array_push($users, $user->username);
+			}
+			$users = substr($users, 1);
+
+			Debugbar::info($users);
+			return View::make('usersList')->with('users',$users)->with('bannedUsers',$bannedUsers);
 		}
-		//$bannedUsers = substr($bannedUsers, 1);
-		Debugbar::info("ssssss".$bannedUsers);
+		return Redirect::to('login');
 
-
-		$allUsers = User::orderBy('username','asc')->get();//->paginate(20);
-		$users = '';
-		
-		foreach ($allUsers as $user) {
-			$users = $users.','.$user->username;
-			//array_push($users, $user->username);
-		}
-		$users = substr($users, 1);
-
-		Debugbar::info($users);
-		return View::make('usersList')->with('users',$users)->with('bannedUsers',$bannedUsers);
 	}
 
 

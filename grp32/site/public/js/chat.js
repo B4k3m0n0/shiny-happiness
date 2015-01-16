@@ -1,5 +1,5 @@
 main.controller('ChatController', ['$scope', function($scope) {
-	var socket = io.connect('http://192.168.117.137:8080'),
+	var socket = io.connect('http://192.168.216.134:8080'),
 		colorChosen = '#333';
 		
 	$scope.serverStatus = false;
